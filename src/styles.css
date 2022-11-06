@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+/* override icon class to allow vertical alignment */
+.bi { vertical-align: 0.125em; }
+
+body{
+    border: none;
+    margin: 0;
+    background-color: #F4F4F8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+

@@ -1,0 +1,49 @@
+.prod_preview .prod_img{
+    background-image: url('../../assets/images/producto_1.png');
+    background-position: center;
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+}
+.prod_preview {
+    width: 200px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 450;
+    text-align: center;
+    margin: 0 15px;
+}
+.prod_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.highlited_products h3{
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: .3em;
+    font-size: 1.2em;
+    font-weight: 250;
+    text-align: center;
+    margin: 15px 0 10px 0;
+    color: rgba(0,0,0,.7);
+}
+.prod_price{
+    color: #AD0624;
+}
+.fw_banner{
+    background-image: url('../../assets/images/banner_handmade.png');
+    background-position: center;
+    background-size: cover;
+    height: 260px;
+}
+
+.fw_banner div{
+    height: 260px;
+    padding: 2.5em;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+    font-weight: 600;
+    letter-spacing: .1em;
+    color: white;
+    background-color: rgba(255,255,255,.15);
+}
