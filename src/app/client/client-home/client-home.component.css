@@ -1,5 +1,5 @@
 .prod_preview .prod_img{
-    background-image: url('../../assets/images/producto_1.png');
+    background-image: url('../../../assets/images/producto_1.png');
     background-position: center;
     object-fit: cover;
     width: 200px;
@@ -30,7 +30,7 @@
     color: #AD0624;
 }
 .fw_banner{
-    background-image: url('../../assets/images/banner_handmade.png');
+    background-image: url('../../../assets/images/banner_handmade.png');
     background-position: center;
     background-size: cover;
     height: 260px;
