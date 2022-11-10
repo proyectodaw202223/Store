@@ -9,7 +9,7 @@ import {  Router, NavigationEnd } from '@angular/router';
 })
 export class ClientComponent implements OnInit {
 
-  public header_class: string = '';
+  public header_class: string = 'home_header';
 
   constructor(
     private router: Router,
