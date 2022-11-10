@@ -1,0 +1,84 @@
+/* HEADER STYLES */
+header {
+    background-image: url('../../assets/images/fondo_promocion_header2.jpg');
+    background-position: center top;
+    background-size: 2000px auto;
+    object-fit: cover;
+    height: 200px;
+}
+
+#logo_main{
+    height: 130px;
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+}
+#login{
+    position: absolute;
+    top: 20px;
+    right: 100px;
+    color: white;
+    vertical-align: middle;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+}
+.main_nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style: none;
+}
+.main_nav li{
+    text-align: center;
+    width: 185px;
+    padding: 8px 15px;
+    border-bottom: 1px white solid;
+}
+.main_nav a{
+    text-decoration: none;
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+#slogan{
+    display: none;
+}
+.home_header {
+    height: 400px;
+}
+.home_header #slogan{
+    display: block;
+    padding: 2em;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.8em;
+    font-weight: 600;
+    letter-spacing: .1em;
+    color: #f8be2d;
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.2) 50%,  rgba(255,255,255,0) 100%);
+}
+
+/* FOOTER STYLES */
+footer{
+    background-color: #D9D9D9;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* position: absolute; */
+    width: 100vw;
+}
+.redes{
+    position: absolute;
+    right: 100px;
+}
+.redes i{
+    margin: 0 .2em;
+}
+footer p{
+    text-align: center;
+    color: white;
+    margin: 0;
+}
