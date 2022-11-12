@@ -1,0 +1,43 @@
+.txt-par-1,
+.txt-par-2,
+.txt-banner{
+    font-weight: 100;
+    text-align: justify;
+}
+.col-6{
+    padding: 0;
+}
+img{
+    width: 100%;
+}
+.txt-par-1{
+    padding: 1em 5em 0 5em;
+}
+.img-wrapper-1{
+    padding-top: 1em;
+    padding-left: 1em;
+}
+.txt-banner{
+    margin: 4em 0;
+    padding: 1.5em 7em;
+    text-align: center;
+}
+.grey{
+    background-color: rgba(75,75,75,.04);
+}
+.img-wrapper-2{
+    padding: 0 7em;
+}
+.txt-par-2{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    padding-right: 7em;
+}
+.img-wrapper-3{
+    padding-top: 5em;
+}
+.orange{
+    background-color: rgba(242,169,60,.19);
+}

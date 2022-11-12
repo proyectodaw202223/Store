@@ -1,19 +1,34 @@
 <h1 class="titulo-2">CONTACTO</h1>
 <section id="content" class="row">
-    <div class="col">
+    <div id="contact-txt" class="col">
         <h2>¿Quiéres contactar con nosotros?</h2>
         <p>
-            Rellena el siguiente formulario, o si lo prefieres puedes contactar con nosotros en la siguiente dirección de email <a>pimpocreaciones@pimpo.pi</a>
+            Rellena el siguiente formulario, o si lo prefieres puedes contactar con nosotros en la siguiente dirección de email <a href="google.es">pimpocreaciones@pimpo.pi</a>
         </p>
     </div>
-    <form class="col-6">
-        <label for="name">Nombre:</label><br>
-        <input type="text" id="name" name="name"><br>
-        <label for="surname">Apellidos:</label><br>
-        <input type="text" id="surname" name="surname"><br>
-        <label for="email">email:</label><br>
-        <input type="email" id="email" name="email"><br>
-        <label for="msg">¿En qué podemos ayudarte?</label><br>
-        <textarea rows="5" cols="40" id="msg" name="msg"></textarea>
+    <form class="col-6" (ngSubmit)="submitForm()">
+        <div class="row">
+            <div class="col-6">
+                <label for="name">Nombre:</label>  
+                <input class="form-control" type="text" name="name" [(ngModel)]="name">
+            </div>
+            <div class="col-6">
+                <label for="surname">Apellidos:</label>
+                <input class="form-control" type="text" name="surname" [(ngModel)]="surname">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label for="email">email:</label><br>
+                <input class="form-control" type="email" name="email" [(ngModel)]="email">
+                <label for="message">¿En qué podemos ayudarte?</label><br>
+                <textarea class="form-control" rows="5" name="message" [(ngModel)]="message"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-warning" id="btn-enviar">ENVIAR</button>
+            </div>
+        </div>
     </form>
 </section>

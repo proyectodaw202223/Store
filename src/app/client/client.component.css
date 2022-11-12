@@ -1,3 +1,9 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
 /* HEADER STYLES */
 header {
     background-image: url('../../assets/images/fondo_promocion_header2.jpg');
@@ -61,6 +67,7 @@ header {
 
 /* FOOTER STYLES */
 footer{
+    margin-top: auto;
     background-color: #D9D9D9;
     height: 30px;
     display: flex;
@@ -80,4 +87,14 @@ footer p{
     text-align: center;
     color: white;
     margin: 0;
+}
+/* CONTACT AND ABOUT TITLES */
+.titulo-2{
+    padding: 1.2em 0 .8em;
+    margin: 0;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    font-weight: 100;
+    letter-spacing: .9em;
 }
