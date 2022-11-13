@@ -1,24 +1,26 @@
-<header [ngClass]="header_class">
-    <a routerLink=""><img id="logo_main" src="assets/images/logo.png"></a> 
-    <p id="login">LOGIN <i class="bi bi-cart3"></i></p>
-    <nav class="main_nav">
-        <li><a routerLink="/about">¿Quiénes somos?</a></li>
-        <li><a routerLink="/products">Productos</a></li>
-        <li><a routerLink="/contact">Contáctanos</a></li>
-    </nav>
-    <div id="slogan">
-        <p>ESTE OTOÑO REGALA PIMPO</p>
-        <p>30% DE DESCUENTO EN PRODUCTOS SEÑALADOS</p>
-    </div>
-</header> 
+<body>
+    <header [ngClass]="header_class">
+        <a routerLink=""><img id="logo_main" src="assets/images/logo.png"></a> 
+        <p id="login">LOGIN <i class="bi bi-cart3"></i></p>
+        <nav class="main_nav">
+            <li><a routerLink="/about">¿Quiénes somos?</a></li>
+            <li><a routerLink="/products">Productos</a></li>
+            <li><a routerLink="/contact">Contáctanos</a></li>
+        </nav>
+        <div id="slogan">
+            <p>ESTE OTOÑO REGALA PIMPO</p>
+            <p>30% DE DESCUENTO EN PRODUCTOS SEÑALADOS</p>
+        </div>
+    </header> 
 
-<router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 
-<footer>
-    <p>Pimpo creaciones s.l. +34 666 666 666 pimpocreaciones@pimpo.pi</p>
-    <div class="redes">
-        <i class="bi bi-facebook"></i>
-        <i class="bi bi-twitter"></i>
-        <i class="bi bi-instagram"></i>
-    </div>
-</footer>
+    <footer>
+        <p>Pimpo creaciones s.l. +34 666 666 666 pimpocreaciones@pimpo.pi</p>
+        <div class="redes">
+            <i class="bi bi-facebook"></i>
+            <i class="bi bi-twitter"></i>
+            <i class="bi bi-instagram"></i>
+        </div>
+    </footer>
+</body>
