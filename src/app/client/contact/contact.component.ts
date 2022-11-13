@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactService } from 'src/app/services/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -16,12 +15,12 @@ export class ContactComponent implements OnInit {
   email: string = '';
   message: string = '';
 
-  constructor(private contact: ContactService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
   submitForm(){
-    postMessage(this.message);
+    //enviar mensaje de contacto
   }
 
 }

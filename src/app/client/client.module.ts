@@ -8,7 +8,6 @@ import { ClientRoutingModule } from './client-routing.module';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { ProductsComponent } from './products/products.component';
-import { ContactService } from '../services/contact.service';
 
 
 
@@ -25,8 +24,6 @@ import { ContactService } from '../services/contact.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [
-    ContactService,
-  ]
+  providers: [  ]
 })
 export class ClientModule { }
