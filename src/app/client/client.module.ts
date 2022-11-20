@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { ClientComponent } from './client.component';
 import { ClientRoutingModule } from './client-routing.module';
@@ -22,7 +23,8 @@ import { ProductsComponent } from './products/products.component';
     CommonModule,
     ClientRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [  ]
 })
