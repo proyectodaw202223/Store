@@ -27,6 +27,11 @@ header {
     vertical-align: middle;
     font-family: 'Roboto', sans-serif;
     font-size: 1em;
+    background: none;
+    border: none;
+}
+#login:hover{
+    border-bottom: solid .02em white;
 }
 .main_nav{
     display: flex;
