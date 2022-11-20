@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
-import {  Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-client',
@@ -13,7 +15,12 @@ export class ClientComponent implements OnInit {
 
   constructor(
     private router: Router,
+    public dialog: MatDialog
   ) { }
+
+  openLoginDialog():void{
+    const loginDialogRef = this.dialog.open(LoginComponent);
+  }
 
   ngOnInit() {
     // Constantly check the url to set the header class.
