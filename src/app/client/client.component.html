@@ -1,7 +1,10 @@
 <body>
     <header [ngClass]="header_class">
-        <a routerLink=""><img id="logo_main" src="assets/images/logo.png"></a> 
-        <button id="login" (click)="openLoginDialog()">LOGIN <i class="bi bi-cart3"></i></button>
+        <a routerLink=""><img id="logo_main" src="assets/images/logo.png"></a>
+        <div id="login">
+            <button (click)="openLoginDialog()">LOGIN </button>
+            <button><i class="bi bi-cart3"></i></button>
+        </div> 
         <nav class="main_nav">
             <li><a routerLink="/about">¿Quiénes somos?</a></li>
             <li><a routerLink="/products">Productos</a></li>

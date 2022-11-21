@@ -23,15 +23,17 @@ header {
     position: absolute;
     top: 20px;
     right: 100px;
-    color: white;
     vertical-align: middle;
     font-family: 'Roboto', sans-serif;
     font-size: 1em;
+}
+#login button{
+    color: white;
     background: none;
     border: none;
 }
-#login:hover{
-    border-bottom: solid .02em white;
+#login button:hover{
+    color: #f8be2d;
 }
 .main_nav{
     display: flex;
