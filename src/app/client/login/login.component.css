@@ -17,9 +17,12 @@ input{
     width: 80%;
     margin: .2em;
 }
-a{
+.toggle{
     text-decoration: none;
     color: #F8C630;
+}
+.toggle:hover{
+    cursor: pointer;
 }
 button{
     margin: .5em;

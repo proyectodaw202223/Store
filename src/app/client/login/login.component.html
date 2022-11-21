@@ -1,8 +1,21 @@
-<form id="client-login">
-    <label>usuario</label>
-    <input type="text">
+<form *ngIf="!newUser" id="client-login">
+    <label>email</label>
+    <input type="email">
     <label>contraseña</label>
     <input type="text">
-    <a href="">nuevo usuario</a>
-    <button type="submit" class="btn btn-warning">LOGIN</button>
+    <button  type="submit" class="btn btn-warning">LOGIN</button>
+    <a class="toggle" (click)="newUser=true">nuevo usuario</a>
+</form>
+
+<form *ngIf="newUser" id="client-login">
+    <label>nombre</label>
+    <input type="text">
+    <label>email</label>
+    <input type="email">
+    <label>contraseña</label>
+    <input type="text">
+    <label>repetir contraseña</label>
+    <input type="text">
+    <button type="submit" class="btn btn-warning">SIGN UP</button>
+    <a class="toggle" (click)="newUser=false">usuario existente</a>
 </form>

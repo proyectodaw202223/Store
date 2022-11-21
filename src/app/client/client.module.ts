@@ -9,6 +9,7 @@ import { ClientRoutingModule } from './client-routing.module';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { ProductsComponent } from './products/products.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -17,7 +18,8 @@ import { ProductsComponent } from './products/products.component';
     ClientComponent,
     ContactComponent,
     AboutComponent,
-    ProductsComponent
+    ProductsComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
