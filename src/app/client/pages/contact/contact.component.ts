@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './contact.component.html',
   styleUrls: [
     './contact.component.css',
-    '../client.component.css'
+    '../../client.component.css'
     ]
 })
 export class ContactComponent implements OnInit {

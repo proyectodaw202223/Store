@@ -35,6 +35,16 @@ header {
 #login button:hover{
     color: #f8be2d;
 }
+.dropdown-menu{
+    background-color: rgba(38, 38, 38, 0.6) !important;
+}
+.dropdown-menu a{
+    color: white;
+}
+.dropdown-menu a:hover{
+    color: #f8be2d;
+    background-color: transparent;
+}
 .main_nav{
     display: flex;
     flex-direction: row;
@@ -94,14 +104,4 @@ footer p{
     text-align: center;
     color: white;
     margin: 0;
-}
-/* CONTACT AND ABOUT TITLES */
-.titulo-2{
-    padding: 1.2em 0 .8em;
-    margin: 0;
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5em;
-    font-weight: 100;
-    letter-spacing: .9em;
 }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from 'rxjs/operators';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @Component({
   selector: 'app-client',
@@ -12,32 +11,50 @@ import { LoginComponent } from './login/login.component';
 export class ClientComponent implements OnInit {
 
   public header_class: string = 'home_header';
+  public loginText: string = 'login';
 
   constructor(
     private router: Router,
-    public dialog: MatDialog
-  ) { }
+    public loginDialog: MatDialog,
+  ) {
+    this.setLoginText();
+  }
+
+  customerIsLoggedIn(): boolean {
+    return ('customerName' in sessionStorage);
+  }
+  
+  setLoginText(){
+    if (this.customerIsLoggedIn()){
+      this.loginText = `${sessionStorage.getItem("customerName")}`;
+    } else {
+      this.loginText = 'login';
+    }
+  }
 
   openLoginDialog():void{
-    const loginDialogRef = this.dialog.open(LoginComponent);
+    const loginDialogRef = this.loginDialog.open(LoginComponent);
+    loginDialogRef.afterClosed().subscribe(result => {
+      this.setLoginText();
+    });
+  }
+
+  logOut(){
+    sessionStorage.removeItem('customerName');
+    this.setLoginText();
   }
 
   ngOnInit() {
     // Constantly check the url to set the header class.
-    this.router.events
-      .pipe(
-        filter((event: any) => event instanceof NavigationEnd)
-      )
-      .subscribe(event => {
-          if (event.urlAfterRedirects) {
-            const url = event.urlAfterRedirects;
-            if ((url === '/') )  {
-              this.header_class = 'home_header';
-            } else {
-              this.header_class = '';
-            }
-          }
-      });
+    this.router.events.subscribe((events) => {
+      if (events instanceof NavigationStart) {
+        if (events.url === '/') {
+          this.header_class = 'home_header';
+        } else {
+          this.header_class = '';
+        }
+      }
+    });
   }
 
 }

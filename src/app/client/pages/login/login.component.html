@@ -1,0 +1,15 @@
+<form *ngIf="!newUser" id="client-login" #loginForm = "ngForm" (ngSubmit) = "login(this.email, this.password, this.name)" ngNativeValidate>
+    <input name="email" type="email" [(ngModel)]="this.email" placeholder="email" required>
+    <input name="password" type="password" [(ngModel)]="this.password" placeholder="contraseña" required>
+    <button  type="submit" class="btn btn-warning">LOGIN</button>
+    <a class="newUserToggle" (click)="newUser=true">crear una cuenta</a>
+</form>
+
+<form *ngIf="newUser" id="client-login" #loginForm ="ngForm" (ngSubmit) ="login(this.email, this.password, this.name)" ngNativeValidate>
+    <input name="name" type="text" [(ngModel)]="this.name" placeholder="nombre" required>
+    <input name="email"  type="email" [(ngModel)]="this.email" placeholder="email" required>
+    <input name="password" type="password" [(ngModel)]="this.password" placeholder="contraseña" required minlength="8" maxlength="20">
+    <input name="passwordConfirm" id="passwordConfirm" type="password" [(ngModel)]="this.passwordConfirm" placeholder="confirmar contraseña" required>
+    <button type="submit" class="btn btn-warning">SIGN UP</button>
+    <a class="newUserToggle" (click)="newUser=false">ya tengo una cuenta</a>
+</form>
