@@ -6,9 +6,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { ClientComponent } from './client.component';
 import { ClientRoutingModule } from './client-routing.module';
-import { ContactComponent } from './contact/contact.component';
-import { AboutComponent } from './about/about.component';
-import { ProductsComponent } from './products/products.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { AboutComponent } from './pages/about/about.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { LoginComponent } from './pages/login/login.component';
 
 
 
@@ -17,14 +18,15 @@ import { ProductsComponent } from './products/products.component';
     ClientComponent,
     ContactComponent,
     AboutComponent,
-    ProductsComponent
+    ProductsComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule,
     FormsModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    ClientRoutingModule
   ],
   providers: [  ]
 })

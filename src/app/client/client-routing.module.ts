@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './about/about.component';
-import { ClientHomeComponent } from './client-home/client-home.component';
+import { AboutComponent } from './pages/about/about.component';
+import { ClientHomeComponent } from './pages/client-home/client-home.component';
 import { ClientComponent } from './client.component';
-import { ContactComponent } from './contact/contact.component';
-import { ProductsComponent } from './products/products.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { ProductsComponent } from './pages/products/products.component';
 
 
 const routes: Routes = [

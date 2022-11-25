@@ -1,7 +1,21 @@
 <body>
     <header [ngClass]="header_class">
-        <a routerLink=""><img id="logo_main" src="assets/images/logo.png"></a> 
-        <button id="login" (click)="openLoginDialog()">LOGIN <i class="bi bi-cart3"></i></button>
+        <a routerLink=""><img id="logo_main" src="assets/images/logo.png"></a>
+
+        <div *ngIf="!customerIsLoggedIn()" id="login">
+            <button (click)="openLoginDialog()">{{loginText}} </button>
+            <button><i class="bi bi-cart3"></i></button>
+        </div>
+        <div *ngIf="customerIsLoggedIn()" id="login" class="dropdown">
+            <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                hola, {{loginText}}
+            </button>
+            <button><i class="bi bi-cart3"></i></button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Mi cuenta</a>
+                <button class="dropdown-item" (click)="logOut()">Log out</button>
+            </div>
+        </div> 
         <nav class="main_nav">
             <li><a routerLink="/about">¿Quiénes somos?</a></li>
             <li><a routerLink="/products">Productos</a></li>
@@ -11,6 +25,7 @@
             <p>ESTE OTOÑO REGALA PIMPO</p>
             <p>30% DE DESCUENTO EN PRODUCTOS SEÑALADOS</p>
         </div>
+
     </header> 
 
     <router-outlet></router-outlet>
