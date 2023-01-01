@@ -5,6 +5,8 @@ import { ClientHomeComponent } from './pages/client-home/client-home.component';
 import { ClientComponent } from './client.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { MyAccountComponent } from './pages/my-account/my-account.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
       { path: '', component: ClientHomeComponent },
       { path: 'about', component: AboutComponent },
       { path: 'contact', component: ContactComponent},
-      { path: 'products', component: ProductsComponent}
+      { path: 'products', component: ProductsComponent},
+      { path: 'account', component: MyAccountComponent},
+      { path: 'cart', component: CartComponent}
     ]
   }
 ];

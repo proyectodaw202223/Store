@@ -8,7 +8,6 @@ export class Customer { 
         public phoneNumber: number = 111111111,
         public id?: number,
         public created_at?: string,
-        public updated_at?: string
-        
+        public updated_at?: string      
     ){}
 }
