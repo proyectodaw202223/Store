@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Customer } from '../../models/customer.model';
-import { CustomerService } from '../../services/customer.service';
+import { Customer } from '../../../models/customer.model';
+import { CustomerService } from '../../../services/customer.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
