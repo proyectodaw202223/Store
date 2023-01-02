@@ -1,1 +1,33 @@
-<p>admin works!</p>
+<!DOCTYPE html>
+<html>
+<head>
+      
+</head>
+<body>
+    <div class = "header">
+        <img src="../../assets/images/pimpo-creaciones-nombre-morado.png">
+        <p>Pedidos</p>
+    </div>
+    <div class ="body">
+        <div class ="lateral">
+            <div class ="enlaces">
+                <!-- Links in Div -->
+                <p><img src="../../assets/iconos/box-seam.svg">
+                <a routerLink="/admin/pedidos">Pedidos</a>
+                </p>
+                <p>
+                <img src="../../assets/iconos/boxes-orange.svg">
+                <a routerLink="/admin/productos">Productos</a>
+                </p>
+                <p>
+                <img src="../../assets/iconos/tag.svg">
+                <a routerLink="/admin/descuentos">Descuentos</a>
+                </p>
+            </div>
+        </div>
+        <div class ="central">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</body>
+</html>

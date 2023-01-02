@@ -1,0 +1,60 @@
+/* Header */
+.header {
+    color: #000000;
+    background-color: white;
+    padding: 30px;
+    height: 20%;
+    background-image: #EAEAEA;
+    display: flex;
+    border: black 1px solid;
+    }
+.header img{
+    width: 268px;
+    height: 40px;
+    } 
+.header p{
+    padding-left: 30px;
+    vertical-align: middle;
+    margin-top: 5px;
+    }  
+/* Body */
+html .body{
+    display: flex;
+    height: 80%;
+}
+/* Sidebar Div */
+.lateral {
+    color: #000000;
+    width: 20%;
+    height:100vh;
+    border: black 1px solid;
+    border-top: none;
+    background-color: #EAEAEA;
+    }    
+/* Div links */
+.enlaces {
+    padding-top: 84px;
+}  
+.enlaces p{
+    padding-left: 30px;
+}
+.enlaces p a {
+    font-size: 25px;
+    cursor: pointer;
+    padding-left: 30px;
+    color: #000000;
+    text-decoration: none;
+    }
+.enlaces img {
+    width: 32px;
+    height: 32px;
+}
+.lateral p:hover ,a:hover {
+    color: #000000;
+    background: #DEDEDE;
+    width: 100%;
+    }
+/* Div central */
+.central {
+    width: 80%;
+}
