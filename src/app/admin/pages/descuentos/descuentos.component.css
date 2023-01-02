@@ -1,0 +1,41 @@
+h1{
+    margin: 20px;
+    font-weight: bold;
+    font-size: 32px;
+}
+.filtros{
+    margin: 20px;
+    border: black 1px solid;
+    border-radius: 10px;
+    display: flex;
+}
+.tabla{
+    margin: 20px;
+    border: black 1px solid;
+    border-radius: 10px;
+}
+.menu{
+    font-size: 14px;
+    display: flex;
+    padding: 15px;
+}
+.menu img{
+    padding-right: 10px;
+}
+span{
+    padding: 5px;
+}
+.filderarr{
+    display: flex;
+}
+.filizqarr{
+    display: flex;
+    white-space: nowrap;
+}
+.filizq{
+    padding: 0.3cm;
+}
+th, td {
+    padding: 0.2cm;
+    font-size: 14px;
+}

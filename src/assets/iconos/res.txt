@@ -1,0 +1,24 @@
+ ====================================
+ MENÚ ASIDE
+ ====================================
+ box-seam.svg -> https://icons.getbootstrap.com/icons/box-seam/
+ boxes-orange.svg -> https://icons.getbootstrap.com/icons/boxes/
+ tag-svg -> https://icons.getbootstrap.com/icons/tag/
+
+ ====================================
+ BOTONES Y FILTROS
+ ====================================
+ boxes-black.svg -> https://icons.getbootstrap.com/icons/boxes/
+ carret-down-fill-black.svg -> https://icons.getbootstrap.com/icons/caret-down-fill/
+ carret-down-fill-white.svg -> https://icons.getbootstrap.com/icons/caret-down-fill/
+ image.svg -> https://icons.getbootstrap.com/icons/image/
+ plus-lg.svg -> https://icons.getbootstrap.com/icons/plus-lg/
+ trash3.svg -> https://icons.getbootstrap.com/icons/trash3/
+ x-octagon -> https://icons.getbootstrap.com/icons/x-octagon/
+ save.svg -> https://www.iconfinder.com/icons/9035613/save_outline_floppy_icon
+
+ ====================================
+ ICONOS EN TABLAS
+ ====================================
+ check-circle.svg -> https://icons.getbootstrap.com/icons/check-circle/
+ x-circle.svg -> https://icons.getbootstrap.com/icons/x-circle/
