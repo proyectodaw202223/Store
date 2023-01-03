@@ -10,15 +10,28 @@ import { Product } from 'src/app/models/product.model';
 export class ClientHomeComponent implements OnInit {
 
   public newProducts: Product[] = [];
+  public productsForSale: Product[] = [];
 
   constructor(
     private _productService : ProductService
   ) { }
 
   ngOnInit(): void { 
+
     this._productService.getNewProducts(5).subscribe({
       next: (result) => {
         this.newProducts = result;
+        return result;
+      },
+      error: (error) => {
+        console.log(<any>error);
+        return error;
+      }
+    })
+
+    this._productService.getProductsForSale(5).subscribe({
+      next: (result) => {
+        this.productsForSale = result;
         return result;
       },
       error: (error) => {
