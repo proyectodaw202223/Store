@@ -1,3 +1,6 @@
+#products_component{
+   margin: 35px 5px 20px 20px;
+}
 .prod_preview {
     width: 200px;
     font-family: 'Roboto', sans-serif;
@@ -12,4 +15,13 @@
 }
 .prod_price{
     color: #AD0624;
+}
+
+.filter_title{
+
+}
+.filter{
+    display: flex;
+    padding-left: 2em;
+    justify-content: space-between;
 }

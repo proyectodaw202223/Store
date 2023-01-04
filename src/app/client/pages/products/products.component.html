@@ -1,20 +1,19 @@
-<p>Products works</p>
-<div class="row">
-    <section id="filtros" class="col-2">
+<div class="row" id="products_component">
+    <section id="filtros" class="col-4 col-md-2">
         <h2>Filtrar productos</h2>
-        <li>Categorías</li>
-        <li>    Bisutería</li>
-        <li>    Lana</li>
-        <li>Subcategorías</li>
-        <li>    Colgantes</li>
-        <li>    Pendientes</li>
-        <li>    Pulseras</li>
-        <li>    Patucos</li>
-        <li>    Gorros</li>
-        <li>Productos en stock</li>
+        <li class="filter_title"><label>Categorías</label></li>
+        <li class="filter"><label>Bisutería </label><input type="checkbox" [(ngModel)]="bisuteria_filter" (ngModelChange)="onNgModelChange($event)"></li>
+        <li class="filter"><label>Lana </label><input type="checkbox" [(ngModel)]="lana_filter" (ngModelChange)="onNgModelChange($event)"></li>
+        <li class="filter_title"><label>Subcategorías</label></li>
+        <li class="filter"><label>Colgantes </label><input type="checkbox" [(ngModel)]="colgantes_filter" (ngModelChange)="onNgModelChange($event)"></li>
+        <li class="filter"><label>Pendientes </label><input type="checkbox" [(ngModel)]="pendientes_filter" (ngModelChange)="onNgModelChange($event)"></li>
+        <li class="filter"><label>Pulseras </label><input type="checkbox" [(ngModel)]="pulseras_filter" (ngModelChange)="onNgModelChange($event)"></li>
+        <li class="filter"><label>Patucos </label><input type="checkbox" [(ngModel)]="patucos_filter" (ngModelChange)="onNgModelChange($event)"></li>
+        <li class="filter"><label>Gorros </label><input type="checkbox" [(ngModel)]="gorros_filter" (ngModelChange)="onNgModelChange($event)"></li>
+
     </section>
-    <section id="productos" class="col-10 d-flex flex-row">
-        <div class="prod_preview" *ngFor="let product of allProducts">
+    <section id="productos" class="col-8 col-md-10 d-flex flex-row flex-wrap">
+        <div class="prod_preview" *ngFor="let product of filteredProducts">
             <img *ngIf="product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
             <p class="prod_name">{{product.name}}</p>
             <p class="prod_price">{{product.price}} €</p>
