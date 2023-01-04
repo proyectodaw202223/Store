@@ -2,7 +2,7 @@
     <h3>NOVEDADES</h3>
     <div class="suggested-prods row flex overflow-hidden justify-content-center">
         <div class="prod_preview" *ngFor="let product of newProducts">
-            <img src={{product.productItems[0].images[0].url}}>
+            <img *ngIf="product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
             <p class="prod_name">{{product.name}}</p>
             <p class="prod_price">{{product.price}} €</p>
         </div>
@@ -17,7 +17,7 @@
     <h3>DESTACADOS</h3>
     <div class="suggested-prods row flex overflow-hidden justify-content-center">
         <div class="prod_preview" *ngFor="let product of productsForSale">
-            <img src={{product.productItems[0].images[0].url}}>
+            <img *ngIf="product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
             <p class="prod_name">{{product.name}}</p>
             <p class="prod_price">{{product.price}} €</p>
         </div>

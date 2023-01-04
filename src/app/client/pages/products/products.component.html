@@ -1,1 +1,23 @@
 <p>Products works</p>
+<div class="row">
+    <section id="filtros" class="col-2">
+        <h2>Filtrar productos</h2>
+        <li>Categorías</li>
+        <li>    Bisutería</li>
+        <li>    Lana</li>
+        <li>Subcategorías</li>
+        <li>    Colgantes</li>
+        <li>    Pendientes</li>
+        <li>    Pulseras</li>
+        <li>    Patucos</li>
+        <li>    Gorros</li>
+        <li>Productos en stock</li>
+    </section>
+    <section id="productos" class="col-10 d-flex flex-row">
+        <div class="prod_preview" *ngFor="let product of allProducts">
+            <img *ngIf="product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
+            <p class="prod_name">{{product.name}}</p>
+            <p class="prod_price">{{product.price}} €</p>
+        </div>
+    </section>
+</div>
