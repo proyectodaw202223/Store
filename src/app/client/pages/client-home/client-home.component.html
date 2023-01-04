@@ -1,31 +1,11 @@
 <section class="highlited_products">
     <h3>NOVEDADES</h3>
     <div class="suggested-prods row flex overflow-hidden justify-content-center">
-        <div class="prod_preview">
-            <img src="../../../../assets/images/producto_1.png">
-            <p class="prod_name">PRODUCTO 1</p>
-            <p class="prod_price">19,90 €</p>
+        <div class="prod_preview" *ngFor="let product of newProducts">
+            <img src={{product.productItems[0].images[0].url}}>
+            <p class="prod_name">{{product.name}}</p>
+            <p class="prod_price">{{product.price}} €</p>
         </div>
-        <div class="prod_preview">
-            <img src="../../../../assets/images/producto_1.png">
-            <p class="prod_name">PRODUCTO 1</p>
-            <p class="prod_price">19,90 €</p>
-        </div>
-        <div class="prod_preview">
-            <img src="../../../../assets/images/producto_1.png">
-            <p class="prod_name">PRODUCTO 1</p>
-            <p class="prod_price">19,90 €</p>
-        </div>
-        <div class="prod_preview">
-            <img src="../../../../assets/images/producto_1.png">
-            <p class="prod_name">PRODUCTO 1</p>
-            <p class="prod_price">19,90 €</p>
-        </div>
-        <div class="prod_preview">
-            <img src="../../../../assets/images/producto_1.png">
-            <p class="prod_name">PRODUCTO 1</p>
-            <p class="prod_price">19,90 €</p>
-        </div>  
     </div>
 </section>
 
@@ -36,30 +16,10 @@
 <section class="highlited_products">
     <h3>DESTACADOS</h3>
     <div class="suggested-prods row flex overflow-hidden justify-content-center">
-        <div class="prod_preview">
-            <img src="../../../../assets/images/producto_1.png">
-            <p class="prod_name">PRODUCTO 1</p>
-            <p class="prod_price">19,90 €</p>
+        <div class="prod_preview" *ngFor="let product of productsForSale">
+            <img src={{product.productItems[0].images[0].url}}>
+            <p class="prod_name">{{product.name}}</p>
+            <p class="prod_price">{{product.price}} €</p>
         </div>
-        <div class="prod_preview">
-            <img src="../../../../assets/images/producto_1.png">
-            <p class="prod_name">PRODUCTO 1</p>
-            <p class="prod_price">19,90 €</p>
-        </div>
-        <div class="prod_preview">
-            <img src="../../../../assets/images/producto_1.png">
-            <p class="prod_name">PRODUCTO 1</p>
-            <p class="prod_price">19,90 €</p>
-        </div>
-        <div class="prod_preview">
-            <img src="../../../../assets/images/producto_1.png">
-            <p class="prod_name">PRODUCTO 1</p>
-            <p class="prod_price">19,90 €</p>
-        </div>
-        <div class="prod_preview">
-            <img src="../../../../assets/images/producto_1.png">
-            <p class="prod_name">PRODUCTO 1</p>
-            <p class="prod_price">19,90 €</p>
-        </div>  
     </div>
 </section>

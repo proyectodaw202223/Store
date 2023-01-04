@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { ClientComponent } from './client.component';
+import { ClientHomeComponent } from './pages/client-home/client-home.component';
 import { ClientRoutingModule } from './client-routing.module';
 import { ContactComponent } from './pages/contact/contact.component';
 import { AboutComponent } from './pages/about/about.component';
@@ -19,6 +20,7 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
 @NgModule({
   declarations: [
     ClientComponent,
+    ClientHomeComponent,
     ContactComponent,
     AboutComponent,
     ProductsComponent,
