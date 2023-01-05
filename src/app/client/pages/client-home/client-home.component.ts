@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-client-home',
@@ -11,6 +12,7 @@ export class ClientHomeComponent implements OnInit {
 
   public newProducts: Product[] = [];
   public productsForSale: Product[] = [];
+  public apiStorage: string = environment.apiStorage;
 
   constructor(
     private _productService : ProductService
