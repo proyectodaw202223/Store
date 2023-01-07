@@ -60,13 +60,19 @@ html .body{
 }
 
 /* COMMON STYLES FOR PAGE COMPONENTS */
-.component-title {
+.component-title-1 {
   margin: 20px;
   font-weight: bold;
   font-size: 32px;
 }
 
-.action-panel {
+.component-title-2 {
+  margin: 20px;
+  font-weight: bold;
+  font-size: 26px;
+}
+
+.container-box {
   display: flex;
   margin: 20px;
   border: black 1px solid;
@@ -118,4 +124,32 @@ html .body{
 .admin-table-wrapper th, .admin-table-wrapper td {
   padding: 0.2cm;
   font-size: 14px;
+}
+
+.form-group {
+  padding: 15px;
+}
+
+.form-group-content {
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+}
+
+.form-group-content-column {
+  margin-right: 40px;
+}
+
+.form-group-title {
+  font-weight: bold;
+}
+
+.form-label {
+  width: 120px;
+}
+
+/* GENERAL STYLES */
+.column {
+  display: flex;
+  flex-direction: column;
 }

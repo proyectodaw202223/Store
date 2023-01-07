@@ -1,6 +1,6 @@
 import { ProductItem } from "./productItem.model";
 
-export class Product { 
+export class Product {
     constructor(
         public name: string,
         public description: string,
