@@ -1,31 +1,41 @@
-<h1 class="component-title-1">Producto 000001</h1>
+<h1 class="component-title-1">Producto {{ (product.id) ? ('000000' + product.id).slice(-6) : '000000' }}</h1>
 <div class ="container-box">
   <div class = "action-panel-group">
     <div>
-      <button class="action-panel-button"><img src="../../../assets/iconos/plus-lg.svg">Nuevo Item</button>
-      <button class="action-panel-button"><img src="../../../assets/iconos/trash3.svg">Eliminar Item</button>
-      <button class="action-panel-button"><img src="../../../assets/iconos/save.svg">Guardar</button>
+      <button class="action-panel-button" (click)="onNewProductButtonClick($event)">
+        <img src="../../../assets/iconos/plus-lg.svg">Nuevo Producto
+      </button>
+      <button class="action-panel-button" (click)="onDeleteProductButtonClick($event)">
+        <img src="../../../assets/iconos/trash3.svg">Eliminar Producto
+      </button>
+      <button class="action-panel-button" (click)="onSaveProductButtonClick($event)">
+        <img src="../../../assets/iconos/save.svg">Guardar
+      </button>
     </div>
     <span class="action-panel-group-label">Acciones</span>
   </div>
 </div>
 <div class="container-box">
-  <form>
+  <form #productForm="ngForm">
     <div class="form-group">
       <span class="form-group-title">Producto</span>
       <div class="form-group-content">
         <div class="form-group-content-column">
           <div>
             <label class="form-label">ID:</label>
-            <input type="text" name="productId" value="" disabled>
+            <input type="text" name="productId" value="{{ (product.id) ? ('000000' + product.id).slice(-6) : '000000' }}" disabled>
           </div>
           <div>
             <label class="form-label">Nombre:</label>
-            <input type="text" name="name" value="">
+            <input type="text" name="name" [(ngModel)]="product.name">
+          </div>
+          <div>
+            <label class="form-label">Precio:</label>
+            <input type="number" name="price" [(ngModel)]="product.price">
           </div>
           <div>
             <label class="form-label">Categoría:</label>
-            <select>
+            <select name="category" [(ngModel)]="product.category">
               <option value=""></option>
               <option value="Bisutería">Bisutería</option>
               <option value="Lana">Lana</option>
@@ -35,7 +45,7 @@
           </div>
           <div>
             <label class="form-label">Subcategoría:</label>
-            <select>
+            <select name="subcategory" [(ngModel)]="product.subcategory">
               <option value=""></option>
               <option value="Colgantes">Colgantes</option>
               <option value="Pendientes">Pendientes</option>
@@ -48,7 +58,7 @@
         <div class="form-group-content-column">
           <div class="column">
             <label class="form-label">Descripción:</label>
-            <textarea></textarea>
+            <textarea name="description" [(ngModel)]="product.description"></textarea>
           </div>
         </div>
       </div>
@@ -59,9 +69,12 @@
 <div class="container-box">
   <div class="action-panel-group">
     <div>
-      <button class="action-panel-button"><img src="../../../assets/iconos/plus-lg.svg">Nuevo Descuento</button>
-      <button class="action-panel-button"><img src="../../../assets/iconos/trash3.svg">Eliminar Descuento</button>
-      <button class="action-panel-button"><img src="../../../assets/iconos/boxes-black.svg">Añadir Stock</button>
+      <button class="action-panel-button" (click)="onNewItemButtonClick($event)">
+        <img src="../../../assets/iconos/plus-lg.svg">Nuevo Item
+      </button>
+      <button class="action-panel-button" (click)="onDeleteItemButtonClick($event)">
+        <img src="../../../assets/iconos/trash3.svg">Eliminar Item
+      </button>
     </div>
     <span class="action-panel-group-label">Acciones</span>
   </div>
@@ -70,7 +83,7 @@
   <table>
     <thead>
       <tr>
-        <td><input type="checkbox"></td>
+        <td><input type="checkbox" (change)="onSelectAllItemsCheckboxChange($event)"></td>
         <th>ID</th>
         <th>Color</th>
         <th>Talla</th>
@@ -78,12 +91,12 @@
     </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><input type="checkbox" class="select-product-checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>#000000</td>
-        <td>M</td>
-        <td>12</td>
+      <tr *ngFor="let item of product.productItems">
+        <td><input type="checkbox" value="{{ item.id }}" class="select-item-checkbox"></td>
+        <td><a [routerLink]="['/detitem/' + item.id]">{{ ("000000" + item.id).slice(-6) }}</a></td>
+        <td>{{ item.color }}</td>
+        <td>{{ item.size }}</td>
+        <td>{{ item.stock }}</td>
       </tr>
     </tbody>
   </table>
