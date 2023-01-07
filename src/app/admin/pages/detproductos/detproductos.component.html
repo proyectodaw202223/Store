@@ -1,116 +1,91 @@
-<h1>Producto 000001</h1>
-<div class ="uno">
-    <div class = "filizq">
-        <div class = "filizqarr">
-            <p class = "menu"><img src="../../../assets/iconos/plus-lg.svg">Nuevo Item</p>
-            <p class = "menu"><img src="../../../assets/iconos/trash3.svg">Eliminar Item</p>
-            <p class = "menu"><img src="../../../assets/iconos/save.svg">Guardar</p>
-        </div>
-        <p>Acciones</p>
+<h1 class="component-title-1">Producto 000001</h1>
+<div class ="container-box">
+  <div class = "action-panel-group">
+    <div>
+      <button class="action-panel-button"><img src="../../../assets/iconos/plus-lg.svg">Nuevo Item</button>
+      <button class="action-panel-button"><img src="../../../assets/iconos/trash3.svg">Eliminar Item</button>
+      <button class="action-panel-button"><img src="../../../assets/iconos/save.svg">Guardar</button>
     </div>
-    
-    <div class ="filder">
-        <div class="v-line">
-        </div>  
-        <div class = "filderarr">
-            <label>Clase</label>
+    <span class="action-panel-group-label">Acciones</span>
+  </div>
+</div>
+<div class="container-box">
+  <form>
+    <div class="form-group">
+      <span class="form-group-title">Producto</span>
+      <div class="form-group-content">
+        <div class="form-group-content-column">
+          <div>
+            <label class="form-label">ID:</label>
+            <input type="text" name="productId" value="" disabled>
+          </div>
+          <div>
+            <label class="form-label">Nombre:</label>
+            <input type="text" name="name" value="">
+          </div>
+          <div>
+            <label class="form-label">Categoría:</label>
             <select>
               <option value=""></option>
-              <option value="c1">Clase 1</option>
-              <option value="c2">Clase 2</option>
-              <option value="c3">Clase 3</option>
-              <option value="c4">Clase 4</option>
+              <option value="Bisutería">Bisutería</option>
+              <option value="Lana">Lana</option>
+              <option value="Hama Beads">Hama Beads</option>
+              <option value="Personalizaciones">Personalizaciones</option>
             </select>
-            <label>Subclase</label>
+          </div>
+          <div>
+            <label class="form-label">Subcategoría:</label>
             <select>
               <option value=""></option>
-              <option value="sc1">Subclase 1</option>
-              <option value="sc2">Subclase 2</option>
-              <option value="sc3">Subclase 3</option>
-              <option value="sc4">Subclase 4</option>
+              <option value="Colgantes">Colgantes</option>
+              <option value="Pendientes">Pendientes</option>
+              <option value="Pulseras">Pulseras</option>
+              <option value="Patucos">Patucos</option>
+              <option value="Gorros">Gorros</option>
             </select>
+          </div>
         </div>
-        <div>
-            <p>Filtros</p>
+        <div class="form-group-content-column">
+          <div class="column">
+            <label class="form-label">Descripción:</label>
+            <textarea></textarea>
+          </div>
         </div>
+      </div>
     </div>
+  </form> 
 </div>
-<div class = "dos">
-    <div class = "filizq">
-    <p>Producto</p>
-    <label>ID:</label><input type="text" name="inputname" value="000001" disabled><br>
-    <label>Nombre:</label><input type="text" name="inputname" value="Un Nombre de Producto" disabled><br>
-    <label>Clase:</label>
-    <select>
-        <option value=""></option>
-        <option value="c1">Clase 1</option>
-        <option value="c2">Clase 2</option>
-        <option value="c3">Clase 3</option>
-        <option value="c4">Clase 4</option>
-    </select><br>
-    <label>Subclase</label>
-    <select>
-        <option value=""></option>
-        <option value="sc1">Subclase 1</option>
-        <option value="sc2">Subclase 2</option>
-        <option value="sc3">Subclase 3</option>
-        <option value="sc4">Subclase 4</option>
-    </select><br>
+<h2 class="component-title-2">Items del Producto</h2>
+<div class="container-box">
+  <div class="action-panel-group">
+    <div>
+      <button class="action-panel-button"><img src="../../../assets/iconos/plus-lg.svg">Nuevo Descuento</button>
+      <button class="action-panel-button"><img src="../../../assets/iconos/trash3.svg">Eliminar Descuento</button>
+      <button class="action-panel-button"><img src="../../../assets/iconos/boxes-black.svg">Añadir Stock</button>
     </div>
-    <div class="filcen">
-        <label>Descripción:</label><br>
-        <textarea>La descripciones son muy largas y no cabe el texto entero en una columna de la tabla pero si el usuario quiere leer o editar la descripción puede entrar a ver los detalles de un producto y usar este campo que es mucho mas grande."</textarea>
-    </div> 
+    <span class="action-panel-group-label">Acciones</span>
+  </div>
 </div>
-<h2>Items del Producto</h2>
-<div class = "tres">
-    <div class = "filizqarr">
-        <p class = "menu"><img src="../../../assets/iconos/plus-lg.svg">Nuevo Descuento</p>
-        <p class = "menu"><img src="../../../assets/iconos/trash3.svg">Eliminar Descuento</p>
-        <p class = "menu"><img src="../../../assets/iconos/boxes-black.svg">Añadir Stock</p>
-    </div>
-    <p>Acciones</p>
-</div>
-<div class ="tabla">
-    <tr>
-        <td><input type = "checkbox"></td>
+<div class="admin-table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <td><input type="checkbox"></td>
         <th>ID</th>
-        <th>Precio</th>
-        <th>Atributo 1</th>
-        <th>Atributo 2</th>
+        <th>Color</th>
+        <th>Talla</th>
         <th>Stock</th>
     </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="checkbox" class="select-product-checkbox"></td>
         <td><a href=>000001</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>56</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>56</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>56</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>56</td>
-    </tr>
+        <td>#000000</td>
+        <td>M</td>
+        <td>12</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
