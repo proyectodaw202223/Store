@@ -7,7 +7,7 @@ export class Product { 
         public price: number,
         public category: string,
         public subcategory: string,
-        public productItems: Array<ProductItem>,
+        public productItems?: Array<ProductItem>,
         public id?: number,
         public created_at?: string,
         public updated_at?: string
