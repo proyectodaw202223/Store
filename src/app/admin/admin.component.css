@@ -58,3 +58,98 @@ html .body{
 .central {
     width: 80%;
 }
+
+/* COMMON STYLES FOR PAGE COMPONENTS */
+.component-title-1 {
+  margin: 20px;
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.component-title-2 {
+  margin: 20px;
+  font-weight: bold;
+  font-size: 26px;
+}
+
+.container-box {
+  display: flex;
+  margin: 20px;
+  border: black 1px solid;
+  border-radius: 10px;
+}
+
+.v-line{
+  border-left: 1px solid #000;
+  margin: 10px;
+}
+
+.action-panel-group-content { display: flex; }
+
+.action-panel-button {
+  border-width: 0px;
+  border-radius: 5px;
+  background-color: transparent;
+  margin: 10px;
+  padding: 5px;
+}
+
+.action-panel-button:hover { background-color: lightgray; }
+
+.action-panel-button img { margin-right: 5px; }
+
+.action-panel-filter-wrapper { padding: 15px; }
+
+.action-panel-filter { margin-left: 5px; }
+
+.action-panel-filter-label { margin-right: 5px; }
+
+.action-panel-group-label {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+}
+
+.admin-table-wrapper {
+  margin: 20px;
+  border: black 1px solid;
+  border-radius: 10px;
+}
+
+.admin-table-wrapper table { width: 100%; }
+
+.admin-table-wrapper thead { border-bottom: 1px solid black; }
+
+.admin-table-wrapper th, .admin-table-wrapper td {
+  padding: 0.2cm;
+  font-size: 14px;
+}
+
+.form-group {
+  padding: 15px;
+}
+
+.form-group-content {
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+}
+
+.form-group-content-column {
+  margin-right: 40px;
+}
+
+.form-group-title {
+  font-weight: bold;
+}
+
+.form-label {
+  width: 120px;
+}
+
+/* GENERAL STYLES */
+.column {
+  display: flex;
+  flex-direction: column;
+}

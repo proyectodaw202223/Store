@@ -1,133 +1,61 @@
-<h1>Productos</h1>
-<div class ="filtros">
-    <div class = "filizq">
-        <div class = "filizqarr">
-        <p><img src="../../../assets/iconos/plus-lg.svg">Nuevo producto</p>
-        <p><img src="../../../assets/iconos/trash3.svg">Eliminar producto</p>
-        </div>
-        <p>Acciones</p>
+<h1 class="component-title-1">Productos</h1>
+<div class ="container-box">
+  <div class="action-panel-group">
+    <div>
+      <button class="action-panel-button" (click)="onNewProductButtonClick($event)"><img src="../../../assets/iconos/plus-lg.svg">Nuevo producto</button>
+      <button class="action-panel-button" (click)="onDeleteProductButtonClick($event)"><img src="../../../assets/iconos/trash3.svg">Eliminar producto</button>
     </div>
-    <div class ="filder">
-        <div class="v-line">
-        </div>  
-        <div class = "filderarr">
-            <label>Clase</label>
-            <select>
-              <option value=""></option>
-              <option value="c1">Clase 1</option>
-              <option value="c2">Clase 2</option>
-              <option value="c3">Clase 3</option>
-              <option value="c4">Clase 4</option>
-            </select>
-            <label>Subclase</label>
-            <select>
-              <option value=""></option>
-              <option value="sc1">Subclase 1</option>
-              <option value="sc2">Subclase 2</option>
-              <option value="sc3">Subclase 3</option>
-              <option value="sc4">Subclase 4</option>
-            </select>
-        </div>
-        <div>
-            <p>Filtros</p>
-        </div>
+    <span class="action-panel-group-label">Acciones</span>
+  </div>
+  <div class="v-line"></div>
+  <div class="action-panel-group">
+    <div class="action-panel-group-content">
+      <div class="action-panel-filter-wrapper">
+        <label class="action-panel-filter-label">Categoría</label>
+        <select class="action-panel-filter" id="category-filter" (change)="onFilterChange($event)">
+          <option value=""></option>
+          <option value="Bisutería">Bisutería</option>
+          <option value="Lana">Lana</option>
+          <option value="Hama Beads">Hama Beads</option>
+          <option value="Personalizaciones">Personalizaciones</option>
+        </select>
+      </div>
+      <div class="action-panel-filter-wrapper">
+        <label class="action-panel-filter-label">Subcategoría</label>
+        <select class="action-panel-filter" id="subcategory-filter" (change)="onFilterChange($event)">
+          <option value=""></option>
+          <option value="Colgantes">Colgantes</option>
+          <option value="Pendientes">Pendientes</option>
+          <option value="Pulseras">Pulseras</option>
+          <option value="Patucos">Patucos</option>
+          <option value="Gorros">Gorros</option>
+        </select>
+      </div>
     </div>
+    <span class="action-panel-group-label">Filtros</span>
+  </div>
 </div>
-<div class ="tabla">
-    <tr>
-        <td><input type = "checkbox"></td>
+<div class="admin-table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <td><input type="checkbox" (change)="onSelectAllProductsCheckboxChange($event)"></td>
         <th>ID</th>
         <th>Nombre</th>
-        <th>Clase</th>
-        <th>Subclase</th>
+        <th>Categoría</th>
+        <th>Subcategoría</th>
         <th>Descripción</th>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Nombre de Producto</td>
-        <td>Un Nombre de Clase</td>
-        <td>Un Nombre de Subclase</td>
-        <td>Las descripciones son muy largas y no cabe el texto entero...</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Nombre de Producto</td>
-        <td>Un Nombre de Clase</td>
-        <td>Un Nombre de Subclase</td>
-        <td>Las descripciones son muy largas y no cabe el texto entero...</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Nombre de Producto</td>
-        <td>Un Nombre de Clase</td>
-        <td>Un Nombre de Subclase</td>
-        <td>Las descripciones son muy largas y no cabe el texto entero...</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Nombre de Producto</td>
-        <td>Un Nombre de Clase</td>
-        <td>Un Nombre de Subclase</td>
-        <td>Las descripciones son muy largas y no cabe el texto entero...</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Nombre de Producto</td>
-        <td>Un Nombre de Clase</td>
-        <td>Un Nombre de Subclase</td>
-        <td>Las descripciones son muy largas y no cabe el texto entero...</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Nombre de Producto</td>
-        <td>Un Nombre de Clase</td>
-        <td>Un Nombre de Subclase</td>
-        <td>Las descripciones son muy largas y no cabe el texto entero...</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Nombre de Producto</td>
-        <td>Un Nombre de Clase</td>
-        <td>Un Nombre de Subclase</td>
-        <td>Las descripciones son muy largas y no cabe el texto entero...</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Nombre de Producto</td>
-        <td>Un Nombre de Clase</td>
-        <td>Un Nombre de Subclase</td>
-        <td>Las descripciones son muy largas y no cabe el texto entero...</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Nombre de Producto</td>
-        <td>Un Nombre de Clase</td>
-        <td>Un Nombre de Subclase</td>
-        <td>Las descripciones son muy largas y no cabe el texto entero...</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Nombre de Producto</td>
-        <td>Un Nombre de Clase</td>
-        <td>Un Nombre de Subclase</td>
-        <td>Las descripciones son muy largas y no cabe el texto entero...</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Nombre de Producto</td>
-        <td>Un Nombre de Clase</td>
-        <td>Un Nombre de Subclase</td>
-        <td>Las descripciones son muy largas y no cabe el texto entero...</td>
-    </tr>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of filteredProductsMap | keyvalue">
+        <td><input type="checkbox" value="{{ product.value.id }}" class="select-product-checkbox"></td>
+        <td><a [routerLink]="['/detproductos/' + product.value.id]">{{ ("000000" + product.value.id).slice(-6) }}</a></td>
+        <td>{{ product.value.name }}</td>
+        <td>{{ product.value.category }}</td>
+        <td>{{ product.value.subcategory }}</td>
+        <td>{{ product.value.description }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
