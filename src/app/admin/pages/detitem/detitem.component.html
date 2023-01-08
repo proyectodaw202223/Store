@@ -1,60 +1,97 @@
-<h1>Item 000001</h1>
-<div class ="uno">
-    <div class = "filizq">
-        <div class = "filizqarr">
-            <p class = "menu"><img src="../../../assets/iconos/plus-lg.svg">Nuevo Item</p>
-            <p class = "menu"><img src="../../../assets/iconos/trash3.svg">Eliminar Item</p>
-            <p class = "menu"><img src="../../../assets/iconos/save.svg">Guardar</p>
-            <p class = "menu"><img src="../../../assets/iconos/boxes-black.svg">Añadir Stock</p>
-            <p class = "menu"><img src="../../../assets/iconos/image.svg">Añadir Imagen</p>
+<h1 class="component-title-1">Item {{ (item.id) ? ('000000' + item.id).slice(-6) : '000000' }}</h1>
+<div class="container-box">
+  <div class = "action-panel-group">
+    <div>
+      <button class="action-panel-button" (click)="onNewItemButtonClick($event)">
+        <img src="../../../assets/iconos/plus-lg.svg">Nuevo Item
+      </button>
+      <button class="action-panel-button" (click)="onDeleteItemButtonClick($event)">
+        <img src="../../../assets/iconos/trash3.svg">Eliminar Item
+      </button>
+      <button class="action-panel-button" (click)="onSaveItemButtonClick($event)">
+        <img src="../../../assets/iconos/save.svg">Guardar
+      </button>
+      <label for="input-file" class="action-panel-button file-upload">
+        <img src="../../../assets/iconos/image.svg">Añadir imagen
+      </label>
+      <input type="file" id="input-file" accept="image/*" (change)="onItemImageUploadChange($event)">
+    </div>
+    <span class="action-panel-group-label">Acciones</span>
+  </div>
+</div>
+<div class="container-box">
+  <form #itemForm="ngForm">
+    <div class="horizontal-container">
+      <div class="form-group">
+        <span class="form-group-title">Item</span>
+        <div class="form-group-content">
+          <div class="form-group-content-column">
+            <div>
+              <label class="form-label">ID:</label>
+              <input type="text" name="id" value="{{ (item.id) ? ('000000' + item.id).slice(-6) : '000000' }}" disabled>
+            </div>
+            <div>
+              <label class="form-label">Color:</label>
+              <input type="text" name="color" [(ngModel)]="item.color">
+            </div>
+            <div>
+              <label class="form-label">Talla:</label>
+              <select name="size" [(ngModel)]="item.size">
+                <option value="Única">Única</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label">Stock:</label>
+              <input type="number" name="stock" [(ngModel)]="item.stock">
+            </div>
+          </div>
         </div>
-        <p>Acciones</p>
-    </div>
-</div>
-<div class = "dos">
-    <div class = "filizq">
-    <p>Item</p>
-    <label>ID:</label><input type="text" name="inputname" value="000001" disabled><br>
-    <label>Precio:</label><input type="text" name="inputname" value="22.45 €"><br>
-    <label>Atributo 1:</label>
-    <select>
-        <option value="c1">Valor 1</option>
-        <option value="c2">Valor 2</option>
-        <option value="c3">Valor 3</option>
-        <option value="c4">Valor 4</option>
-    </select><br>
-    <label>Atributo 2</label>
-    <select>
-        <option value="sc1">Valor 2</option>
-        <option value="sc2">Valor 3</option>
-        <option value="sc3">Valor 4</option>
-        <option value="sc4">Valor 5</option>
-    </select><br>
-    </div>
-    <div class = "filizq">
-        <p>Item</p>
-        <label>ID:</label><input type="text" name="inputname" value="000001" disabled><br>
-        <label>Nombre:</label><input type="text" name="inputname" value="Un Nombre de Producto" disabled><br>
-        <label>Clase:</label><input type="text" name="inputname" value="Un nombre de clase" disabled><br>
-        <label>Subclase:</label><input type="text" name="inputname" value="Un nombre de subclase" disabled><br>
+      </div>
+      <div class="form-group">
+        <span class="form-group-title">Producto</span>
+        <div class="form-group-content">
+          <div class="form-group-content-column">
+            <div>
+              <label class="form-label">ID:</label>
+              <input type="text" name="product-id" value="{{ (item.product?.id) ? ('000000' + item.product?.id).slice(-6) : '000000' }}" disabled>
+            </div>
+            <div>
+              <label class="form-label">Nombre:</label>
+              <input type="text" name="product-name" value="{{ item.product?.name }}" disabled>
+            </div>
+            <div>
+              <label class="form-label">Precio:</label>
+              <input type="number" name="product-price" value="{{ item.product?.price }}" disabled>
+            </div>
+            <div>
+              <label class="form-label">Categoría:</label>
+              <input type="text" name="product-category" value="{{ item.product?.category }}" disabled>
+            </div>
+            <div>
+              <label class="form-label">Subcategoría:</label>
+              <input type="text" name="product-subcategory" value="{{ item.product?.subcategory }}" disabled>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="form-group">
+        <span class="form-group-title">Imágenes</span>
+        <div class="form-group-content">
+          <div class="form-group-content-column">
+            <div class="horizontal-container">
+              <div class="column item-image-wrapper" *ngFor="let image of item.images">
+                <img class="item-image" src="{{ apiStorage }}{{ image.imagePath }}"/>
+                <button value="{{ image.id }}" class="delete-image-button" (click)="onDeleteItemImageButtonClick($event)">
+                  <img src="../../../../assets/iconos/trash3.svg"/>Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
-<h2>Imágenes</h2>
-<div class = "tres">
-    <div class="imag">
-        <img class = "imagen" src="../../../assets/images/producto_1.png">
-        <p>item-000001-img-01.jpg</p>
-        <p class = "menu"><img src="../../../assets/iconos/trash3.svg"></p>
-    </div>
-    <div class="imag">
-        <img class = "imagen" src="../../../assets/images/producto_1.png">
-        <p>item-000001-img-02.jpg</p>
-        <p class = "menu"><img src="../../../assets/iconos/trash3.svg"></p>
-    </div>
-    <div class="imag">
-        <img class = "imagen" src="../../../assets/images/producto_1.png">
-        <p>item-000001-img-03.jpg</p>
-        <p class = "menu"><img src="../../../assets/iconos/trash3.svg"></p>
-    </div>
-</div>
-

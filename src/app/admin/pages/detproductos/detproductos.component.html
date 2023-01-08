@@ -93,7 +93,7 @@
     <tbody>
       <tr *ngFor="let item of product.productItems">
         <td><input type="checkbox" value="{{ item.id }}" class="select-item-checkbox"></td>
-        <td><a [routerLink]="['/detitem/' + item.id]">{{ ("000000" + item.id).slice(-6) }}</a></td>
+        <td><a [routerLink]="['/detitem/item/' + item.id]">{{ ("000000" + item.id).slice(-6) }}</a></td>
         <td>{{ item.color }}</td>
         <td>{{ item.size }}</td>
         <td>{{ item.stock }}</td>
