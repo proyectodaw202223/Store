@@ -6,13 +6,15 @@ import { FormsModule } from '@angular/forms';
 
 import { ProductosComponent } from './pages/productos/productos.component';
 import { DetproductosComponent } from './pages/detproductos/detproductos.component';
+import { DetitemComponent } from './pages/detitem/detitem.component';
 
 
 @NgModule({
   declarations: [
     AdminComponent,
     ProductosComponent,
-    DetproductosComponent
+    DetproductosComponent,
+    DetitemComponent
   ],
   imports: [
     CommonModule,

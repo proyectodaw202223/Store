@@ -60,7 +60,6 @@ export class DetproductosComponent implements OnInit {
   deleteProduct(productId: number): void {
     this.productService.deleteProduct(productId).subscribe({
       next: (result) => {
-        this.router.navigate(['detproductos']);
         console.log("Product " + productId + " successfully deleted.");
       },
       error: (error) => {
@@ -139,7 +138,7 @@ export class DetproductosComponent implements OnInit {
   }
 
   onNewItemButtonClick(event: Event): void {
-    this.router.navigate(['detitem']);
+    this.router.navigate(['detitem/product/', this.product.id]);
   }
 
   onDeleteItemButtonClick(event: Event): void {
