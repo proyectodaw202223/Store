@@ -15,7 +15,8 @@ export class ProductDetailsComponent implements OnInit {
   public newProducts: Product[] = [];
   public product: Product = <Product>{}; 
   public apiStorage: string = environment.apiStorage;
-  public productImages: ProductItemImage[] = []
+  public productColorSize : {[key:string]: string[]} = {};
+  public productUniqueImages: ProductItemImage[] = [];
 
   constructor(
     private _productService: ProductService,
@@ -24,19 +25,28 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Populate product and productImages
+    // Populate product, productColorSize and productUniqueImages
     const id = Number(this._route.snapshot.paramMap.get('id'));
     this._productService.getProductById(id).subscribe({
       next: (result) => {
         this.product = result;
-        for (let item of this.product.productItems){
-          if ( item.images !== undefined){
-            for (let image of item.images){
-              this.productImages.push(image);
+        if (this.product.productItems !== undefined){
+          for (let item of this.product.productItems){
+            if (!(item.color in this.productColorSize)){
+              this.productColorSize[item.color] = [item.size];
+              if ( item.images !== undefined){
+                for (let image of item.images){
+                  this.productUniqueImages.push(image);
+                }
+              }
+            } else {
+              this.productColorSize[item.color].push(item.size);
             }
+            
           }
         }
-        console.log(this.productImages);
+        console.log(this.productUniqueImages);
+        console.log(this.productColorSize);
         return result;
       },
       error: (error) => {
