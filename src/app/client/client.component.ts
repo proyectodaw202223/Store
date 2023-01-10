@@ -45,6 +45,15 @@ export class ClientComponent implements OnInit {
   }
 
   ngOnInit() {
+  
+    let url = window.location;
+
+    if ( url.href === url.protocol + '//' + url.host + '/'){
+      this.header_class = 'home_header';
+    } else {
+      this.header_class = '';
+    }
+    
     // Constantly check the url to set the header class.
     this.router.events.subscribe((events) => {
       if (events instanceof NavigationStart) {
