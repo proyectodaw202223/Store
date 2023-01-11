@@ -1,2 +1,16 @@
 /* image slider */
+.prod_images_slider{
+    display: flex;
+    overflow: hidden;
+    width: 300px;
+    height: 300px;
+    border: 1px black solid;
+}
+.prod_images_slide{
+    text-align: center;
+}
+.prod_images_slide img{
+    max-width:300px;
+    max-height:100%;
+}
 

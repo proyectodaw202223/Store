@@ -1,8 +1,8 @@
 <p>product-details works!</p>
 <section class = "prod_details">
    
-    <div class = "prod_images">
-      <div class="slider" *ngFor="let image of productUniqueImages; let i=index">
+    <div class = "prod_images_slider">
+      <div class = "prod_images_slide" *ngFor="let image of productUniqueImages; let i=index">
         <img src={{apiStorage}}{{image.imagePath}}>
       </div>
     </div>
