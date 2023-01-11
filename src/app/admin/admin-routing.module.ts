@@ -24,7 +24,8 @@ const routes: Routes = [
       { path: 'detitem/item/:itemId', component: DetitemComponent },
       { path: 'detitem/product/:productId', component: DetitemComponent },
       { path: 'descuentos', component: DescuentosComponent },
-      { path: 'detdescuentos', component: DetdescuentosComponent}
+      { path: 'detdescuentos', component: DetdescuentosComponent},
+      { path: 'detdescuentos/:id', component: DetdescuentosComponent}
     ]
   }
 ];

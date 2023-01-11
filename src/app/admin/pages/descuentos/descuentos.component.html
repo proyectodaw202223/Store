@@ -1,55 +1,42 @@
-<h1>Descuentos</h1>
-<div class ="filtros">
-    <div class = "filizq">
-        <div class = "filizqarr">
-            <p class = "menu"><img src="../../../assets/iconos/plus-lg.svg">Nuevo Descuento</p>
-            <p class = "menu"><img src="../../../assets/iconos/trash3.svg">Eliminar Descuento</p>
-            <p class = "menu"><img src="../../../assets/iconos/save.svg">Guardar</p>
-            <p class = "menu"><img src="../../../assets/iconos/x-octagon.svg">Cancelar</p>
-        </div>
-        <p>Acciones</p>
+<h1 class="component-title-1">Descuentos</h1>
+<div class ="container-box">
+  <div class = "action-panel-group">
+    <div>
+      <button class="action-panel-button" (click)="onNewSaleButtonClick($event)">
+        <img src="../../../assets/iconos/plus-lg.svg">Nuevo Descuento
+      </button>
+      <button class="action-panel-button" (click)="onDeleteSaleButtonClick($event)">
+        <img src="../../../assets/iconos/trash3.svg">Eliminar Descuento
+      </button>
+      <button class="action-panel-button" (click)="onCancelSaleButtonClick($event)">
+        <img src="../../../assets/iconos/x-octagon.svg">Cancelar
+      </button>
     </div>
+    <span class="action-panel-group-label">Acciones</span>
+  </div>
 </div>
-<div class ="tabla">
-    <tr>
-        <td><input type = "checkbox"></td>
-        <th>ID</th>
-        <th>Slogan</th>
-        <th>Válido desde</th>
-        <th>Válido hasta</th>
-        <th>Cancelado</th>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Slogan muy largo que se corta a la mit...</td>
-        <td>01/01/2022</td>
-        <td>01/01/2022</td>
-        <td><input type = "checkbox"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Slogan muy largo que se corta a la mit...</td>
-        <td>01/01/2022</td>
-        <td>01/01/2022</td>
-        <td><input type = "checkbox"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Slogan muy largo que se corta a la mit...</td>
-        <td>01/01/2022</td>
-        <td>01/01/2022</td>
-        <td><input type = "checkbox"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Un Slogan muy largo que se corta a la mit...</td>
-        <td>01/01/2022</td>
-        <td>01/01/2022</td>
-        <td><input type = "checkbox"></td>
-    </tr>
+<div class ="admin-table-wrapper">
+  <table>
+    <thead>
+      <tr>
+          <td><input type="checkbox" (change)="onSelectAllSalesCheckboxChange($event)"></td>
+          <th>ID</th>
+          <th>Slogan</th>
+          <th>Válido desde</th>
+          <th>Válido hasta</th>
+          <th>Cancelado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sale of seasonalSalesMap | keyvalue">
+          <td><input type="checkbox" value="{{ sale.value.id }}" class="select-sale-checkbox"></td>
+          <td><a [routerLink]="['/detdescuentos/' + sale.value.id]">{{ ("000000" + sale.value.id).slice(-6) }}</a></td>
+          <td>{{ sale.value.slogan }}</td>
+          <td>{{ sale.value.validFromDateTime }}</td>
+          <td>{{ sale.value.validToDateTime }}</td>
+          <td><input type="checkbox" [checked]="sale.value.isCanceled" disabled></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
