@@ -20,35 +20,16 @@ export class ProductDetailsComponent implements OnInit {
   public productColorSize : {[key:string]: string[]} = {};
   public productUniqueImages: ProductItemImage[] = [];
 
+  public selectedColor: string = '';
+  public selectedColorSizes: string[] = [];
+
   constructor(
     private _productService: ProductService,
     private _route: ActivatedRoute
   ) { }
 
-  //Slider functionality
-  public currentSlide: number = 0;
-  public transX: number = 0;
-
-  public changeSlide(direction : string): void {
-    if (direction === 'right'){
-      if (this.currentSlide == -this.productUniqueImages.length + 1){
-        this.currentSlide = 0;
-      } else {
-        this.currentSlide -= 1;
-      }
-      this.transX = 300 * this.currentSlide;
-    } else {
-      if (this.currentSlide == 0){
-        this.currentSlide = -(this.productUniqueImages.length - 1);
-      } else {
-        this.currentSlide += 1;
-      }
-      this.transX = 300 * this.currentSlide
-    }
-    console.log(`${direction} cur slide ${this.currentSlide}`);
-  }
-
   ngOnInit(): void {
+
 
     // Populate product, productColorSize and productUniqueImages
     const id = Number(this._route.snapshot.paramMap.get('id'));
@@ -70,8 +51,6 @@ export class ProductDetailsComponent implements OnInit {
             
           }
         }
-        console.log(this.productUniqueImages);
-        console.log(this.productColorSize);
         return result;
       },
       error: (error) => {
@@ -92,5 +71,35 @@ export class ProductDetailsComponent implements OnInit {
     })
 
   }
+
+  //Slider functionality
+  public currentSlide: number = 0;
+  public transX: number = 0;
+
+  public changeSlide(direction : string): void {
+    if (direction === 'right'){
+      if (this.currentSlide == -this.productUniqueImages.length + 1){
+        this.currentSlide = 0;
+      } else {
+        this.currentSlide -= 1;
+      }
+      this.transX = 450 * this.currentSlide;
+    } else {
+      if (this.currentSlide == 0){
+        this.currentSlide = -(this.productUniqueImages.length - 1);
+      } else {
+        this.currentSlide += 1;
+      }
+      this.transX = 450 * this.currentSlide
+    }
+  }
+
+  radioSelected(selectedColor:string): void{
+    this.selectedColorSizes = this.productColorSize[selectedColor];
+    this.selectedColor = selectedColor;
+    console.log(selectedColor);
+    console.log(this.selectedColorSizes);
+  }
+
 
 }

@@ -1,17 +1,31 @@
-<p>product-details works!</p>
-<section class = "prod_details">
+<section class = "prod_details d-flex">
    
     <div class = "prod_images_slider">
-      <div class = "prod_images_slide" [ngStyle]="{'transform': 'translateX(' + transX + 'px)'}" *ngFor="let image of productUniqueImages; let i=index">
-        <img src={{apiStorage}}{{image.imagePath}}>
-      </div>
+      <button *ngIf="productUniqueImages.length>1" class="slider_btn prev" (click)="changeSlide('left')"><i class="bi bi-arrow-left-circle-fill"></i></button>
+      <button *ngIf="productUniqueImages.length>1" class="slider_btn next" (click)="changeSlide('right')"><i class="bi bi-arrow-right-circle-fill"></i></button>
 
-      <button *ngIf="productUniqueImages.length>1" class="slider_btn prev" (click)="changeSlide('left')"><i class="bi bi-caret-left"></i></button>
-      <button *ngIf="productUniqueImages.length>1" class="slider_btn next" (click)="changeSlide('right')"><i class="bi bi-caret-right"></i></button>
+      <div class = "prod_images_slide" [ngStyle]="{'transform': 'translateX(' + transX + 'px)'}" *ngFor="let image of productUniqueImages">
+        <img src={{apiStorage}}{{image.imagePath}}>
+      </div> 
     </div>
 
 
     <div class = "prod_data">
+      <h2>{{product.name}}</h2>
+      <h2>{{product.price}}</h2>
+      <p>{{product.description}}</p>
+      <div>
+        <label>Talla: </label>
+        <span *ngIf="selectedColorSizes.length == 0"> Selecciona primero un color.</span>
+        <select name="size" id="size_selector" *ngIf="selectedColorSizes.length !== 0">
+          <option *ngFor="let size of selectedColorSizes" value={{size}}>{{size}}</option>
+        </select>
+      </div>
+      
+      <div *ngFor="let item of productColorSize | keyvalue">
+        <label>{{item.key}}: </label>
+        <input type="radio" id="item.key" name="item.key" value="item.key" (click)="radioSelected(item.key)" [checked]='false'>
+      </div>
 
     </div>
 </section>
