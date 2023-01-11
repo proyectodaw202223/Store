@@ -145,3 +145,10 @@ footer p{
 .highlighted_prod_price{
     color: #AD0624;
 }
+.highlighted_prod_link{
+    text-decoration: none;
+    color: rgb(30, 30, 30);
+}
+.highlighted_prod_link:hover{
+    color: black;
+}
