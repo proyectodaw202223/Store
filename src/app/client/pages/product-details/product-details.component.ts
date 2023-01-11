@@ -39,7 +39,7 @@ export class ProductDetailsComponent implements OnInit {
       this.transX = 300 * this.currentSlide;
     } else {
       if (this.currentSlide == 0){
-        this.currentSlide = -2;
+        this.currentSlide = -(this.productUniqueImages.length - 1);
       } else {
         this.currentSlide += 1;
       }

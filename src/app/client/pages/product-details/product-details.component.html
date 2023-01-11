@@ -6,8 +6,8 @@
         <img src={{apiStorage}}{{image.imagePath}}>
       </div>
 
-      <button class="slider_btn prev" (click)="changeSlide('left')"><i class="bi bi-caret-left"></i></button>
-      <button class="slider_btn next" (click)="changeSlide('right')"><i class="bi bi-caret-right"></i></button>
+      <button *ngIf="productUniqueImages.length>1" class="slider_btn prev" (click)="changeSlide('left')"><i class="bi bi-caret-left"></i></button>
+      <button *ngIf="productUniqueImages.length>1" class="slider_btn next" (click)="changeSlide('right')"><i class="bi bi-caret-right"></i></button>
     </div>
 
 
