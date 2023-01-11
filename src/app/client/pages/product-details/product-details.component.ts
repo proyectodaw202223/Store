@@ -8,7 +8,9 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css']
+  styleUrls: ['./product-details.component.css',
+  '../../client.component.css'
+]
 })
 export class ProductDetailsComponent implements OnInit {
 
