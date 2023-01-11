@@ -1,7 +1,8 @@
 /* image slider */
 .prod_images_slider{
+    position: relative;
     display: flex;
-    overflow: hidden;
+    /* overflow: hidden; */
     width: 300px;
     height: 300px;
     border: 1px black solid;
@@ -12,5 +13,20 @@
 .prod_images_slide img{
     max-width:300px;
     max-height:100%;
+}
+.slider_btn{
+    position:absolute;
+    top:45%;
+    z-index: 10;
+    border: none;
+    background: none;
+}
+.prev{
+    left:.5rem;
+    transform: translate(-50%, -50%);
+}
+.next{
+    right: .5rem;
+    transform: translate(50%, -50%); 
 }
 

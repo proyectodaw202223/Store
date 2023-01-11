@@ -25,6 +25,29 @@ export class ProductDetailsComponent implements OnInit {
     private _route: ActivatedRoute
   ) { }
 
+  //Slider functionality
+  public currentSlide: number = 0;
+  public transX: number = 0;
+
+  public changeSlide(direction : string): void {
+    if (direction === 'right'){
+      if (this.currentSlide == -this.productUniqueImages.length + 1){
+        this.currentSlide = 0;
+      } else {
+        this.currentSlide -= 1;
+      }
+      this.transX = 300 * this.currentSlide;
+    } else {
+      if (this.currentSlide == 0){
+        this.currentSlide = -2;
+      } else {
+        this.currentSlide += 1;
+      }
+      this.transX = 300 * this.currentSlide
+    }
+    console.log(`${direction} cur slide ${this.currentSlide}`);
+  }
+
   ngOnInit(): void {
 
     // Populate product, productColorSize and productUniqueImages
@@ -67,7 +90,7 @@ export class ProductDetailsComponent implements OnInit {
         return error;
       }
     })
-    
+
   }
 
 }

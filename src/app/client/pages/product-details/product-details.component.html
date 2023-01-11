@@ -2,10 +2,14 @@
 <section class = "prod_details">
    
     <div class = "prod_images_slider">
-      <div class = "prod_images_slide" *ngFor="let image of productUniqueImages; let i=index">
+      <div class = "prod_images_slide" [ngStyle]="{'transform': 'translateX(' + transX + 'px)'}" *ngFor="let image of productUniqueImages; let i=index">
         <img src={{apiStorage}}{{image.imagePath}}>
       </div>
+
+      <button class="slider_btn prev" (click)="changeSlide('left')"><i class="bi bi-caret-left"></i></button>
+      <button class="slider_btn next" (click)="changeSlide('right')"><i class="bi bi-caret-right"></i></button>
     </div>
+
 
     <div class = "prod_data">
 
