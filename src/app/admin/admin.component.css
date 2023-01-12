@@ -92,6 +92,7 @@ html .body{
   background-color: transparent;
   margin: 10px;
   padding: 5px;
+  cursor: pointer;
 }
 
 .action-panel-button:hover { background-color: lightgray; }
@@ -133,11 +134,13 @@ html .body{
 
 .form-group {
   padding: 15px;
+  width: fit-content;
 }
 
 .form-group-content {
   display: flex;
   flex-direction: row;
+  width: fit-content;
   padding-left: 20px;
 }
 
@@ -157,4 +160,11 @@ html .body{
 .column {
   display: flex;
   flex-direction: column;
+  width: fit-content;
+}
+
+.horizontal-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

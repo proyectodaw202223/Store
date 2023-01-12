@@ -1,62 +1,25 @@
-h1{
-    margin: 20px;
-    font-weight: bold;
-    font-size: 32px;
+.item-image-wrapper {
+  margin-right: 40px;
+  margin-bottom: 40px;
 }
-.uno{
-    margin: 20px;
-    border: black 1px solid;
-    border-radius: 10px;
-    display: flex;
+
+.item-image {
+  width: 160px;
+  height: 160px;
 }
-.dos{
-    margin: 20px;
-    border: black 1px solid;
-    border-radius: 10px;
-    display: flex;
+
+.delete-image-button {
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: transparent;
+  margin: 10px;
+  padding: 5px;
 }
-.tres{
-    margin: 20px;
-    border: black 1px solid;
-    border-radius: 10px;
-}
-.tabla{
-    margin: 20px;
-    border: black 1px solid;
-    border-radius: 10px;
-}
-p{
-    font-size: 14px;
-    display: flex;
-    padding: 5px;
-}
-span{
-    padding: 5px;
-}
-.filderarr{
-    display: flex;
-}
-.filizqarr{
-    display: flex;
-    white-space: nowrap;
-}
-th, td {
-    padding: 0.2cm;
-    font-size: 14px;
-}
-.v-line{
-    border-left: thin solid #000;
-    height: 10%;
-    position: absolute;
-    padding: 0.4cm;
-   }
-.imagen {
-    height: 2cm;
-    width: 2cm;
-    border: black 1px solid;
-    padding: 0.2cm;
-}
-.imag {
-    display: flex;
-    padding: 0.3cm;
+
+.delete-image-button:hover { background-color: lightgray; }
+
+.delete-image-button img { margin-right: 5px; }
+
+input[type="file"] {
+  display: none;
 }
