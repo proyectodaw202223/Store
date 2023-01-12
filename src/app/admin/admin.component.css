@@ -3,7 +3,7 @@
     color: #000000;
     background-color: white;
     padding: 30px;
-    height: 20%;
+    height: 100px;
     background-image: #EAEAEA;
     display: flex;
     border: black 1px solid;
@@ -124,6 +124,11 @@ html .body{
 .admin-table-wrapper th, .admin-table-wrapper td {
   padding: 0.2cm;
   font-size: 14px;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .form-group {

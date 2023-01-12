@@ -18,6 +18,7 @@ const routes: Routes = [
     children:[
       { path: 'pedidos', component: PedidosComponent },
       { path: 'detpedidos', component: DetpedidosComponent },
+      { path: 'detpedidos/:id', component: DetpedidosComponent},
       { path: 'productos', component: ProductosComponent},
       { path: 'detproductos', component: DetproductosComponent},
       { path: 'detproductos/:id', component: DetproductosComponent},

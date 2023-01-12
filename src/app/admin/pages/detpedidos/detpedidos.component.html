@@ -1,78 +1,103 @@
-<h1>Pedido 000001</h1>
-<div class ="filtros">
-    <div class = "filizq">
-        <label>Pedido:</label><br>
-        <label>ID</label><input type="text" name="inputname" value="000001" disabled><br>
-        <label>Estado:</label>
-        <select>
-            <option value=""></option>
-            <option value="pagado">Pagado</option>
-            <option value="php">En Gestión</option>
-            <option value="java">Enviado</option>
-            <option value="golang">Cancelado</option>
-            </select><br>
-        <label>Importe:</label><input type="text" name="inputname" value="72.45 €" disabled><br>   
-        <label>Fecha:</label><input type="text" name="inputname" value="01/01/2022" disabled><br>
-    </div>
-    <div class="filcen">
-        <label>Comentarios:</label><br>
-        <textarea>La descripciones son muy largas y no cabe el texto entero en una columna de la tabla pero si el usuario quiere leer o editar la descripción puede entrar a ver los detalles de un producto y usar este campo que es mucho mas grande."</textarea>
-    </div>    
-    <div class ="filder">
-        <label>Cliente:</label><br>
-        <label>Nombre:</label><input type="text" name="inputname" value="Un Nombre" disabled><br>
-        <label>Apellido:</label><input type="text" name="inputname" value="Un Apellido" disabled><br>
-        <label>Dirección:</label><input type="text" name="inputname" value="Calle Me Falta Un Tornillo, 1B esc A" disabled><br>
-        <label>Email:</label><input type="text" name="inputname" value="unnombreunapellido@gmail.com" disabled><br>
-        <label>N. de Teléfono:</label><input type="text" name="inputname" value="123456789" disabled><br>
-    </div>
+<h1 class="component-title-1">Pedido {{ (order.id) ? ('000000' + order.id).slice(-6) : '000000' }}</h1>
+<div class ="container-box">
+  <div class = "action-panel-group">
     <div>
+      <button class="action-panel-button" (click)="onSaveOrderButtonClick($event)">
+        <img src="../../../assets/iconos/save.svg">Guardar
+      </button>
     </div>
+    <span class="action-panel-group-label">Acciones</span>
+  </div>
 </div>
-<div class ="tabla">
-    <tr>
-        <td><input type = "checkbox"></td>
+<div class="container-box">
+  <form #orderForm="ngForm" class ="form">
+    <div class="form-group">
+      <span class="form-group-title">Pedido</span>
+      <div class="form-group-content">
+        <div class="form-group-content-column">
+          <div>
+            <label class="form-label">ID:</label>
+            <input type="text" name="orderId" value="{{ (order.id) ? ('000000' + order.id).slice(-6) : '000000' }}" disabled>
+          </div>
+          <div>
+            <label class="form-label">Estado:</label>
+            <select name="status" [(ngModel)]="order.status">
+              <option value=""></option>
+              <option value="Pagado">Pagado</option>
+              <option value="En Gestión">En Gestión</option>
+              <option value="Enviado">Enviado</option>
+              <option value="Cancelado">Cancelado</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Importe:</label>
+            <input type="text" name="amount" [(ngModel)]="order.amount" disabled>
+          </div>
+          <div>
+            <label class="form-label">Fecha:</label>
+            <input type="text" name="date" [(ngModel)]="order.created_at" disabled>
+          </div>
+        </div>
+        <div class="form-group-content-column">
+          <div class="column">
+            <label class="form-label">Comentarios:</label>
+            <textarea name="comments" [(ngModel)]="order.comments"></textarea>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+    <div class="form-group">
+      <span class="form-group-title">Cliente</span>
+      <div class="form-group-content">
+      <div class="form-group-content-column">
+        <div>
+          <label class="form-label">Nombre:</label>
+          <input type="text" name="nombre" value="{{order.customer?.firstName}}" disabled>
+        </div>
+        <div>
+          <label class="form-label">Apellido:</label>
+          <input type="text" name="apellido" value="{{order.customer?.lastName}}" disabled>
+        </div>
+        <div>
+          <label class="form-label">Direccion:</label>
+          <input type="text" name="direccion" value="{{order.customer?.streetAddress}}" disabled>
+        </div>
+        <div>
+          <label class="form-label">Email:</label>
+          <input type="text" name="mail" value="{{order.customer?.email}}" disabled>
+        </div>
+        <div>
+          <label class="form-label">N. de Teléfono:</label>
+          <input type="text" name="phone" value="{{order.customer?.phoneNumber}}" disabled>
+        </div>
+      </div>
+    </div>
+    </div>
+  </form> 
+</div>
+<div class="admin-table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <td><input type="checkbox" (change)="onSelectAllItemsCheckboxChange($event)"></td>
         <th>Producto</th>
         <th>Cantidad</th>
         <th>Precio</th>
-        <th>Descuento</th>
-        <th>Precio Con Descuento</th>
+        <th>Precio con Descuento</th>
         <th>Importe</th>
     </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td>Un Nombre Muy Largo</td>
-        <td>2 ud.</td>
-        <td>22,45€</td>
-        <td>15%</td>
-        <td>19,09€</td>
-        <td>38,18€</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td>Un Nombre Muy Largo</td>
-        <td>2 ud.</td>
-        <td>22,45€</td>
-        <td>15%</td>
-        <td>19,09€</td>
-        <td>38,18€</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td>Un Nombre Muy Largo</td>
-        <td>2 ud.</td>
-        <td>22,45€</td>
-        <td>15%</td>
-        <td>19,09€</td>
-        <td>38,18€</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td>Un Nombre Muy Largo</td>
-        <td>2 ud.</td>
-        <td>22,45€</td>
-        <td>15%</td>
-        <td>19,09€</td>
-        <td>38,18€</td>
-    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let line of order.lines">
+        <td><input type="checkbox" value="{{ line.id }}" class="select-item-checkbox"></td>
+        <td>{{ line.productItem?.product?.name }}</td>
+        <td>{{ line.quantity }}</td>
+        <td>{{ line.productItem?.product?.price }}</td>
+        <td>{{ line.priceWithDiscount }}</td>
+        <td>{{ line.amount }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
