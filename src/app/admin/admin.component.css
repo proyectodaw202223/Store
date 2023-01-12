@@ -127,6 +127,11 @@ html .body{
   font-size: 14px;
 }
 
+.form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .form-group {
   padding: 15px;
   width: fit-content;

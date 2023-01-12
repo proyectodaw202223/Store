@@ -1,153 +1,46 @@
-<h1>Pedidos</h1>
-<div class ="filtros">
-    <div class ="filizq">
-        <label>Cambiar estado</label>
-        <select>
+<h1 class="component-title-1">Pedidos</h1>
+<div class ="container-box">
+  <div class="action-panel-group">
+    <div class="action-panel-group-content">
+      <div class="action-panel-filter-wrapper">
+        <label class="action-panel-filter-label">Estado</label>
+        <select class="action-panel-filter" id="status-filter" (change)="onFilterChange($event)">
             <option value=""></option>
-            <option value="pagado">Pagado</option>
-            <option value="gestion">En Gestión</option>
-            <option value="enviado">Enviado</option>
-            <option value="cancelado">Cancelado</option>
+            <option value="Pagado">Pagado</option>
+            <option value="En Gestión">En Gestión</option>
+            <option value="Enviado">Enviado</option>
+            <option value="Cancelado">Cancelado</option>
         </select>
-        <div class="leyenda">
-            <p>Acciones</p>
-        </div>
+      </div>
     </div>
-    <div class ="filder">
-        <div class = "filderarr">
-            <label>Estados</label>
-            <select>
-              <option value=""></option>
-              <option value="pagado">Pagado</option>
-              <option value="gestion">En Gestión</option>
-              <option value="enviado">Enviado</option>
-              <option value="cancelado">Cancelado</option>
-            </select>
-            <label>ID</label>
-            <select>
-              <option value=""></option>
-              <option value="1">000001</option>
-              <option value="2">000002</option>
-              <option value="3">000003</option>
-              <option value="4">000004</option>
-            </select>
-        </div>
-        <div class="leyenda">
-            <p>Filtros</p>
-        </div>
-    </div>
+    <span class="action-panel-group-label">Filtros</span>
+  </div>
 </div>
-<div class ="tabla">
-    <table>
-    <tr>
-        <th><input type = "checkbox"></th>
+<div class="admin-table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <td><input type="checkbox" (change)="onSelectAllOrdersCheckboxChange($event)"></td>
         <th>ID</th>
         <th>Estado</th>
         <th>Importe</th>
         <th>Fecha</th>
         <th>Cliente</th>
-        <th>Direccion</th>
+        <th>Dirección</th>
         <th>Comentarios</th>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Pagado</td>
-        <td>72,45€</td>
-        <td>01/01/2022</td>
-        <td>Un Nombre muy muy largo</td>
-        <td>Calle me falta un tornillo, 14, 1B esc. A</td>
-        <td><img src="../../../assets/iconos/check-circle.svg"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Pagado</td>
-        <td>172,45€</td>
-        <td>01/01/2022</td>
-        <td>Un Nombre muy muy largo</td>
-        <td>Calle me falta un tornillo, 14, 1B esc. A</td>
-        <td><img src="../../../assets/iconos/check-circle.svg"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Pagado</td>
-        <td>252,00€</td>
-        <td>01/01/2022</td>
-        <td>Un Nombre muy muy largo</td>
-        <td>Calle me falta un tornillo, 14, 1B esc. A</td>
-        <td><img src="../../../assets/iconos/x-circle.svg"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Pagado</td>
-        <td>22,95€</td>
-        <td>01/01/2022</td>
-        <td>Un Nombre muy muy largo</td>
-        <td>Calle me falta un tornillo, 14, 1B esc. A</td>
-        <td><img src="../../../assets/iconos/check-circle.svg"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>En Gestión</td>
-        <td>34,65€</td>
-        <td>01/01/2022</td>
-        <td>Un Nombre muy muy largo</td>
-        <td>Calle me falta un tornillo, 14, 1B esc. A</td>
-        <td><img src="../../../assets/iconos/x-circle.svg"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>En Gestión</td>
-        <td>72,45€</td>
-        <td>01/01/2022</td>
-        <td>Un Nombre muy muy largo</td>
-        <td>Calle me falta un tornillo, 14, 1B esc. A</td>
-        <td><img src="../../../assets/iconos/check-circle.svg"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>En Gestión</td>
-        <td>22,45€</td>
-        <td>01/01/2022</td>
-        <td>Un Nombre muy muy largo</td>
-        <td>Calle me falta un tornillo, 14, 1B esc. A</td>
-        <td><img src="../../../assets/iconos/x-circle.svg"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Enviado</td>
-        <td>57,45€</td>
-        <td>01/01/2022</td>
-        <td>Un Nombre muy muy largo</td>
-        <td>Calle me falta un tornillo, 14, 1B esc. A</td>
-        <td><img src="../../../assets/iconos/x-circle.svg"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Enviado</td>
-        <td>72,45€</td>
-        <td>01/01/2022</td>
-        <td>Un Nombre muy muy largo</td>
-        <td>Calle me falta un tornillo, 14, 1B esc. A</td>
-        <td><img src="../../../assets/iconos/x-circle.svg"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>000001</a></td>
-        <td>Cancelado</td>
-        <td>192,55€</td>
-        <td>01/01/2022</td>
-        <td>Un Nombre muy muy largo</td>
-        <td>Calle me falta un tornillo, 14, 1B esc. A</td>
-        <td><img src="../../../assets/iconos/x-circle.svg"></td>
-    </tr>
-    </table>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of filteredOrdersMap | keyvalue">
+        <td><input type="checkbox" value="{{ order.value.id }}" class="select-order-checkbox"></td>
+        <td><a [routerLink]="['/detpedidos/' + order.value.id]">{{ ("000000" + order.value.id).slice(-6) }}</a></td>
+        <td>{{ order.value.status }}</td>
+        <td>{{ order.value.amount }}</td>
+        <td>{{ order.value.created_at?.substr(0,10) }}</td>
+        <td>{{ order.value.customer?.lastName }}, {{ order.value.customer?.firstName }}</td>
+        <td>{{ order.value.customer?.streetAddress }}</td>
+        <td>{{ order.value.comments }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
