@@ -109,18 +109,21 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  radioSelected(selectedColor:string): void{
+  colorSelected(selectedColor:string): void{
     this.selectedColorSizes = this.productColorSize[selectedColor];
     this.selectedColor = selectedColor;
-    console.log(selectedColor);
-    console.log(this.selectedColorSizes);
+    this.selectedSize = this.selectedColorSizes[0];
+  }
+
+  sizeSelected(selectedSize:string): void{
+    this.selectedSize = selectedSize;
   }
 
   selectItem():void{
     if( this.selectedColor !== '' && this.selectedSize !== ''){
-      console.log(`Item selected: `);
+      console.log(`Item selected: color:${this.selectedColor} size:${this.selectedSize} `);
     } else {
-      console.log(`No selected`);
+      console.log(`No selected color:${this.selectedColor} size:${this.selectedSize}`);
     }
   }
 
