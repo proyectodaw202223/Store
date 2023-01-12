@@ -4,6 +4,7 @@ import { ProductItemImage } from 'src/app/models/productItemImage.model';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { ProductItem } from 'src/app/models/productItem.model';
 
 @Component({
   selector: 'app-product-details',
@@ -20,8 +21,13 @@ export class ProductDetailsComponent implements OnInit {
   public productColorSize : {[key:string]: string[]} = {};
   public productUniqueImages: ProductItemImage[] = [];
 
-  public selectedColor: string = '';
+  public productOneSize: boolean = false;
+  public productColorOptions: number = 0;
   public selectedColorSizes: string[] = [];
+  public selectedColor: string = '';
+  public selectedSize: string = '';
+
+  public selectedItem: ProductItem = <ProductItem>{};
 
   constructor(
     private _productService: ProductService,
@@ -36,6 +42,7 @@ export class ProductDetailsComponent implements OnInit {
     this._productService.getProductById(id).subscribe({
       next: (result) => {
         this.product = result;
+        console.log(this.product);
         if (this.product.productItems !== undefined){
           for (let item of this.product.productItems){
             if (!(item.color in this.productColorSize)){
@@ -47,8 +54,16 @@ export class ProductDetailsComponent implements OnInit {
               }
             } else {
               this.productColorSize[item.color].push(item.size);
-            }
-            
+            } 
+          }
+          this.productColorOptions = Object.keys(this.productColorSize).length; 
+          if (this.productColorOptions === 1){
+            this.selectedColor = Object.keys(this.productColorSize)[0];
+            this.selectedColorSizes = this.productColorSize[this.selectedColor];
+            if (this.selectedColorSizes.length === 1) {
+              this.productOneSize = true;
+              this.selectedSize = this.selectedColorSizes[0];
+            };
           }
         }
         return result;
@@ -99,6 +114,14 @@ export class ProductDetailsComponent implements OnInit {
     this.selectedColor = selectedColor;
     console.log(selectedColor);
     console.log(this.selectedColorSizes);
+  }
+
+  selectItem():void{
+    if( this.selectedColor !== '' && this.selectedSize !== ''){
+      console.log(`Item selected: `);
+    } else {
+      console.log(`No selected`);
+    }
   }
 
 

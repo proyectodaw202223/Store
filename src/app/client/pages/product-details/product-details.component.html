@@ -14,18 +14,31 @@
       <h2>{{product.name}}</h2>
       <h2>{{product.price}}</h2>
       <p>{{product.description}}</p>
-      <div>
+      <div *ngIf="!productOneSize; else oneSize">
         <label>Talla: </label>
         <span *ngIf="selectedColorSizes.length == 0"> Selecciona primero un color.</span>
         <select name="size" id="size_selector" *ngIf="selectedColorSizes.length !== 0">
           <option *ngFor="let size of selectedColorSizes" value={{size}}>{{size}}</option>
         </select>
       </div>
+      <ng-template #oneSize>
+        <label>Talla: {{selectedColorSizes[0]}}</label>
+      </ng-template>
       
-      <div *ngFor="let item of productColorSize | keyvalue">
-        <label>{{item.key}}: </label>
-        <input type="radio" id="item.key" name="item.key" value="item.key" (click)="radioSelected(item.key)" [checked]='false'>
+      <div *ngIf="productColorOptions === 1; else moreColorOptions">
+        <div *ngFor="let item of productColorSize | keyvalue">
+          <label>Color: {{item.key}} </label>
+        </div>
       </div>
+      <ng-template #moreColorOptions>
+        <label>Color: </label>
+        <div *ngFor="let item of productColorSize | keyvalue">
+          <label>{{item.key}} </label>
+          <input type="radio" id="item.key" name="item.key" value="item.key" (click)="radioSelected(item.key)" [checked]='false'>
+        </div>
+      </ng-template>
+
+      <button (click)="selectItem()">AÑADIR <i class="bi bi-cart3"></i></button>
 
     </div>
 </section>
