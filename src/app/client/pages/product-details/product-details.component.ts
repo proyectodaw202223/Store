@@ -5,6 +5,12 @@ import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ProductItem } from 'src/app/models/productItem.model';
+import { OrderService } from 'src/app/services/order.service';
+import { Order } from 'src/app/models/order.model';
+import { OrderLine } from 'src/app/models/orderLine.model';
+import { SeasonalSale } from 'src/app/models/seasonalSale.model';
+import { Customer } from 'src/app/models/customer.model';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-product-details',
@@ -17,6 +23,7 @@ export class ProductDetailsComponent implements OnInit {
 
   public newProducts: Product[] = [];
   public product: Product = <Product>{}; 
+  public customer: Customer = <Customer>{}; 
   public apiStorage: string = environment.apiStorage;
   public productColorSize : {[key:string]: string[]} = {};
   public productUniqueImages: ProductItemImage[] = [];
@@ -31,11 +38,24 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private _productService: ProductService,
+    private _orderService: OrderService,
+    private _customerService: CustomerService,
     private _route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
 
+    let customerId = Number(sessionStorage.getItem("customerId"));
+    console.log(customerId);
+    this._customerService.getCustormerById(customerId).subscribe({
+      next: (result) => {
+        this.customer = result;
+        console.log(result)
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
 
     // Populate product, productColorSize and productUniqueImages
     const id = Number(this._route.snapshot.paramMap.get('id'));
@@ -134,11 +154,112 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
+  isUserLoggedIn(): boolean{
+    return (sessionStorage.getItem("customerName") !== undefined);
+  }
+
+  getCreatedOrder( customerId: number, orders: Order[]): Order | null{
+    return orders.filter((order: Order) =>{order.id === customerId})[0];
+  }
+
+  isActiveSale(seasonalSale: SeasonalSale): boolean{
+    let saleStart = new Date(seasonalSale.validFromDateTime).getTime();
+    let saleEnd = new Date(seasonalSale.validToDateTime).getTime();
+    let today = new Date().getTime();
+
+    return seasonalSale.isCanceled 
+      ? false
+      : (saleStart <= today && today <= saleEnd)? true : false;
+  }
+
+  getActiveDiscount(productItem: ProductItem): number{
+    if (productItem.sale !== undefined){
+      if (this.isActiveSale(productItem.sale)){
+        if (productItem.sale.lines !== undefined){
+          for (let line of productItem.sale.lines){
+            if (line.itemId === productItem.id){
+              return line.discountPercentage/100;
+            }
+          }
+          return 0;
+        } else {
+          return 0;
+        } 
+      } else {
+        return 0;
+      }    
+    } else {
+      return 0;
+    }
+  }
+
+  calculatePriceWithDiscount(productItem: ProductItem): number{
+    return this.product.price * (1+this.getActiveDiscount(productItem))
+  }
+
+  addItemToOrder( order: Order, selectedItem: ProductItem){
+    if(order.lines !== undefined){
+      for (let line of order.lines){
+        if(line.itemId === selectedItem.id){
+          line.amount++;
+          return;
+        }
+      }
+      if (order.id !== undefined && selectedItem.id !== undefined){
+        let newLine = new OrderLine(
+          order.id,
+          selectedItem.id,
+          1,
+          this.calculatePriceWithDiscount(selectedItem),
+          this.calculatePriceWithDiscount(selectedItem)
+        )
+        order.lines.push(newLine);
+        order.amount += this.calculatePriceWithDiscount(selectedItem);
+        this._orderService.updateOrder(order);
+      }
+    }  
+  }
+
+  createOrder(customer: Customer): Order | any{
+    if (customer.id !== undefined){
+      let order: Order = new Order(customer.id, 0, '', 'Creado')
+      this._orderService.createOrder(order).subscribe({
+        next: (result) => {
+          return result;
+        },
+        error: (error) => {
+          return error;
+        }
+      })
+    } else {
+      return null
+    }
+  }
+
   addToCart():void{
     if (this.selectItem()){
-      sessionStorage.getItem("customerName")
-        ? console.log('item selected client loged in')
-        : alert("Please log in to add product to the cart")
+      if (this.isUserLoggedIn()){
+        this._orderService.getOrdersByStatus('Creado').subscribe({
+          next: (result) => {
+            let customerId = Number(sessionStorage.getItem("customerId"));
+            let createdOrder = this.getCreatedOrder(customerId, result);
+            if (createdOrder){
+              this.addItemToOrder(createdOrder, this.selectedItem);
+              console.log(createdOrder);
+            } else {
+              let newOrder = this.createOrder(this.customer)
+              this.addItemToOrder(newOrder, this.selectedItem)
+              console.log(newOrder);
+            }
+          },
+          error: (error) => {
+            console.log(<any>error);
+            return error;
+          }
+        })
+      } else {
+        alert("Please log in to add product to the cart")
+      }
     } else {
       console.log('nothing selected')
     }
