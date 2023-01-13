@@ -16,9 +16,12 @@
 .prod_price{
     color: #AD0624;
 }
-
-.filter_title{
-
+.prod_link{
+    text-decoration: none;
+    color: rgb(30, 30, 30);
+}
+.prod_link:hover{
+    color: black;
 }
 .filter{
     display: flex;
