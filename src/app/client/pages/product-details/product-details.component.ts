@@ -11,6 +11,7 @@ import { OrderLine } from 'src/app/models/orderLine.model';
 import { SeasonalSale } from 'src/app/models/seasonalSale.model';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-product-details',
@@ -46,10 +47,10 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     let customerId = Number(sessionStorage.getItem("customerId"));
-    console.log(customerId);
     this._customerService.getCustormerById(customerId).subscribe({
       next: (result) => {
         this.customer = result;
+        console.log('CUSTOMER')
         console.log(result)
       },
       error: (error) => {
@@ -62,7 +63,6 @@ export class ProductDetailsComponent implements OnInit {
     this._productService.getProductById(id).subscribe({
       next: (result) => {
         this.product = result;
-        console.log(this.product);
         if (this.product.productItems !== undefined){
           for (let item of this.product.productItems){
             if (!(item.color in this.productColorSize)){
@@ -159,7 +159,12 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   getCreatedOrder( customerId: number, orders: Order[]): Order | null{
-    return orders.filter((order: Order) =>{order.id === customerId})[0];
+    for (let order of orders){
+      if(order.customerId === customerId){
+        return order;
+      }
+    }
+    return null;
   }
 
   isActiveSale(seasonalSale: SeasonalSale): boolean{
@@ -244,8 +249,8 @@ export class ProductDetailsComponent implements OnInit {
             let customerId = Number(sessionStorage.getItem("customerId"));
             let createdOrder = this.getCreatedOrder(customerId, result);
             if (createdOrder){
-              this.addItemToOrder(createdOrder, this.selectedItem);
               console.log(createdOrder);
+              this.addItemToOrder(createdOrder, this.selectedItem);
             } else {
               let newOrder = this.createOrder(this.customer)
               this.addItemToOrder(newOrder, this.selectedItem)
