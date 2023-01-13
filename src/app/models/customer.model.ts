@@ -3,9 +3,9 @@ export class Customer { 
         public firstName: string,
         public email: string,
         public password: string,
-        public lastName: string = 'no',
-        public streetAddress: string = 'no',
-        public phoneNumber: number = 111111111,
+        public lastName?: string,
+        public address?: string,
+        public phoneNumber?: number,
         public id?: number,
         public created_at?: string,
         public updated_at?: string      
