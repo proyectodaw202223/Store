@@ -38,7 +38,7 @@
         </div>
       </ng-template>
 
-      <button (click)="selectItem()">AÑADIR <i class="bi bi-cart3"></i></button>
+      <button (click)="addToCart()">AÑADIR <i class="bi bi-cart3"></i></button>
 
     </div>
 </section>
@@ -47,7 +47,7 @@
     <h3>NOVEDADES</h3>
     <div class="highlighted_products row flex overflow-hidden justify-content-center">
       <div class="highlighted_prod_preview" *ngFor="let product of newProducts">
-          <a class="highlighted_prod_link" routerLink="products/product/{{product.id}}">
+          <a class="highlighted_prod_link" routerLink="../{{product.id}}">
               <img *ngIf="product.productItems !== undefined && product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
               <p class="highlighted_prod_name">{{product.name}}</p>
               <p class="highlighted_prod_price">{{product.price}} €</p>

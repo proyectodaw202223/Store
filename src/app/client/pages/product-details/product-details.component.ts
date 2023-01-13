@@ -119,11 +119,28 @@ export class ProductDetailsComponent implements OnInit {
     this.selectedSize = selectedSize;
   }
 
-  selectItem():void{
+  selectItem():ProductItem | null{
     if( this.selectedColor !== '' && this.selectedSize !== ''){
-      console.log(`Item selected: color:${this.selectedColor} size:${this.selectedSize} `);
+      let selectedItem = this.product.productItems?.filter(
+        (item) => item.color === this.selectedColor && item.size === this.selectedSize
+      )
+      if (selectedItem !== undefined){
+        this.selectedItem =   selectedItem[0];
+      }
+      return this.selectedItem;
     } else {
-      console.log(`No selected color:${this.selectedColor} size:${this.selectedSize}`);
+      console.log(`No selected item. SelColor:${this.selectedColor} SelSize:${this.selectedSize}`);
+      return null;
+    }
+  }
+
+  addToCart():void{
+    if (this.selectItem()){
+      sessionStorage.getItem("customerName")
+        ? console.log('item selected client loged in')
+        : alert("Please log in to add product to the cart")
+    } else {
+      console.log('nothing selected')
     }
   }
 
