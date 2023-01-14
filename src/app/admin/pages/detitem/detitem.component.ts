@@ -144,6 +144,7 @@ export class DetitemComponent implements OnInit {
     this.productItemService.createItem(this.item).subscribe({
       next: (result) => {
         this.item = result as ProductItem;
+        window.alert("Item creado correctamente.");
         this.router.navigate(['detitem/item/', this.item.id]);
       },
       error: (error) => {
@@ -166,6 +167,7 @@ export class DetitemComponent implements OnInit {
     this.productItemService.updateItem(this.item).subscribe({
       next: (result) => {
         this.item = result as ProductItem;
+        window.alert("Item actualizado correctamente.");
       },
       error: (error) => {
         window.alert(error.error.error);
