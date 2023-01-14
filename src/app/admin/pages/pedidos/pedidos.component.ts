@@ -19,6 +19,9 @@ export class PedidosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (!('userRole' in sessionStorage))
+      this.router.navigate(['/admin']);
+      
     this.getOrders();
   }
 

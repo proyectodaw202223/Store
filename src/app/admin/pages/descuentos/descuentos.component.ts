@@ -18,6 +18,9 @@ export class DescuentosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (!('userRole' in sessionStorage))
+      this.router.navigate(['/admin']);
+
     this.getSeasonalSales();
   }
 

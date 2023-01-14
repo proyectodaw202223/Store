@@ -22,6 +22,9 @@ export class DetproductosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (!('userRole' in sessionStorage))
+      this.router.navigate(['/admin']);
+      
     this.activatedRoute.params.subscribe((params) => {
       this.isEditing = (params['id']) ? true : false;
 
