@@ -1,192 +1,139 @@
-<h1>Descuento 000001</h1>
-<div class ="uno">
-    <div class = "filizq">
-        <div class = "filizqarr">
-            <p class = "menu"><img src="../../../assets/iconos/plus-lg.svg">Nuevo Descuento</p>
-            <p class = "menu"><img src="../../../assets/iconos/trash3.svg">Eliminar Descuento</p>
-            <p class = "menu"><img src="../../../assets/iconos/save.svg">Guardar</p>
-            <p class = "menu"><img src="../../../assets/iconos/x-octagon.svg">Cancelar</p>
-        </div>
-        <p>Acciones</p>
-    </div>
-    
-    <div class ="filder">
-        <div class="v-line">
-        </div>  
-        <div class = "filderarr">
-            <label>Clase</label>
-            <select>
-              <option value=""></option>
-              <option value="c1">Clase 1</option>
-              <option value="c2">Clase 2</option>
-              <option value="c3">Clase 3</option>
-              <option value="c4">Clase 4</option>
-            </select>
-            <label>Subclase</label>
-            <select>
-              <option value=""></option>
-              <option value="sc1">Subclase 1</option>
-              <option value="sc2">Subclase 2</option>
-              <option value="sc3">Subclase 3</option>
-              <option value="sc4">Subclase 4</option>
-            </select>
-        </div>
-        <div>
-            <p>Filtros</p>
-        </div>
-    </div>
-</div>
-<div class = "dos">
-    <div class = "filizq">
-    <p>Descuento</p>
-    <label>ID:</label><input type="text" name="inputname" value="000001" disabled><br>
-    <label>Válido desde:</label><input type="date" name="inputname" value="01/01/2022"><br>
-    <label>Válido hasta:</label><input type="date" name="inputname" value="01/01/2022"><br>
-    <label>Cancelado</label><input type = "checkbox">
-    </div>
-    <div class="filcen">
-        <label>Slogan:</label><br>
-        <textarea>EL slogan es un texto relativamente largo, debe ir en un textarea pero no es tan lago como la descripción. el usuario quiere leer o editar la descripción puede entrar a ver los detalles de un producto y usar este campo que es mucho mas grande."</textarea><br>
-        <label>Descripción:</label><br>
-        <textarea>La descripciones son muy largas y no cabe el texto entero en una columna de la tabla pero si el usuario quiere leer o editar la descripción puede entrar a ver los detalles de un producto y usar este campo que es mucho mas grande."</textarea>
-    </div> 
-</div>
-<h2>Items con Descuento</h2>
-<div class = "tres">
+<h1 class="component-title-1">Descuento {{ (seasonalSale.id) ? ('000000' + seasonalSale.id).slice(-6) : '000000' }}</h1>
+<div class="container-box">
+  <div class="action-panel-group">
     <div>
-        <p class = "menu"><img src="../../../assets/iconos/trash3.svg">Eliminar Descuento</p> 
-        <p>Acciones</p>
+      <button class="action-panel-button" (click)="onNewSaleButtonClick($event)">
+        <img src="../../../assets/iconos/plus-lg.svg">Nuevo Descuento
+      </button>
+      <button class="action-panel-button" (click)="onDeleteSaleButtonClick($event)">
+        <img src="../../../assets/iconos/trash3.svg">Eliminar Descuento
+      </button>
+      <button class="action-panel-button" (click)="onSaveSaleButtonClick($event)" [disabled]="disableEdit">
+        <img src="../../../assets/iconos/save.svg">Guardar
+      </button>
+      <button class="action-panel-button" (click)="onCancelSaleButtonClick($event)" [disabled]="!canBeCanceled">
+        <img src="../../../assets/iconos/x-octagon.svg">Cancelar
+      </button>
     </div>
-    <div>
-        <p class = "menu">Descuento por defecto:</p> 
-        <p>Ajustes</p>
-    </div>
-    <div>
-        <input type="text" name="inputname" value="15%"> 
-    </div>
+    <span class="action-panel-group-label">Acciones</span>
+  </div>
 </div>
-<div class ="tabla">
-    <tr>
-        <td><input type = "checkbox"></td>
+<div class="container-box">
+  <form #seasonalSaleForm="ngForm">
+    <div class="form-group">
+      <span class="form-group-title">Descuento</span>
+      <div class="form-group-content">
+        <div class="form-group-content-column">
+          <div>
+            <label class="form-label">ID:</label>
+            <input type="text" name="id" value="{{ (seasonalSale.id) ? ('000000' + seasonalSale.id).slice(-6) : '000000' }}" disabled>
+          </div>
+          <div>
+            <label class="form-label">Válido desde:</label>
+            <input type="datetime-local" name="ValidFromDateTime" [(ngModel)]="seasonalSale.validFromDateTime" (focus)="onValidFromFocus($event)" (focusout)="onValidFromFocusout($event)" [disabled]="disableEdit">  
+          </div>
+          <div>
+            <label class="form-label">Válido hasta:</label>
+            <input type="datetime-local" name="validToDateTime" [(ngModel)]="seasonalSale.validToDateTime" (focus)="onValidToFocus($event)" (focusout)="onValidToFocusout($event)" [disabled]="disableEdit">  
+          </div>
+          <div>
+            <label class="form-label">Cancelado</label>
+            <input type="checkbox" name="isCanceled" disabled [(ngModel)]="seasonalSale.isCanceled">
+          </div>
+        </div>
+        <div class="form-group-content-column">
+          <div class="column">
+            <label>Slogan:</label>
+            <textarea name="slogan" [(ngModel)]="seasonalSale.slogan" [disabled]="disableEdit"></textarea>
+          </div>
+          <div class="column">
+            <label>Descripción:</label>
+            <textarea name="description" [(ngModel)]="seasonalSale.description" [disabled]="disableEdit"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<h2 class="component-title-2">Items con Descuento</h2>
+<div class="container-box">
+  <div class="action-panel-group">
+    <div>
+      <button class="action-panel-button" (click)="onDeleteSaleLineButtonClick($event)" [disabled]="disableEdit">
+        <img src="../../../assets/iconos/trash3.svg">Eliminar Descuento
+      </button> 
+    </div>
+    <span class="action-panel-group-label">Acciones</span>
+  </div>
+  <div class="v-line"></div>
+  <div class="action-panel-group">
+    <div class="action-panel-group-content">
+      <div class="action-panel-filter-wrapper">
+        <label class="action-panel-filter-label">Descuento por defecto:</label> 
+        <input type="number" class="action-panel-filter" [(ngModel)]="defaultDiscountPct" (focus)="onDefaultDiscountFocus($event)" (focusout)="onDefaultDiscountFocusout($event)"> 
+      </div>
+    </div>
+    <span class="action-panel-group-label">Ajustes</span>
+  </div>
+</div>
+<div class="admin-table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <td><input type="checkbox" (change)="onSelectAllSaleLinesCheckboxChange($event)"></td>
         <th>Producto</th>
         <th>Precio</th>
-        <th>Atributo 1</th>
-        <th>Atributo 2</th>
-        <th>Descuento</th>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>Un Nombre de Producto</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td><input type="text" name="inputname" value="50%"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>Un Nombre de Producto</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td><input type="text" name="inputname" value="50%"></td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>Un Nombre de Producto</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td><input type="text" name="inputname" value="50%"></td>
-    </tr>
-</div>
-<h2>Items sin Descuento</h2>
-<div class ="uno">
-    <div class = "filizq">
-        <div class = "filizqarr">
-            <p class = "menu"><img src="../../../assets/iconos/plus-lg.svg">Añadir Descuento</p>
-        </div>
-        <p>Acciones</p>
-    </div>
-</div>
-<div class ="tabla">
-    <tr>
-        <td><input type = "checkbox"></td>
-        <th>Producto</th>
-        <th>Precio</th>
-        <th>Atributo 1</th>
-        <th>Atributo 2</th>
+        <th>Color</th>
+        <th>Talla</th>
         <th>Stock</th>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>Un Nombre de Producto</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>50</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>Un Nombre de Producto</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>50</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>Un Nombre de Producto</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>50</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>Un Nombre de Producto</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>50</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>Un Nombre de Producto</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>50</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>Un Nombre de Producto</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>50</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>Un Nombre de Producto</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>50</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>Un Nombre de Producto</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>50</td>
-    </tr>
-    <tr>
-        <td><input type = "checkbox"></td>
-        <td><a href=>Un Nombre de Producto</a></td>
-        <td>22,45€</td>
-        <td>Valor 1</td>
-        <td>Valor 2</td>
-        <td>50</td>
-    </tr>
+        <th>Descuento (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let line of seasonalSale.lines">
+        <td><input type="checkbox" value="{{ line.productItem?.id }}" class="select-sale-lines-checkbox"></td>
+        <td><a [routerLink]="['/detproductos/' + line.productItem?.product?.id]">{{ line.productItem?.product?.name }}</a></td>
+        <td>{{ line.productItem?.product?.price }}</td>
+        <td>{{ line.productItem?.color }}</td>
+        <td>{{ line.productItem?.size }}</td>
+        <td>{{ line.productItem?.stock }}</td>
+        <td><input type="number" name="discount" [(ngModel)]="line.discountPercentage" [disabled]="disableEdit"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h2 class="component-title-2">Items sin Descuento</h2>
+<div class="container-box">
+  <div class="action-panel-group">
+    <div>
+      <button class="action-panel-button" (click)="onAddDiscountButtonClick($event)" [disabled]="disableEdit">
+        <img src="../../../assets/iconos/plus-lg.svg">Añadir Descuento
+      </button>
+    </div>
+    <span class="action-panel-group-label">Acciones</span>
+  </div>
+</div>
+<div class ="admin-table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <td><input type="checkbox" (change)="onSelectAllItemsWithoutDiscountCheckboxChange($event)"></td>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Color</th>
+        <th>Talla</th>
+        <th>Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of productItemsWithoutDiscountMap | keyvalue">
+        <td><input type="checkbox" value="{{ item.value.id }}" class="select-item-without-discount-checkbox"></td>
+        <td><a [routerLink]="['/detproductos/' + item.value.product?.id]">{{ item.value.product?.name }}</a></td>
+        <td>{{ item.value.product?.price }}</td>
+        <td>{{ item.value.color }}</td>
+        <td>{{ item.value.size }}</td>
+        <td>{{ item.value.stock }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
