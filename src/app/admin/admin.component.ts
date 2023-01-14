@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from 'rxjs/operators';
-import {  Router, NavigationEnd } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { Router, NavigationStart } from '@angular/router';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 
 @Component({
   selector: 'app-admin',
@@ -8,29 +9,22 @@ import {  Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
-  public header_class: string = '';
   
   constructor(
-    private router: Router,
+    private loginDialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    // Constantly check the url to set the header class.
-    this.router.events
-      .pipe(
-        filter((event: any) => event instanceof NavigationEnd)
-      )
-      .subscribe(event => {
-          if (event.urlAfterRedirects) {
-            const url = event.urlAfterRedirects;
-            if ((url === '/') )  {
-              this.header_class = 'home_header';
-            } else {
-              this.header_class = '';
-            }
-          }
-      });
+    if (!('userRole' in sessionStorage))
+      this.loginDialog.open(AdminLoginComponent);
+    
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        if (!('userRole' in sessionStorage))
+          this.loginDialog.open(AdminLoginComponent);
+      }
+    });
   }
 
 }
