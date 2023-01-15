@@ -8,10 +8,8 @@ import { ProductItem } from 'src/app/models/productItem.model';
 import { OrderService } from 'src/app/services/order.service';
 import { Order } from 'src/app/models/order.model';
 import { OrderLine } from 'src/app/models/orderLine.model';
-import { SeasonalSale } from 'src/app/models/seasonalSale.model';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-product-details',
@@ -141,11 +139,11 @@ export class ProductDetailsComponent implements OnInit {
 
   selectItem():ProductItem | null{
     if( this.selectedColor !== '' && this.selectedSize !== ''){
-      let selectedItem = this.product.productItems?.filter(
+      let selectedItemArray = this.product.productItems?.filter(
         (item) => item.color === this.selectedColor && item.size === this.selectedSize
       )
-      if (selectedItem !== undefined){
-        this.selectedItem = selectedItem[0];
+      if (selectedItemArray !== undefined){
+        this.selectedItem = selectedItemArray[0];
       }
       return this.selectedItem;
     } else {
@@ -158,108 +156,136 @@ export class ProductDetailsComponent implements OnInit {
     return (sessionStorage.getItem("customerName") !== null);
   }
 
-  getCreatedOrder( customerId: number, orders: Order[]): Order | null{
-    for (let order of orders){
-      if(order.customerId === customerId){
-        return order;
-      }
-    }
-    return null;
-  }
+  // NUEVOS METODOS
 
-  isActiveSale(seasonalSale: SeasonalSale): boolean{
-    let saleStart = new Date(seasonalSale.validFromDateTime).getTime();
-    let saleEnd = new Date(seasonalSale.validToDateTime).getTime();
-    let today = new Date().getTime();
-
-    return seasonalSale.isCanceled 
-      ? false
-      : (saleStart <= today && today <= saleEnd)? true : false;
-  }
-
-  getActiveDiscount(productItem: ProductItem): number{
-    if (productItem.sale !== undefined){
-      if (this.isActiveSale(productItem.sale)){
-        if (productItem.sale.lines !== undefined){
-          for (let line of productItem.sale.lines){
-            if (line.itemId === productItem.id){
-              return line.discountPercentage/100;
-            }
-          }
-          return 0;
-        } else {
-          return 0;
-        } 
+  createNewOrder(){
+    if (this.selectedItem !== undefined){
+      let discount = 0;
+      let newLine: OrderLine = <OrderLine>{};
+      if(this.selectedItem.sale !== undefined && this.selectedItem.sale !== null && this.selectedItem.sale.lines !== undefined){
+        discount = this.selectedItem.sale.lines[0].discountPercentage / 100;
+        console.log(`descuento es ${discount}`)
       } else {
-        return 0;
-      }    
-    } else {
-      return 0;
-    }
-  }
-
-  calculatePriceWithDiscount(productItem: ProductItem): number{
-    return this.product.price * (1+this.getActiveDiscount(productItem))
-  }
-
-  addItemToOrder( order: Order, selectedItem: ProductItem){
-    if(order.lines !== undefined){
-      for (let line of order.lines){
-        if(line.itemId === selectedItem.id){
-          line.amount++;
-          return;
-        }
+        discount = 0;
       }
-      if (order.id !== undefined && selectedItem.id !== undefined){
-        let newLine = new OrderLine(
-          order.id,
-          selectedItem.id,
-          1,
-          this.calculatePriceWithDiscount(selectedItem),
-          this.calculatePriceWithDiscount(selectedItem)
-        )
-        order.lines.push(newLine);
-        order.amount += this.calculatePriceWithDiscount(selectedItem);
-        this._orderService.updateOrder(order);
+      let priceWithDiscount = this.product.price * (1 - discount);
+      if (this.selectedItem.id !== undefined){
+        newLine = new OrderLine(0,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
+        console.log(newLine)
       }
-    }  
-  }
-
-  createOrder(customer: Customer): Order | any{
-    if (customer.id !== undefined){
-      let order: Order = new Order(customer.id, 0, '', 'Creado')
-      this._orderService.createOrder(order).subscribe({
+      let newOrder = new Order (Number(this.customer.id), priceWithDiscount, '', 'Creado', '', [newLine])
+      this._orderService.createOrder(newOrder).subscribe({
         next: (result) => {
-          return result;
+          console.log("order creado");
+          console.log(result)
         },
         error: (error) => {
-          return error;
+          console.log('error al crear')
+          console.log(error)
         }
       })
-    } else {
-      return null
     }
+  }
+
+  addOrderLine(order:Order){
+    if (this.selectedItem !== undefined){
+      let discount = 0;
+      let newLine: OrderLine = <OrderLine>{};
+      if(this.selectedItem.sale !== undefined && this.selectedItem.sale !== null && this.selectedItem.sale.lines !== undefined){
+        discount = this.selectedItem.sale.lines[0].discountPercentage / 100;
+        console.log(`descuento es ${discount}`)
+      } else {
+        discount = 0;
+        console.log("el descuento es cero")
+      }
+      let priceWithDiscount = this.product.price * (1 - discount);
+      if (this.selectedItem.id !== undefined){
+        newLine = new OrderLine(8678,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
+        if (order.lines !== undefined){
+          order.lines.push(newLine);
+          console.log('order.lines no es undefined')
+        }
+        this._orderService.updateOrder(order).subscribe({
+          next: (result) => {
+            console.log("order para updatear ADD LINE")
+            console.log(order);
+            console.log("order updateado ADD LINE");
+            console.log(result)
+          },
+          error: (error) => {
+            console.log('error al updatear')
+            console.log(error)
+          }
+        })
+      }
+    }
+  }
+
+  updateOrderLine(order:Order, line:OrderLine){
+    let newQuantity = line.quantity + 1;
+    let newAmount = line.priceWithDiscount * newQuantity;
+    order.amount = order.amount - line.amount + newAmount;
+    line.amount = newAmount;
+    line.quantity = newQuantity;
+    this._orderService.updateOrder(order).subscribe({
+      next: (result) => {
+        console.log("order para updatear")
+        console.log(order);
+        console.log("order updateado");
+        console.log(result)
+      },
+      error: (error) => {
+        console.log('error al updatear')
+        console.log(error)
+      }
+    })
+  }
+
+  updateExistingOrder(order: Order){
+    console.log("order a updatear")
+    console.log(order);
+    if (this.selectedItem !== undefined){
+      if (order.lines !== undefined){
+        for (let line of order.lines){
+          // Ya hay una linea con ese itemId
+          if(this.selectedItem.id === line.itemId){
+            this.updateOrderLine(order, line);
+            break;
+          // No hay linea con ese itemId
+          } else {
+            console.log("el metodo que no")
+            this.addOrderLine(order);
+            break;
+          }
+        }
+      }
+
+    }
+
   }
 
   addToCart():void{
+    console.log("PRODUCTO")
+    console.log(this.product),
+    console.log("SELECTED ITEM")
+    console.log(this.selectedItem)
     if (this.selectItem()){
       if (this.isUserLoggedIn()){
-        this._orderService.getOrdersByStatus('Creado').subscribe({
+        let customerId = Number(this.customer.id)
+        this._customerService.getCustomerAndCreatedOrderByCustomerId(customerId).subscribe({
           next: (result) => {
-            let customerId = Number(sessionStorage.getItem("customerId"));
-            let createdOrder = this.getCreatedOrder(customerId, result);
-            if (createdOrder){
-              console.log(createdOrder);
-              this.addItemToOrder(createdOrder, this.selectedItem);
+            console.log("result desde addtocart:")
+            console.log(result)
+            if(result.orders.length>0){
+              console.log("entro a updatear")
+              this.updateExistingOrder(result.orders[0])
             } else {
-              let newOrder = this.createOrder(this.customer)
-              this.addItemToOrder(newOrder, this.selectedItem)
-              console.log(newOrder);
-            }
+              console.log("entro a crear")
+              this.createNewOrder();
+            } 
           },
           error: (error) => {
-            console.log(<any>error);
-            return error;
+            console.log(error)
           }
         })
       } else {
