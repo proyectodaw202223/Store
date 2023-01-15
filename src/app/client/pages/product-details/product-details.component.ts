@@ -145,7 +145,7 @@ export class ProductDetailsComponent implements OnInit {
         (item) => item.color === this.selectedColor && item.size === this.selectedSize
       )
       if (selectedItem !== undefined){
-        this.selectedItem =   selectedItem[0];
+        this.selectedItem = selectedItem[0];
       }
       return this.selectedItem;
     } else {
@@ -155,7 +155,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   isUserLoggedIn(): boolean{
-    return (sessionStorage.getItem("customerName") !== undefined);
+    return (sessionStorage.getItem("customerName") !== null);
   }
 
   getCreatedOrder( customerId: number, orders: Order[]): Order | null{
