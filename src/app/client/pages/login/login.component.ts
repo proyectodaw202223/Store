@@ -45,7 +45,8 @@ export class LoginComponent implements OnInit {
         }
       })
     } else {
-      this._customerService.getCustormerByEmailAndPassword(this.email, this.password).subscribe({
+      let customer = new Customer('', this.email, this.password);
+      this._customerService.getCustormerByEmailAndPassword(customer).subscribe({
         next: (result) => {
           console.log("login correcto");
           this.setSessionStorage(result);
