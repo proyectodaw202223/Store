@@ -1,1 +1,34 @@
-<p>my-account works!</p>
+<section id="content" class="row">
+    <div id="account-txt" class="col">
+        <h2>TUS DATOS</h2>
+        <div class="row">
+            <div class="col-6">
+                <input for="name" [(ngModel)]="customer.firstName" disabled>
+                <input for="name" [(ngModel)]="customer.lastName" disabled>
+                <input for="name" [(ngModel)]="customer.streetAddress" disabled>
+                <input for="name" [(ngModel)]="customer.email" disabled>
+                <input for="name" [(ngModel)]="customer.phoneNumber" disabled>
+            </div>
+        </div>
+    </div>
+    <div id="tabla-pedidos" class="col-6">
+        <table>
+            <thead>
+              <tr>
+                <th>FECHA PEDIDO</th>
+                <th>Nº PEDIDO</th>
+                <th>IMPORTE</th>
+                <th>ESTADO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of customer.orders">
+                <td>{{ order.created_at?.substr(0,10) }}</td>
+                <td>{{ order.id }}</td>
+                <td>{{ order.amount }}</td>
+                <td>{{ order.status }}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</section>
