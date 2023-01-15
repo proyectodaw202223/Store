@@ -22,6 +22,9 @@ export class DetproductosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (!('userRole' in sessionStorage))
+      this.router.navigate(['/admin']);
+      
     this.activatedRoute.params.subscribe((params) => {
       this.isEditing = (params['id']) ? true : false;
 
@@ -108,6 +111,7 @@ export class DetproductosComponent implements OnInit {
       next: (result) => {
         this.product = result as Product;
         this.isEditing = true;
+        window.alert("Producto creado correctamente.");
       },
       error: (error) => {
         window.alert(error.error.error);
@@ -129,6 +133,7 @@ export class DetproductosComponent implements OnInit {
     this.productService.updateProduct(this.product).subscribe({
       next: (result) => {
         this.product = result as Product;
+        window.alert("Producto actualizado correctamente.");
       },
       error: (error) => {
         window.alert(error.error.error);

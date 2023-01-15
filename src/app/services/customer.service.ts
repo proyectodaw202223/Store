@@ -17,8 +17,8 @@ export class CustomerService {
     return this._http.get(this.apiUrl + `/${id}`);
   }
 
-  getCustomerByEmailAndPassword(email: string, password: string): Observable<any>{
-    return this._http.get(this.apiUrl + `/credentials/${email}/${password}`);
+  getCustomerByEmailAndPassword(customer: Customer): Observable<any>{
+    return this._http.post(this.apiUrl + '/credentials', customer);
   }
 
   getCustomerOrdersByCustomerId(id: number): Observable<any>{

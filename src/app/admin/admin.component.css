@@ -61,13 +61,13 @@ html .body{
 
 /* COMMON STYLES FOR PAGE COMPONENTS */
 .component-title-1 {
-  margin: 20px;
+  margin: 30px 20px 20px 20px;
   font-weight: bold;
   font-size: 32px;
 }
 
 .component-title-2 {
-  margin: 20px;
+  margin: 30px 20px 20px 20px;
   font-weight: bold;
   font-size: 26px;
 }
@@ -167,4 +167,8 @@ html .body{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }

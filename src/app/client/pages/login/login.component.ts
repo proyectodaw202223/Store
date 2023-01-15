@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       this._customerService.createCustomer(customer).subscribe({
         next: (result) => {
           console.log("sign in correcto");
-          sessionStorage.setItem('customerName', result.firstName)
+          this.setSessionStorage(result);
           this.loginDialogRef.close(result);
           return result;
         },
@@ -45,10 +45,11 @@ export class LoginComponent implements OnInit {
         }
       })
     } else {
-      this._customerService.getCustormerByEmailAndPassword(this.email, this.password).subscribe({
+      let customer = new Customer('', this.email, this.password);
+      this._customerService.getCustormerByEmailAndPassword(customer).subscribe({
         next: (result) => {
           console.log("login correcto");
-          sessionStorage.setItem('customerName', result.firstName)
+          this.setSessionStorage(result);
           this.loginDialogRef.close(result); 
         },
         error: (error) => {
@@ -57,5 +58,10 @@ export class LoginComponent implements OnInit {
       })
     }
     
+  }
+
+  setSessionStorage(loggedInCustomer: Customer){
+    sessionStorage.setItem('customerName', loggedInCustomer.firstName);
+    loggedInCustomer.id? sessionStorage.setItem('customerId', loggedInCustomer.id.toString()) : null;
   }
 }

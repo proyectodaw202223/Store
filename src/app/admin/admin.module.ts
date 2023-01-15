@@ -11,6 +11,7 @@ import { PedidosComponent } from './pages/pedidos/pedidos.component';
 import { DetpedidosComponent } from './pages/detpedidos/detpedidos.component';
 import { DescuentosComponent } from './pages/descuentos/descuentos.component';
 import { DetdescuentosComponent } from './pages/detdescuentos/detdescuentos.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DetdescuentosComponent } from './pages/detdescuentos/detdescuentos.comp
     PedidosComponent,
     DetpedidosComponent,
     DescuentosComponent,
-    DetdescuentosComponent
+    DetdescuentosComponent,
+    AdminLoginComponent
   ],
   imports: [
     CommonModule,

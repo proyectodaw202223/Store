@@ -17,6 +17,10 @@ export class ProductItemService {
     return this._http.get(this.apiUrl + `/${id}`);
   }
 
+  getAllItems(): Observable<any> {
+    return this._http.get(this.apiUrl);
+  }
+
   createItem(item: ProductItem): Observable<any> {
     return this._http.post(this.apiUrl, item);
   }

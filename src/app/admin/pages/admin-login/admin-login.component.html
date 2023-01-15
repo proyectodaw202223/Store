@@ -1,0 +1,9 @@
+<form #adminLoginForm="ngForm" (submit)="login()">
+  <div class="form-content">
+    <label for="email" class="label">Email:</label>
+    <input type="email" name="email" [(ngModel)]="this.user.email">
+    <label for="password" class="label">Password:</label>
+    <input type="password" name="password" [(ngModel)]="this.user.password">
+    <button type="submit" class="btn btn-warning">LOGIN</button>
+  </div>
+</form>
