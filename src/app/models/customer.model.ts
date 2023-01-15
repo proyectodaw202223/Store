@@ -1,13 +1,16 @@
-export class Customer { 
+import { Order } from "./order.model";
+
+export class Customer {
     constructor(
         public firstName: string,
         public email: string,
         public password: string,
-        public lastName: string = 'no',
-        public streetAddress: string = 'no',
-        public phoneNumber: number = 111111111,
+        public lastName: string,
+        public streetAddress: string,
+        public phoneNumber: string,
+        public orders?: Array<Order>, 
         public id?: number,
         public created_at?: string,
-        public updated_at?: string      
+        public updated_at?: string   
     ){}
 }

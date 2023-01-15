@@ -13,15 +13,15 @@ export class CustomerService {
 
   constructor(public _http: HttpClient) {}
 
-  getCustormerById(id: number): Observable<any>{
+  getCustomerById(id: number): Observable<any>{
     return this._http.get(this.apiUrl + `/${id}`);
   }
 
-  getCustormerByEmailAndPassword(email: string, password: string): Observable<any>{
+  getCustomerByEmailAndPassword(email: string, password: string): Observable<any>{
     return this._http.get(this.apiUrl + `/credentials/${email}/${password}`);
   }
 
-  getCustormerOrdersByCustomerId(id: number): Observable<any>{
+  getCustomerOrdersByCustomerId(id: number): Observable<any>{
     return this._http.get(this.apiUrl + `/${id}/orders`);
   }
 
@@ -37,4 +37,7 @@ export class CustomerService {
     return this._http.post(this.apiUrl, customer);
   }
 
+  updateCustomer(customer: Customer): Observable<any> {
+    return this._http.put(this.apiUrl + `/${customer.id}`, customer);
+  }
 }
