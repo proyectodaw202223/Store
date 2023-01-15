@@ -11,8 +11,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 })
 export class MyAccountComponent implements OnInit {
 
-  public customer = new Customer('', '', '', '', '', '');
-  private isEditing = false;
+  public customer : Customer = <Customer>{};
 
   constructor(
     private customerService: CustomerService,
@@ -23,10 +22,7 @@ export class MyAccountComponent implements OnInit {
   ngOnInit(): void {
 
     if (sessionStorage.getItem('customerId') != null) {
-
-      if (this.isEditing) {
-          this.getCustomer(Number(sessionStorage.getItem('customerId')));
-      }
+      this.getCustomer(Number(sessionStorage.getItem('customerId')));
     } else {
       this.router.navigate(['']);
     }
@@ -36,6 +32,7 @@ export class MyAccountComponent implements OnInit {
     this.customerService.getCustomerOrdersByCustomerId(id).subscribe({
         next: (result: Customer) => {
           this.customer = result as Customer;
+          console.log(this.customer);
         },
         error: (error) => {
           window.alert(error.error.error);

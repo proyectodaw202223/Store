@@ -47,7 +47,7 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     let customerId = Number(sessionStorage.getItem("customerId"));
-    this._customerService.getCustormerById(customerId).subscribe({
+    this._customerService.getCustomerById(customerId).subscribe({
       next: (result) => {
         this.customer = result;
         console.log('CUSTOMER')
