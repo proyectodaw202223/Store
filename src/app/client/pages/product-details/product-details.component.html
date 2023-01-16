@@ -13,8 +13,8 @@
 
     <div class = "prod_data">
         <div class="row">
-          <h2 class="col-6 prod-data-name">{{product.name}}</h2>
-          <h2 class="col-6 prod-data-price">{{product.price}}</h2>
+          <h2 class="col-8 prod-data-name">{{product.name}}</h2>
+          <h2 class="col-4 prod-data-price">{{getItemPriceWithDiscount(selectedItem).toFixed(2)}}</h2>
         </div>
         <div class="row prod-data-description">
           <p>{{product.description}}</p>
@@ -64,7 +64,8 @@
                     <div *ngFor="let item of productColorSize | keyvalue">
                       <!-- <label>{{item.key}} </label> -->
                       <div class ="color-selector-option" style.background-color = {{item.key}}>
-                        <input type="radio" id="item.key" name="item.key" value="item.key" (click)="colorSelected(item.key)" [checked]='false'>
+                        <input type="radio" id="item.key" name="item.key" value="item.key" (click)="colorSelected(item.key)" [checked]='false' *ngIf="selectedItem.color !== item.key">
+                        <input type="radio" id="item.key" name="item.key" value="item.key" (click)="colorSelected(item.key)" [checked]='true' *ngIf="selectedItem.color === item.key">
                       </div>
                     </div>
                   </div>
