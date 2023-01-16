@@ -1,5 +1,85 @@
 .prod_details{
+    padding: 30px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.slider_container{
+    display: flex;
+    justify-content: right;
+}
+
+.prod_data{
+    display: flex;
+    flex-direction: column;
+    padding: 15px 30px;
+    margin-right: 40px;
+    width: 100%;
+}
+
+.prod-data-price{
+    text-align: right;
+    color: #AD0824;
+}
+
+.prod-data-description{
+    display: flex;
+    padding: 20px 20px;
+    min-height: 150px;
+}
+.prod-data-description p{
+    background-color: #EDEDF1;
+    border-radius: .5em;
+    padding: 1em;
+}
+
+label{
+    font-size: 1.3em;
+}
+
+.select-add{
+    height: 100%;
+}
+
+.add{
+    display: flex;
+    align-items: center;
     justify-content: center;
+}
+
+.size-selector,
+.color-selector{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 0;
+}
+.color-selector-option-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.color-selector-option{
+    width: 2em;
+    height: 2em;
+    margin: 0 .5em;
+    border: 1.5px solid black;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.size-selector-combo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#btn-add{
+    margin: 1.5em auto;
+    color: white;
+    background-color: #F8C630;
+    border-color: #F8C630;
 }
 
 /* image slider */

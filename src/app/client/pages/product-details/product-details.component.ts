@@ -8,23 +8,20 @@ import { ProductItem } from 'src/app/models/productItem.model';
 import { OrderService } from 'src/app/services/order.service';
 import { Order } from 'src/app/models/order.model';
 import { OrderLine } from 'src/app/models/orderLine.model';
-import { SeasonalSale } from 'src/app/models/seasonalSale.model';
-import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css',
-  '../../client.component.css'
-]
+  styleUrls: [
+    './product-details.component.css',
+    '../../client.component.css'
+  ]
 })
 export class ProductDetailsComponent implements OnInit {
 
   public newProducts: Product[] = [];
   public product: Product = <Product>{}; 
-  public customer: Customer = <Customer>{}; 
   public apiStorage: string = environment.apiStorage;
   public productColorSize : {[key:string]: string[]} = {};
   public productUniqueImages: ProductItemImage[] = [];
@@ -46,24 +43,15 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let customerId = Number(sessionStorage.getItem("customerId"));
-    this._customerService.getCustomerById(customerId).subscribe({
-      next: (result) => {
-        this.customer = result;
-        console.log('CUSTOMER')
-        console.log(result)
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
-
-    // Populate product, productColorSize and productUniqueImages
+    // Populate product, selectedItem productColorSize and productUniqueImages
     const id = Number(this._route.snapshot.paramMap.get('id'));
     this._productService.getProductById(id).subscribe({
       next: (result) => {
         this.product = result;
         if (this.product.productItems !== undefined){
+          this.selectedItem = this.product.productItems[0];
+          this.selectedColor = this.selectedItem.color;
+          this.selectedSize = this.selectedItem.size;
           for (let item of this.product.productItems){
             if (!(item.color in this.productColorSize)){
               this.productColorSize[item.color] = [item.size];
@@ -76,6 +64,7 @@ export class ProductDetailsComponent implements OnInit {
               this.productColorSize[item.color].push(item.size);
             } 
           }
+          this.selectedColorSizes = this.productColorSize[this.selectedColor]
           this.productColorOptions = Object.keys(this.productColorSize).length; 
           if (this.productColorOptions === 1){
             this.selectedColor = Object.keys(this.productColorSize)[0];
@@ -141,11 +130,11 @@ export class ProductDetailsComponent implements OnInit {
 
   selectItem():ProductItem | null{
     if( this.selectedColor !== '' && this.selectedSize !== ''){
-      let selectedItem = this.product.productItems?.filter(
+      let selectedItemArray = this.product.productItems?.filter(
         (item) => item.color === this.selectedColor && item.size === this.selectedSize
       )
-      if (selectedItem !== undefined){
-        this.selectedItem =   selectedItem[0];
+      if (selectedItemArray !== undefined){
+        this.selectedItem = selectedItemArray[0];
       }
       return this.selectedItem;
     } else {
@@ -155,120 +144,142 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   isUserLoggedIn(): boolean{
-    return (sessionStorage.getItem("customerName") !== undefined);
+    return (sessionStorage.getItem("customerName") !== null);
   }
 
-  getCreatedOrder( customerId: number, orders: Order[]): Order | null{
-    for (let order of orders){
-      if(order.customerId === customerId){
-        return order;
-      }
+  // NUEVOS METODOS
+
+  getItemPriceWithDiscount(productItem: ProductItem): number{
+    if (this.selectedItem !== undefined){
+      let discount = 0;
+      if(this.selectedItem.sale !== undefined && this.selectedItem.sale !== null && this.selectedItem.sale.lines !== undefined){
+        discount = this.selectedItem.sale.lines[0].discountPercentage / 100;
+      } 
+      return this.product.price * (1 - discount);
+    } else return this.product.price;
+  }
+
+  createNewOrder(){
+    /* if (this.selectedItem !== undefined){
+      let discount = 0;
+      let newLine: OrderLine = <OrderLine>{};
+      if(this.selectedItem.sale !== undefined && this.selectedItem.sale !== null && this.selectedItem.sale.lines !== undefined){
+        discount = this.selectedItem.sale.lines[0].discountPercentage / 100;
+        console.log(`descuento es ${discount}`)
+      } 
+    let priceWithDiscount = this.product.price * (1 - discount); */
+    let newLine: OrderLine = <OrderLine>{};
+    let priceWithDiscount = this.getItemPriceWithDiscount(this.selectedItem);
+    if (this.selectedItem.id !== undefined){
+      newLine = new OrderLine(0,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
+      console.log(newLine)
     }
-    return null;
+    let newOrder = new Order (Number(sessionStorage.getItem("customerId")), priceWithDiscount, '', 'Creado', '', [newLine])
+    this._orderService.createOrder(newOrder).subscribe({
+      next: (result) => {
+        alert("Producto añadido al carrito")
+      },
+      error: (error) => {
+        console.error(error)
+        alert("Ha ocurrido un error inesperado")
+      }
+    })
   }
 
-  isActiveSale(seasonalSale: SeasonalSale): boolean{
-    let saleStart = new Date(seasonalSale.validFromDateTime).getTime();
-    let saleEnd = new Date(seasonalSale.validToDateTime).getTime();
-    let today = new Date().getTime();
-
-    return seasonalSale.isCanceled 
-      ? false
-      : (saleStart <= today && today <= saleEnd)? true : false;
-  }
-
-  getActiveDiscount(productItem: ProductItem): number{
-    if (productItem.sale !== undefined){
-      if (this.isActiveSale(productItem.sale)){
-        if (productItem.sale.lines !== undefined){
-          for (let line of productItem.sale.lines){
-            if (line.itemId === productItem.id){
-              return line.discountPercentage/100;
-            }
-          }
-          return 0;
-        } else {
-          return 0;
-        } 
+  addOrderLine(order:Order){
+    /* if (this.selectedItem !== undefined){
+      let discount = 0;
+      let newLine: OrderLine;
+      if(this.selectedItem.sale !== undefined && this.selectedItem.sale !== null && this.selectedItem.sale.lines !== undefined){
+        discount = this.selectedItem.sale.lines[0].discountPercentage / 100;
+        console.log(`descuento es ${discount}`)
       } else {
-        return 0;
-      }    
-    } else {
-      return 0;
-    }
-  }
-
-  calculatePriceWithDiscount(productItem: ProductItem): number{
-    return this.product.price * (1+this.getActiveDiscount(productItem))
-  }
-
-  addItemToOrder( order: Order, selectedItem: ProductItem){
-    if(order.lines !== undefined){
-      for (let line of order.lines){
-        if(line.itemId === selectedItem.id){
-          line.amount++;
-          return;
-        }
-      }
-      if (order.id !== undefined && selectedItem.id !== undefined){
-        let newLine = new OrderLine(
-          order.id,
-          selectedItem.id,
-          1,
-          this.calculatePriceWithDiscount(selectedItem),
-          this.calculatePriceWithDiscount(selectedItem)
-        )
+        console.log("el descuento es cero")
+      } */
+    let newLine: OrderLine = <OrderLine>{};
+    let priceWithDiscount = this.getItemPriceWithDiscount(this.selectedItem);
+    if (this.selectedItem.id !== undefined){
+      if (order.id == undefined) return
+      newLine = new OrderLine(order.id,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
+      console.log(newLine)
+      if (order.lines !== undefined){
         order.lines.push(newLine);
-        order.amount += this.calculatePriceWithDiscount(selectedItem);
-        this._orderService.updateOrder(order);
+        order.amount = Number(order.amount) + priceWithDiscount;
+      } else {
+        return
       }
-    }  
-  }
-
-  createOrder(customer: Customer): Order | any{
-    if (customer.id !== undefined){
-      let order: Order = new Order(customer.id, 0, '', 'Creado')
-      this._orderService.createOrder(order).subscribe({
+      this._orderService.updateOrder(order).subscribe({
         next: (result) => {
-          return result;
+          alert("Producto añadido al carrito")
         },
         error: (error) => {
-          return error;
+          console.error(error)
+          alert("Ha ocurrido un error inesperado")
         }
       })
-    } else {
-      return null
+    }
+  }
+
+  updateOrderLine(order:Order, line:OrderLine){
+    let newQuantity = line.quantity + 1;
+    let newAmount = line.priceWithDiscount * newQuantity;
+    order.amount = order.amount - line.amount + newAmount;
+    line.amount = newAmount;
+    line.quantity = newQuantity;
+    this._orderService.updateOrder(order).subscribe({
+      next: (result) => {
+        alert("Producto añadido al carrito")
+      },
+      error: (error) => {
+        console.error(error)
+        alert("Ha ocurrido un error inesperado")
+      }
+    })
+  }
+
+  updateExistingOrder(order: Order){
+    console.log(order);
+    if (this.selectedItem !== undefined){
+      let orderHasItem = false;
+      let itemInLine: OrderLine = <OrderLine>{};
+      if (order.lines !== undefined){
+        for (let line of order.lines){
+          console.log(this.selectedItem.id)
+          console.log(line.itemId)
+          if(this.selectedItem.id === line.itemId){
+            itemInLine = line;
+            orderHasItem = true;
+            break;
+          }
+        }
+      }
+      orderHasItem ? this.updateOrderLine(order, itemInLine) : this.addOrderLine(order)
     }
   }
 
   addToCart():void{
     if (this.selectItem()){
       if (this.isUserLoggedIn()){
-        this._orderService.getOrdersByStatus('Creado').subscribe({
+        let customerId = Number(sessionStorage.getItem("customerId"))
+        this._customerService.getCustomerAndCreatedOrderByCustomerId(customerId).subscribe({
           next: (result) => {
-            let customerId = Number(sessionStorage.getItem("customerId"));
-            let createdOrder = this.getCreatedOrder(customerId, result);
-            if (createdOrder){
-              console.log(createdOrder);
-              this.addItemToOrder(createdOrder, this.selectedItem);
+            if(result.orders.length>0){
+              let orderToUpdate = result.orders[0];
+              this.updateExistingOrder(orderToUpdate)
             } else {
-              let newOrder = this.createOrder(this.customer)
-              this.addItemToOrder(newOrder, this.selectedItem)
-              console.log(newOrder);
-            }
+              this.createNewOrder();
+            } 
           },
           error: (error) => {
-            console.log(<any>error);
-            return error;
+            console.error(error)
           }
         })
       } else {
-        alert("Please log in to add product to the cart")
+        alert("Registrate para empezar a comprar.")
       }
     } else {
-      console.log('nothing selected')
+      console.log('no item selected')
     }
   }
-
 
 }
