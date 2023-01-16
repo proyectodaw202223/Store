@@ -33,7 +33,7 @@ export class DescuentosComponent implements OnInit {
       },
       error: (error) => {
         window.alert(error.error.error);
-        console.log(error);
+        console.error(error);
       }
     });
   }
@@ -81,7 +81,7 @@ export class DescuentosComponent implements OnInit {
       },
       error: (error) => {
         window.alert(error.error.error);
-        console.log(error);
+        console.error(error);
       }
     });
   }
@@ -122,7 +122,7 @@ export class DescuentosComponent implements OnInit {
       },
       error: (error) => {
         window.alert(error.error.error);
-        console.log(error);
+        console.error(error);
       }
     });
   }

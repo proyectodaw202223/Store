@@ -8,15 +8,15 @@ import { ProductItem } from 'src/app/models/productItem.model';
 import { OrderService } from 'src/app/services/order.service';
 import { Order } from 'src/app/models/order.model';
 import { OrderLine } from 'src/app/models/orderLine.model';
-import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css',
-  '../../client.component.css'
-]
+  styleUrls: [
+    './product-details.component.css',
+    '../../client.component.css'
+  ]
 })
 export class ProductDetailsComponent implements OnInit {
 
@@ -52,8 +52,6 @@ export class ProductDetailsComponent implements OnInit {
           this.selectedItem = this.product.productItems[0];
           this.selectedColor = this.selectedItem.color;
           this.selectedSize = this.selectedItem.size;
-          console.log("selected item")
-          console.log(this.selectedItem)
           for (let item of this.product.productItems){
             if (!(item.color in this.productColorSize)){
               this.productColorSize[item.color] = [item.size];
@@ -156,7 +154,6 @@ export class ProductDetailsComponent implements OnInit {
       let discount = 0;
       if(this.selectedItem.sale !== undefined && this.selectedItem.sale !== null && this.selectedItem.sale.lines !== undefined){
         discount = this.selectedItem.sale.lines[0].discountPercentage / 100;
-        console.log(`descuento es ${discount}`)
       } 
       return this.product.price * (1 - discount);
     } else return this.product.price;
@@ -180,13 +177,10 @@ export class ProductDetailsComponent implements OnInit {
     let newOrder = new Order (Number(sessionStorage.getItem("customerId")), priceWithDiscount, '', 'Creado', '', [newLine])
     this._orderService.createOrder(newOrder).subscribe({
       next: (result) => {
-        console.log("order creado");
-        console.log(result)
         alert("Producto añadido al carrito")
       },
       error: (error) => {
-        console.log('error al crear')
-        console.log(error)
+        console.error(error)
         alert("Ha ocurrido un error inesperado")
       }
     })
@@ -205,31 +199,21 @@ export class ProductDetailsComponent implements OnInit {
     let newLine: OrderLine = <OrderLine>{};
     let priceWithDiscount = this.getItemPriceWithDiscount(this.selectedItem);
     if (this.selectedItem.id !== undefined){
-      newLine = new OrderLine(0,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
+      if (order.id == undefined) return
+      newLine = new OrderLine(order.id,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
       console.log(newLine)
       if (order.lines !== undefined){
         order.lines.push(newLine);
         order.amount = Number(order.amount) + priceWithDiscount;
-        console.log('order.lines no es undefined')
-        console.log(order.amount)
-        console.log(order)
       } else {
-        console.log('order.lines es undefined')
         return
       }
       this._orderService.updateOrder(order).subscribe({
         next: (result) => {
-          console.log("order para updatear ADD LINE")
-          console.log(order);
-          console.log("order updateado ADD LINE");
-          console.log(result)
           alert("Producto añadido al carrito")
         },
         error: (error) => {
-          console.log("order para updatear ADD LINE")
-          console.log(order);
-          console.log('error al updatear')
-          console.log(error)
+          console.error(error)
           alert("Ha ocurrido un error inesperado")
         }
       })
@@ -244,76 +228,58 @@ export class ProductDetailsComponent implements OnInit {
     line.quantity = newQuantity;
     this._orderService.updateOrder(order).subscribe({
       next: (result) => {
-        console.log("order para updatear")
-        console.log(order);
-        console.log("order updateado");
-        console.log(result)
         alert("Producto añadido al carrito")
       },
       error: (error) => {
-        console.log('error al updatear')
-        console.log(error)
+        console.error(error)
         alert("Ha ocurrido un error inesperado")
       }
     })
   }
 
   updateExistingOrder(order: Order){
-    console.log("order a updatear")
     console.log(order);
     if (this.selectedItem !== undefined){
+      let orderHasItem = false;
+      let itemInLine: OrderLine = <OrderLine>{};
       if (order.lines !== undefined){
         for (let line of order.lines){
-          // Ya hay una linea con ese itemId
+          console.log(this.selectedItem.id)
+          console.log(line.itemId)
           if(this.selectedItem.id === line.itemId){
-            console.log("el metodo update line")
-            this.updateOrderLine(order, line);
-            break;
-          // No hay linea con ese itemId
-          } else {
-            console.log("el metodo add line")
-            this.addOrderLine(order);
+            itemInLine = line;
+            orderHasItem = true;
             break;
           }
         }
       }
-
+      orderHasItem ? this.updateOrderLine(order, itemInLine) : this.addOrderLine(order)
     }
-
   }
 
   addToCart():void{
-    console.log("PRODUCTO")
-    console.log(this.product),
-    console.log("SELECTED ITEM")
-    console.log(this.selectedItem)
     if (this.selectItem()){
       if (this.isUserLoggedIn()){
         let customerId = Number(sessionStorage.getItem("customerId"))
         this._customerService.getCustomerAndCreatedOrderByCustomerId(customerId).subscribe({
           next: (result) => {
-            console.log("result desde addtocart:")
-            console.log(result)
             if(result.orders.length>0){
-              console.log("entro a updatear")
               let orderToUpdate = result.orders[0];
               this.updateExistingOrder(orderToUpdate)
             } else {
-              console.log("entro a crear")
               this.createNewOrder();
             } 
           },
           error: (error) => {
-            console.log(error)
+            console.error(error)
           }
         })
       } else {
-        alert("Please log in to add product to the cart")
+        alert("Registrate para empezar a comprar.")
       }
     } else {
-      console.log('nothing selected')
+      console.log('no item selected')
     }
   }
-
 
 }
