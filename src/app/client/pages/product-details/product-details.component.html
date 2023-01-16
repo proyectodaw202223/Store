@@ -17,16 +17,16 @@
           <h2 class="col-6 prod-data-price">{{product.price}}</h2>
         </div>
         <div class="row prod-data-description">
-          <p class="prod-data-description">{{product.description}}</p>
+          <p>{{product.description}}</p>
         </div>
         <div class="row select-add">
           <div class="col-8 select">
 <!-- size selector -->
             <div class="size-selector" *ngIf="!productOneSize; else oneSize">
-              <div class="col">
+              <div class="col-4">
                 <label>Talla</label>
               </div>
-              <div class="col size-selector-combo">
+              <div class="col-8 size-selector-combo">
                 <span *ngIf="selectedColorSizes.length == 0"> Selecciona primero un color.</span>
                 <select name="size" id="size_selector" *ngIf="selectedColorSizes.length !== 0">
                   <option *ngFor="let size of selectedColorSizes" value={{size}} (click)="sizeSelected(size)">{{size}}</option>
@@ -35,10 +35,10 @@
             </div>
             <ng-template #oneSize>
               <div class="size-selector">
-                <div class="col">
+                <div class="col-4">
                   <label>Talla</label>
                 </div>
-                <div class="col">
+                <div class="col-8">
                   <span>{{selectedColorSizes[0]}}</span>
                 </div>
               </div>
@@ -47,20 +47,20 @@
             <div >
               <div *ngIf="productColorOptions === 1; else moreColorOptions">
                 <div class="color-selector" *ngFor="let item of productColorSize | keyvalue">
-                  <div class="col">
+                  <div class="col-4">
                     <label>Color</label>
                   </div>
-                  <div class="col">
+                  <div class="col-8">
                     <span>Único</span>
                   </div>
                 </div>
               </div>
               <ng-template #moreColorOptions>
                 <div class="color-selector">
-                  <div class="col">
+                  <div class="col-4">
                     <label>Color</label>
                   </div>
-                  <div class="col color-selector-option-container">
+                  <div class="col-8 color-selector-option-container">
                     <div *ngFor="let item of productColorSize | keyvalue">
                       <!-- <label>{{item.key}} </label> -->
                       <div class ="color-selector-option" style.background-color = {{item.key}}>
