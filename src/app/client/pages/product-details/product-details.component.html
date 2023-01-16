@@ -1,45 +1,83 @@
 <section class = "prod_details d-flex">
    
-    <div class = "prod_images_slider">
-      <button *ngIf="productUniqueImages.length>1" class="slider_btn prev" (click)="changeSlide('left')"><i class="bi bi-arrow-left-circle-fill"></i></button>
-      <button *ngIf="productUniqueImages.length>1" class="slider_btn next" (click)="changeSlide('right')"><i class="bi bi-arrow-right-circle-fill"></i></button>
-
-      <div class = "prod_images_slide" [ngStyle]="{'transform': 'translateX(' + transX + 'px)'}" *ngFor="let image of productUniqueImages">
-        <img src={{apiStorage}}{{image.imagePath}}>
-      </div> 
+    <div class="slider_container col-5">
+      <div class = "prod_images_slider">
+        <button *ngIf="productUniqueImages.length>1" class="slider_btn prev" (click)="changeSlide('left')"><i class="bi bi-arrow-left-circle-fill"></i></button>
+        <button *ngIf="productUniqueImages.length>1" class="slider_btn next" (click)="changeSlide('right')"><i class="bi bi-arrow-right-circle-fill"></i></button>
+  
+        <div class = "prod_images_slide" [ngStyle]="{'transform': 'translateX(' + transX + 'px)'}" *ngFor="let image of productUniqueImages">
+          <img src={{apiStorage}}{{image.imagePath}}>
+        </div> 
+      </div>
     </div>
 
-
     <div class = "prod_data">
-      <h2>{{product.name}}</h2>
-      <h2>{{product.price}}</h2>
-      <p>{{product.description}}</p>
-      <div *ngIf="!productOneSize; else oneSize">
-        <label>Talla: </label>
-        <span *ngIf="selectedColorSizes.length == 0"> Selecciona primero un color.</span>
-        <select name="size" id="size_selector" *ngIf="selectedColorSizes.length !== 0">
-          <option *ngFor="let size of selectedColorSizes" value={{size}} (click)="sizeSelected(size)">{{size}}</option>
-        </select>
-      </div>
-      <ng-template #oneSize>
-        <label>Talla: {{selectedColorSizes[0]}}</label>
-      </ng-template>
-      
-      <div *ngIf="productColorOptions === 1; else moreColorOptions">
-        <div *ngFor="let item of productColorSize | keyvalue">
-          <label>Color: {{item.key}} </label>
+        <div class="row">
+          <h2 class="col-6 prod-data-name">{{product.name}}</h2>
+          <h2 class="col-6 prod-data-price">{{product.price}}</h2>
         </div>
-      </div>
-      <ng-template #moreColorOptions>
-        <label>Color: </label>
-        <div *ngFor="let item of productColorSize | keyvalue">
-          <label>{{item.key}} </label>
-          <input type="radio" id="item.key" name="item.key" value="item.key" (click)="colorSelected(item.key)" [checked]='false'>
+        <div class="row prod-data-description">
+          <p class="prod-data-description">{{product.description}}</p>
         </div>
-      </ng-template>
+        <div class="row select-add">
+          <div class="col-8 select">
+<!-- size selector -->
+            <div class="size-selector" *ngIf="!productOneSize; else oneSize">
+              <div class="col">
+                <label>Talla</label>
+              </div>
+              <div class="col size-selector-combo">
+                <span *ngIf="selectedColorSizes.length == 0"> Selecciona primero un color.</span>
+                <select name="size" id="size_selector" *ngIf="selectedColorSizes.length !== 0">
+                  <option *ngFor="let size of selectedColorSizes" value={{size}} (click)="sizeSelected(size)">{{size}}</option>
+                </select>
+              </div> 
+            </div>
+            <ng-template #oneSize>
+              <div class="size-selector">
+                <div class="col">
+                  <label>Talla</label>
+                </div>
+                <div class="col">
+                  <span>{{selectedColorSizes[0]}}</span>
+                </div>
+              </div>
+            </ng-template>
+<!-- color selector -->   
+            <div >
+              <div *ngIf="productColorOptions === 1; else moreColorOptions">
+                <div class="color-selector" *ngFor="let item of productColorSize | keyvalue">
+                  <div class="col">
+                    <label>Color</label>
+                  </div>
+                  <div class="col">
+                    <span>Único</span>
+                  </div>
+                </div>
+              </div>
+              <ng-template #moreColorOptions>
+                <div class="color-selector">
+                  <div class="col">
+                    <label>Color</label>
+                  </div>
+                  <div class="col color-selector-option-container">
+                    <div *ngFor="let item of productColorSize | keyvalue">
+                      <!-- <label>{{item.key}} </label> -->
+                      <div class ="color-selector-option" style.background-color = {{item.key}}>
+                        <input type="radio" id="item.key" name="item.key" value="item.key" (click)="colorSelected(item.key)" [checked]='false'>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+            
 
-      <button (click)="addToCart()">AÑADIR <i class="bi bi-cart3"></i></button>
-
+          </div>
+          <div class="col-4 add">
+            <button class="btn" id="btn-add" (click)="addToCart()">AÑADIR <i class="bi bi-cart3"></i></button>
+          </div>
+        </div>
     </div>
 </section>
 

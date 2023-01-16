@@ -22,7 +22,6 @@ export class ProductDetailsComponent implements OnInit {
 
   public newProducts: Product[] = [];
   public product: Product = <Product>{}; 
-  public customer: Customer = <Customer>{}; 
   public apiStorage: string = environment.apiStorage;
   public productColorSize : {[key:string]: string[]} = {};
   public productUniqueImages: ProductItemImage[] = [];
@@ -45,16 +44,6 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     let customerId = Number(sessionStorage.getItem("customerId"));
-    this._customerService.getCustomerById(customerId).subscribe({
-      next: (result) => {
-        this.customer = result;
-        console.log('CUSTOMER')
-        console.log(result)
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
 
     // Populate product, productColorSize and productUniqueImages
     const id = Number(this._route.snapshot.paramMap.get('id'));
@@ -165,15 +154,13 @@ export class ProductDetailsComponent implements OnInit {
       if(this.selectedItem.sale !== undefined && this.selectedItem.sale !== null && this.selectedItem.sale.lines !== undefined){
         discount = this.selectedItem.sale.lines[0].discountPercentage / 100;
         console.log(`descuento es ${discount}`)
-      } else {
-        discount = 0;
-      }
+      } 
       let priceWithDiscount = this.product.price * (1 - discount);
       if (this.selectedItem.id !== undefined){
         newLine = new OrderLine(0,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
         console.log(newLine)
       }
-      let newOrder = new Order (Number(this.customer.id), priceWithDiscount, '', 'Creado', '', [newLine])
+      let newOrder = new Order (Number(sessionStorage.getItem("customerId")), priceWithDiscount, '', 'Creado', '', [newLine])
       this._orderService.createOrder(newOrder).subscribe({
         next: (result) => {
           console.log("order creado");
@@ -190,20 +177,26 @@ export class ProductDetailsComponent implements OnInit {
   addOrderLine(order:Order){
     if (this.selectedItem !== undefined){
       let discount = 0;
-      let newLine: OrderLine = <OrderLine>{};
+      let newLine: OrderLine;
       if(this.selectedItem.sale !== undefined && this.selectedItem.sale !== null && this.selectedItem.sale.lines !== undefined){
         discount = this.selectedItem.sale.lines[0].discountPercentage / 100;
         console.log(`descuento es ${discount}`)
       } else {
-        discount = 0;
         console.log("el descuento es cero")
       }
       let priceWithDiscount = this.product.price * (1 - discount);
       if (this.selectedItem.id !== undefined){
-        newLine = new OrderLine(8678,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
+        newLine = new OrderLine(0,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
+        console.log(newLine)
         if (order.lines !== undefined){
           order.lines.push(newLine);
+          order.amount = Number(order.amount) + priceWithDiscount;
           console.log('order.lines no es undefined')
+          console.log(order.amount)
+          console.log(order)
+        } else {
+          console.log('order.lines es undefined')
+          return
         }
         this._orderService.updateOrder(order).subscribe({
           next: (result) => {
@@ -213,6 +206,8 @@ export class ProductDetailsComponent implements OnInit {
             console.log(result)
           },
           error: (error) => {
+            console.log("order para updatear ADD LINE")
+            console.log(order);
             console.log('error al updatear')
             console.log(error)
           }
@@ -249,11 +244,12 @@ export class ProductDetailsComponent implements OnInit {
         for (let line of order.lines){
           // Ya hay una linea con ese itemId
           if(this.selectedItem.id === line.itemId){
+            console.log("el metodo update line")
             this.updateOrderLine(order, line);
             break;
           // No hay linea con ese itemId
           } else {
-            console.log("el metodo que no")
+            console.log("el metodo add line")
             this.addOrderLine(order);
             break;
           }
@@ -271,14 +267,15 @@ export class ProductDetailsComponent implements OnInit {
     console.log(this.selectedItem)
     if (this.selectItem()){
       if (this.isUserLoggedIn()){
-        let customerId = Number(this.customer.id)
+        let customerId = Number(sessionStorage.getItem("customerId"))
         this._customerService.getCustomerAndCreatedOrderByCustomerId(customerId).subscribe({
           next: (result) => {
             console.log("result desde addtocart:")
             console.log(result)
             if(result.orders.length>0){
               console.log("entro a updatear")
-              this.updateExistingOrder(result.orders[0])
+              let orderToUpdate = result.orders[0];
+              this.updateExistingOrder(orderToUpdate)
             } else {
               console.log("entro a crear")
               this.createNewOrder();
