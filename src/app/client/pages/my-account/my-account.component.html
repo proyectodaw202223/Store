@@ -1,36 +1,51 @@
-<section id="content" class="row">
-    <div id="account-txt" class="col">
+<section id="content" class="content">
+    <div id="account-txt" class="col-4 column wrapper">
         <h2>TUS DATOS</h2>
-        <div class="row">
-            <div class="col-6">
-              <h3>Nombre:</h3>
-                <input for="name" [(ngModel)]="customer.firstName + ' ' + customer.lastName"  disabled>
-              <h3>Dirección:</h3>
-                <input for="name" [(ngModel)]="customer.streetAddress" disabled>
-                <input for="name" [(ngModel)]="customer.zipCode + ', ' + customer.city" disabled>
-                <input for="name" [(ngModel)]="customer.province + ' ' + customer.country" disabled>
+        <div class="column gray-bg large-font wrapper-2 address-content">
+            <div class="order-table large-font">
+                <div class="column gray-bg large-font wrapper-2 address-content">
+                  <span class="bold">Nombre:</span>
+                  <span>{{ customer.firstName }} {{ customer.lastName }}</span>
+                  <span class="bold">Dirección:</span>
+                  <span>{{ customer.streetAddress }},</span>
+                  <span>{{ customer.zipCode }} - {{ customer.city }},</span>
+                  <span>{{ customer.province }},</span>
+                  <span>{{ customer.country }}</span>
+                  <button class="btn button bold large-font" id="edit-customer-data-button">MODIFICAR DATOS</button>
+                </div>
             </div>
         </div>
-        <button type="buttom" class="btn btn-warning">EDITAR</button>
     </div>
-    <div id="tabla-pedidos" class="col-6">
-        <table>
+    <div id="tabla-pedidos" class="col-8 column wrapper">
+      <h2>TUS PEDIDOS</h2>
+      <div class="wrapper-2 gray-bg">
+        <table class="order-table large-font">
             <thead>
               <tr>
+                <th></th> <!-- Product image column -->
                 <th>FECHA PEDIDO</th>
                 <th>Nº PEDIDO</th>
                 <th>IMPORTE</th>
                 <th>ESTADO</th>
+                <th></th> <!-- Find icon column -->
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let order of customer.orders">
+              <!-- 
+                <td *ngIf="line.productItem !== undefined && line.productItem.images !== undefined">
+                  <img class="order-table-image" src="{{ apiStorage }}{{ line.productItem.images[0].imagePath }}">
+                </td>
+              -->
+                <td>Hola</td>
                 <td>{{ order.created_at?.substr(0,10) }}</td>
-                <td><a [routerLink]="['/orderdetails/' + order.id]">{{ ("000000" + order.id).slice(-6) }}</a></td>
+                <td>{{ order.id }}</td>
                 <td>{{ order.amount }}</td>
                 <td>{{ order.status }}</td>
+                <td><a [routerLink]="['/orderdetails/' + order.id]"><img src="../../../../assets/iconos/x-circle.svg"></a></td>
               </tr>
             </tbody>
           </table>
+        </div>
     </div>
 </section>

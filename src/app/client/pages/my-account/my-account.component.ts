@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -12,11 +13,12 @@ import { CustomerService } from 'src/app/services/customer.service';
 export class MyAccountComponent implements OnInit {
 
   public customer : Customer = <Customer>{};
+  public apiStorage: string = environment.apiStorage;
 
   constructor(
     private customerService: CustomerService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
