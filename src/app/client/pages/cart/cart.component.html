@@ -1,1 +1,71 @@
-<p>cart works!</p>
+<div class="content">
+  <div class="col-8 column wrapper">
+    <h2>TU PEDIDO:</h2>
+    <div class="wrapper-2 gray-bg">
+      <table class="order-table large-font">
+        <thead>
+          <tr>
+            <th></th> <!-- Product image column -->
+            <th>PRODUCTO</th>
+            <th>CANTIDAD</th>
+            <th>IMPORTE</th>
+            <th></th> <!-- Delete icon column -->
+          </tr>
+        </thead>
+        <tbody *ngIf="customer.orders !== undefined && customer.orders[0] !== undefined">
+          <tr *ngFor="let line of customer.orders[0].lines">
+            <td *ngIf="line.productItem !== undefined && line.productItem.images !== undefined">
+              <img class="order-table-image" src="{{ apiStorage }}{{ line.productItem.images[0].imagePath }}">
+            </td>
+            <td>{{ line.productItem?.product?.name }}</td>
+            <td>
+              <input type="number" min="1" [(ngModel)]="line.quantity" (change)="onLineQuantityChange($event)">
+              <input type="hidden" value="{{ line.id }}">
+            </td>
+            <td>{{ line.amount | currency : 'EUR' : '' }} €</td>
+            <td>
+              <button class="delete-line-button" value="{{ line.id }}" (click)="onDeleteLineButtonClick($event)">
+                <img src="../../../../assets/iconos/trash-red.svg">
+              </button>
+            </td>
+            <input type="hidden" value="{{ line.id }}">
+          </tr>
+        </tbody>
+      </table>
+      <div class="subtotal-wrapper larger-font" *ngIf="customer.orders !== undefined && customer.orders[0] !== undefined">
+        <div class="bold">
+          <span>TOTAL A PAGAR:</span>
+          <span>{{ customer.orders[0].amount | currency : 'EUR' : '' }} €</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 column wrapper">
+    <h2>DIRECCIÓN DE ENVÍO:</h2>
+    <div class="column gray-bg large-font wrapper-2 address-content">
+      <span class="bold">Nombre:</span>
+      <span>{{ customer.firstName }} {{ customer.lastName }}</span>
+      <span class="bold">Dirección:</span>
+      <span>{{ customer.streetAddress }},</span>
+      <span>{{ customer.zipCode }} - {{ customer.city }},</span>
+      <span>{{ customer.province }},</span>
+      <span>{{ customer.country }}</span>
+      <button class="btn button bold large-font" id="edit-customer-data-button" (click)="onModifyCustomerDataButtonClick($event)">MODIFICAR DATOS</button>
+    </div>
+    <div class="column" *ngIf="customer.orders !== undefined && customer.orders[0] !== undefined">
+      <button *ngIf="customer.orders[0].lines !== undefined" class="btn button bold large-font" id="pay-button" (click)="onPayButtonClick($event)">PAGAR</button>
+    </div>
+  </div>
+</div>
+<section class="highlighted_products_container">
+  <h3>NOVEDADES</h3>
+  <div class="highlighted_products row flex overflow-hidden justify-content-center">
+    <div class="highlighted_prod_preview" *ngFor="let product of newProducts">
+        <a class="highlighted_prod_link" routerLink="../{{product.id}}">
+            <img *ngIf="product.productItems !== undefined && product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
+            <p class="highlighted_prod_name">{{product.name}}</p>
+            <p class="highlighted_prod_price">{{product.price}} €</p>
+        </a>
+    </div>
+</div>
+</section>

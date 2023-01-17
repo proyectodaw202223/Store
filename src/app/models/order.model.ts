@@ -7,9 +7,9 @@ export class Order { 
         public amount: number,
         public comments: string,
         public status: string,
-        public paymentDateTime?: string,
-        public customer?: Customer,
+        public paymentDateTime: string,
         public lines?: Array<OrderLine>,
+        public customer?: Customer,
         public id?: number,
         public created_at?: string,
         public updated_at?: string

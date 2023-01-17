@@ -21,6 +21,10 @@ export class ProductItemService {
     return this._http.get(this.apiUrl);
   }
 
+  getItemsWithDiscount(limit: number = 0): Observable<any> {
+    return this._http.get(this.apiUrl + `/sale/${limit}`);
+  }
+
   createItem(item: ProductItem): Observable<any> {
     return this._http.post(this.apiUrl, item);
   }
