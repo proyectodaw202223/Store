@@ -1,0 +1,38 @@
+<section id="content" class="row">
+    <h2>PEDIDO   {{ ("000000" + order.id).slice(-6)}} {{order.created_at?.substr(0,10)}}</h2>
+    <div id="tabla-pedidos" class="col-6">
+        <table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Importe</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let line of order.lines">
+                    <td>{{ line.productItem?.product?.name }}</td>
+                    <td>{{ line.quantity }}</td>
+                    <td>{{ line.amount }}</td>
+                  </tr>
+            </tbody>
+          </table>
+    </div>
+    <div id="account-txt" class="col">
+        <h2>DIRECCIÓN DE ENVÍO</h2>
+        <div class="row">
+            <div class="col-6">
+                <input for="name" [(ngModel)]="customer.streetAddress" disabled>
+                <input for="name" [(ngModel)]="customer.zipCode + ', ' + customer.city" disabled>
+                <input for="name" [(ngModel)]="customer.province + ' ' + customer.country" disabled>
+            </div>
+        </div>
+        <button type="buttom" class="btn btn-warning">EDITAR</button>
+        <h2>ESTADO</h2>
+        <div class="row">
+            <div class="col-6">
+                <input for="name" [(ngModel)]="order.status" disabled>
+            </div>
+        </div>
+    </div>
+</section>

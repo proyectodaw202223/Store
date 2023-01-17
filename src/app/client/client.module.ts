@@ -14,6 +14,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { MyAccountComponent } from './pages/my-account/my-account.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 
 
 
@@ -28,6 +29,7 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
     MyAccountComponent,
     CartComponent,
     ProductDetailsComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     CommonModule,

@@ -3,13 +3,15 @@
         <h2>TUS DATOS</h2>
         <div class="row">
             <div class="col-6">
-                <input for="name" [(ngModel)]="customer.firstName" disabled>
-                <input for="name" [(ngModel)]="customer.lastName" disabled>
+              <h3>Nombre:</h3>
+                <input for="name" [(ngModel)]="customer.firstName + ' ' + customer.lastName"  disabled>
+              <h3>Dirección:</h3>
                 <input for="name" [(ngModel)]="customer.streetAddress" disabled>
-                <input for="name" [(ngModel)]="customer.email" disabled>
-                <input for="name" [(ngModel)]="customer.phoneNumber" disabled>
+                <input for="name" [(ngModel)]="customer.zipCode + ', ' + customer.city" disabled>
+                <input for="name" [(ngModel)]="customer.province + ' ' + customer.country" disabled>
             </div>
         </div>
+        <button type="buttom" class="btn btn-warning">EDITAR</button>
     </div>
     <div id="tabla-pedidos" class="col-6">
         <table>
@@ -24,7 +26,7 @@
             <tbody>
               <tr *ngFor="let order of customer.orders">
                 <td>{{ order.created_at?.substr(0,10) }}</td>
-                <td>{{ order.id }}</td>
+                <td><a [routerLink]="['/orderdetails/' + order.id]">{{ ("000000" + order.id).slice(-6) }}</a></td>
                 <td>{{ order.amount }}</td>
                 <td>{{ order.status }}</td>
               </tr>

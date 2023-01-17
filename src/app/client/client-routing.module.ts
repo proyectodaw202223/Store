@@ -8,6 +8,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { MyAccountComponent } from './pages/my-account/my-account.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
       { path: 'products', component: ProductsComponent},
       { path: 'products/product/:id', component: ProductDetailsComponent},
       { path: 'account', component: MyAccountComponent},
-      { path: 'cart', component: CartComponent}
+      { path: 'cart', component: CartComponent},
+      { path: 'orderdetails/:id', component: OrderDetailsComponent}
     ]
   }
 ];
