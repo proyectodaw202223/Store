@@ -11,7 +11,7 @@
                   <span>{{ customer.zipCode }} - {{ customer.city }},</span>
                   <span>{{ customer.province }},</span>
                   <span>{{ customer.country }}</span>
-                  <button class="btn button bold large-font" id="edit-customer-data-button">MODIFICAR DATOS</button>
+                  <button class="btn button bold large-font" id="edit-customer-data-button">EDITAR</button>
                 </div>
             </div>
         </div>
@@ -22,7 +22,6 @@
         <table class="order-table large-font">
             <thead>
               <tr>
-                <th></th> <!-- Product image column -->
                 <th>FECHA PEDIDO</th>
                 <th>Nº PEDIDO</th>
                 <th>IMPORTE</th>
@@ -32,17 +31,11 @@
             </thead>
             <tbody>
               <tr *ngFor="let order of customer.orders">
-              <!-- 
-                <td *ngIf="line.productItem !== undefined && line.productItem.images !== undefined">
-                  <img class="order-table-image" src="{{ apiStorage }}{{ line.productItem.images[0].imagePath }}">
-                </td>
-              -->
-                <td>Hola</td>
                 <td>{{ order.created_at?.substr(0,10) }}</td>
                 <td>{{ order.id }}</td>
                 <td>{{ order.amount }}</td>
                 <td>{{ order.status }}</td>
-                <td><a [routerLink]="['/orderdetails/' + order.id]"><img src="../../../../assets/iconos/x-circle.svg"></a></td>
+                <td><a [routerLink]="['/orderdetails/' + order.id]"><img src="../../../../assets/iconos/lupa.svg"></a></td>
               </tr>
             </tbody>
           </table>

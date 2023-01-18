@@ -5,6 +5,7 @@ import { OrderService } from 'src/app/services/order.service';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
 import { environment } from 'src/environments/environment';
+import { OrderLine } from 'src/app/models/orderLine.model';
 
 @Component({
   selector: 'app-order-details',
@@ -64,6 +65,10 @@ export class OrderDetailsComponent implements OnInit {
           console.log(error);
         }
     });
+  }
+
+  onBackButton(event: Event): void {
+    this.router.navigate(['account']);
   }
 
 }

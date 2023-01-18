@@ -23,6 +23,7 @@
             </tbody>
           </table>
     </div>
+   <button class="btn button bold large-font" id="edit-customer-data-button" (click)="onBackButton($event)">MI CUENTA</button>
 </div>
     <div id="account-txt" class="col-4 column wrapper">
         <h2>DIRECCIÓN DE ENVÍO</h2>
@@ -34,7 +35,7 @@
             <span>{{ customer.zipCode }} - {{ customer.city }},</span>
             <span>{{ customer.province }},</span>
             <span>{{ customer.country }}</span>
-            <button class="btn button bold large-font" id="edit-customer-data-button">MODIFICAR DATOS</button>
+            <button class="btn button bold large-font" id="edit-customer-data-button">EDITAR</button>
           </div>
         <h2>ESTADO</h2>
         <div class="row">
