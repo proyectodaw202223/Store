@@ -1,24 +1,32 @@
-<section id="content" class="row">
-    <div id="account-txt" class="col">
+<section id="content" class="content">
+    <div id="account-txt" class="col-4 column wrapper">
         <h2>TUS DATOS</h2>
-        <div class="row">
-            <div class="col-6">
-                <input for="name" [(ngModel)]="customer.firstName" disabled>
-                <input for="name" [(ngModel)]="customer.lastName" disabled>
-                <input for="name" [(ngModel)]="customer.streetAddress" disabled>
-                <input for="name" [(ngModel)]="customer.email" disabled>
-                <input for="name" [(ngModel)]="customer.phoneNumber" disabled>
+        <div class="column gray-bg large-font wrapper-2 address-content">
+            <div class="order-table large-font">
+                <div class="column gray-bg large-font wrapper-2 address-content">
+                  <span class="bold">Nombre:</span>
+                  <span>{{ customer.firstName }} {{ customer.lastName }}</span>
+                  <span class="bold">Dirección:</span>
+                  <span>{{ customer.streetAddress }},</span>
+                  <span>{{ customer.zipCode }} - {{ customer.city }},</span>
+                  <span>{{ customer.province }},</span>
+                  <span>{{ customer.country }}</span>
+                  <button class="btn button bold large-font" id="edit-customer-data-button">EDITAR</button>
+                </div>
             </div>
         </div>
     </div>
-    <div id="tabla-pedidos" class="col-6">
-        <table>
+    <div id="tabla-pedidos" class="col-8 column wrapper">
+      <h2>TUS PEDIDOS</h2>
+      <div class="wrapper-2 gray-bg">
+        <table class="order-table large-font">
             <thead>
               <tr>
                 <th>FECHA PEDIDO</th>
                 <th>Nº PEDIDO</th>
                 <th>IMPORTE</th>
                 <th>ESTADO</th>
+                <th></th> <!-- Find icon column -->
               </tr>
             </thead>
             <tbody>
@@ -27,8 +35,10 @@
                 <td>{{ order.id }}</td>
                 <td>{{ order.amount }}</td>
                 <td>{{ order.status }}</td>
+                <td><a [routerLink]="['/orderdetails/' + order.id]"><img src="../../../../assets/iconos/lupa.svg"></a></td>
               </tr>
             </tbody>
           </table>
+        </div>
     </div>
 </section>

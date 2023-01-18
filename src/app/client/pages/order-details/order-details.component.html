@@ -1,0 +1,47 @@
+<section id="content" class="content">
+    <div class="col-8 column wrapper">
+    <h2>PEDIDO   {{ ("000000" + order.id).slice(-6)}} {{order.created_at?.substr(0,10)}}</h2>
+    <div id="tabla-pedidos" class="wrapper-2 gray-bg">
+        <table class="order-table large-font">
+            <thead>
+              <tr>
+                <th></th> <!-- Product image column -->
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Importe</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let line of order.lines">
+                    <td *ngIf="line.productItem !== undefined && line.productItem.images !== undefined">
+                        <img class="order-table-image" src="{{ apiStorage }}{{ line.productItem.images[0].imagePath }}">
+                      </td>
+                    <td>{{ line.productItem?.product?.name }}</td>
+                    <td>{{ line.quantity }}</td>
+                    <td>{{ line.amount }}</td>
+                  </tr>
+            </tbody>
+          </table>
+    </div>
+   <button class="btn button bold large-font" id="edit-customer-data-button" (click)="onBackButton($event)">MI CUENTA</button>
+</div>
+    <div id="account-txt" class="col-4 column wrapper">
+        <h2>DIRECCIÓN DE ENVÍO</h2>
+        <div class="column gray-bg large-font wrapper-2 address-content">
+            <span class="bold">Nombre:</span>
+            <span>{{ customer.firstName }} {{ customer.lastName }}</span>
+            <span class="bold">Dirección:</span>
+            <span>{{ customer.streetAddress }},</span>
+            <span>{{ customer.zipCode }} - {{ customer.city }},</span>
+            <span>{{ customer.province }},</span>
+            <span>{{ customer.country }}</span>
+            <button class="btn button bold large-font" id="edit-customer-data-button">EDITAR</button>
+          </div>
+        <h2>ESTADO</h2>
+        <div class="row">
+            <div class="col-6">
+                <span class="bold">{{order.status}}</span>
+            </div>
+        </div>
+    </div>
+</section>
