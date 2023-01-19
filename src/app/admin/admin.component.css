@@ -20,13 +20,12 @@
 /* Body */
 html .body{
     display: flex;
-    height: 80%;
 }
 /* Sidebar Div */
 .lateral {
     color: #000000;
     width: 20%;
-    height:100vh;
+    height: 100%;
     border: black 1px solid;
     border-top: none;
     background-color: #EAEAEA;
