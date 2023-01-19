@@ -14,6 +14,7 @@ export class MyAccountComponent implements OnInit {
 
   public customer : Customer = <Customer>{};
   public apiStorage: string = environment.apiStorage;
+  public onEdit: boolean = false;
 
   constructor(
     private customerService: CustomerService,
@@ -49,12 +50,24 @@ export class MyAccountComponent implements OnInit {
       next: (result) => {
         this.customer = result as Customer;
         alert("Cliente actualizado correctamente");
+        this.ngOnInit();
       },
       error: (error) => {
         window.alert(error.error.error);
         console.log(error);
       }
     });
+  }
+
+  onEditClick(){
+    document.getElementById("address-content")!.classList.remove('disabled');
+    this.onEdit = true;
+  }
+
+  onSaveClick(){
+    document.getElementById("address-content")!.classList.add('disabled');
+    this.onEdit = false;
+    this.updateCustomer();
   }
   
 }

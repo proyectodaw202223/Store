@@ -4,7 +4,6 @@
 
         <div *ngIf="!customerIsLoggedIn()" id="login">
             <button (click)="openLoginDialog()">{{loginText}} </button>
-            <button routerLink="/cart"><i class="bi bi-cart3"></i></button>
         </div>
         <div *ngIf="customerIsLoggedIn()" id="login" class="dropdown">
             <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

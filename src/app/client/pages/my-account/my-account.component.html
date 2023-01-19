@@ -1,17 +1,24 @@
 <section id="content" class="content">
     <div id="account-txt" class="col-4 column wrapper">
         <h2>TUS DATOS</h2>
-        <div class="column gray-bg large-font wrapper-2 address-content">
+        <div class="column gray-bg large-font wrapper-2">
             <div class="order-table large-font">
-                <div class="column gray-bg large-font wrapper-2 address-content">
-                  <span class="bold">Nombre:</span>
-                  <span>{{ customer.firstName }} {{ customer.lastName }}</span>
+                <div id="address-content" class="column disabled gray-bg large-font wrapper-2">
+                  <label class="bold">Nombre:</label>
+                  <div class="same-line">
+                    <input type="text" [(ngModel)]="customer.firstName">
+                    <input type="text" [(ngModel)]="customer.lastName">
+                  </div>
                   <span class="bold">Dirección:</span>
-                  <span>{{ customer.streetAddress }},</span>
-                  <span>{{ customer.zipCode }} - {{ customer.city }},</span>
-                  <span>{{ customer.province }},</span>
-                  <span>{{ customer.country }}</span>
-                  <button class="btn button bold large-font" id="edit-customer-data-button">EDITAR</button>
+                  <input type="text" [(ngModel)]="customer.streetAddress">
+                  <div class="same-line">
+                    <input type="text" [(ngModel)]="customer.zipCode">
+                    <input type="text" [(ngModel)]="customer.city">
+                  </div>
+                  <input type="text" [(ngModel)]="customer.province">
+                  <input type="text" [(ngModel)]="customer.country">
+                  <button *ngIf="!onEdit" (click)="onEditClick()" class="btn button bold large-font" id="edit-customer-data-button">EDITAR</button>
+                  <button *ngIf="onEdit" (click)="onSaveClick()" class="btn button bold large-font" id="edit-customer-data-button">GUARDAR</button>
                 </div>
             </div>
         </div>
