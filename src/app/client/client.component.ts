@@ -41,7 +41,9 @@ export class ClientComponent implements OnInit {
 
   logOut(){
     sessionStorage.removeItem('customerName');
+    sessionStorage.removeItem('customerId');
     this.setLoginText();
+    this.router.navigate(['']);
   }
 
   ngOnInit() {
