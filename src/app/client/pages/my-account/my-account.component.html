@@ -6,17 +6,17 @@
                 <div id="address-content" class="column disabled gray-bg large-font wrapper-2">
                   <label class="bold">Nombre:</label>
                   <div class="same-line">
-                    <input type="text" [(ngModel)]="customer.firstName">
-                    <input type="text" [(ngModel)]="customer.lastName">
+                    <input type="text" placeholder="First name" [(ngModel)]="customer.firstName">
+                    <input type="text" placeholder="Last name" [(ngModel)]="customer.lastName">
                   </div>
                   <span class="bold">Dirección:</span>
-                  <input type="text" [(ngModel)]="customer.streetAddress">
+                  <input type="text" placeholder="Street address" [(ngModel)]="customer.streetAddress">
                   <div class="same-line">
-                    <input type="text" [(ngModel)]="customer.zipCode">
-                    <input type="text" [(ngModel)]="customer.city">
+                    <input type="text" placeholder="Zip code" [(ngModel)]="customer.zipCode">
+                    <input type="text" placeholder="City" [(ngModel)]="customer.city">
                   </div>
-                  <input type="text" [(ngModel)]="customer.province">
-                  <input type="text" [(ngModel)]="customer.country">
+                  <input type="text" placeholder="Province" [(ngModel)]="customer.province">
+                  <input type="text" placeholder="Country" [(ngModel)]="customer.country">
                   <button *ngIf="!onEdit" (click)="onEditClick()" class="btn button bold large-font" id="edit-customer-data-button">EDITAR</button>
                   <button *ngIf="onEdit" (click)="onSaveClick()" class="btn button bold large-font" id="edit-customer-data-button">GUARDAR</button>
                 </div>
