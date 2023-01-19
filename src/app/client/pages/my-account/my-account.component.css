@@ -83,4 +83,26 @@
   .highlighted_products_container {
     margin-top: 50px;
   }
+
+  .disabled input{
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: #EAEAEE;
+  }
+
+  input {
+    margin: .2em;
+    background-color: #ffffff;
+    border: none;
+    border-radius: .1em;
+  }
+
+  .same-line{
+    display: flex;
+    width: 100%;
+  }
+
+  .same-line input{
+    width: 50%;
+  }
   

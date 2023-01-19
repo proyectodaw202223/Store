@@ -47,6 +47,8 @@
   .bold { font-weight: bold; }
   
   .address-content span { margin: 2px 0px; }
+
+  .address-content { margin-bottom: 12px;}
   
   .delete-line-button {
     border-width: 0px;
