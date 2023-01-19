@@ -27,4 +27,16 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  isUserLoggedIn(): boolean {
+    return ('userRole' in sessionStorage);
+  }
+
+  onLoginButtonClick(event: Event): void {
+    this.loginDialog.open(AdminLoginComponent);
+  }
+
+  onLogoutButtonClick(event: Event): void {
+    sessionStorage.removeItem('userRole');
+    window.location.replace('/admin');
+  }
 }
