@@ -59,6 +59,18 @@ html .body{
     width: 80%;
 }
 
+/* Botones de login */
+.login-wrapper {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+}
+
+.login-wrapper button {
+  color: #000;
+  background: none;
+  border: none;
+}
+
 /* COMMON STYLES FOR PAGE COMPONENTS */
 .component-title-1 {
   margin: 30px 20px 20px 20px;

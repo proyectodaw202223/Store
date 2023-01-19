@@ -28,7 +28,7 @@ export class DetitemComponent implements OnInit {
 
   ngOnInit(): void {
     if (!('userRole' in sessionStorage))
-      this.router.navigate(['/admin']);
+      window.location.replace('/admin');
       
     this.activatedRoute.params.subscribe((params) => {
       this.isEditing = (params['itemId']) ? true : false;
