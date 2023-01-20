@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/models/order.model';
 import { OrderService } from 'src/app/services/order.service';
 import { Router } from '@angular/router';
+import { OrderStatus } from 'src/app/models/orderStatus.model';
 
 @Component({
   selector: 'app-pedidos',
@@ -28,6 +29,8 @@ export class PedidosComponent implements OnInit {
   getOrders(): void {
     this.orderService.getAllOrders().subscribe({
         next: (result: Array<Order>) => {
+          result = result.filter(r => r.status != OrderStatus.CREATED);
+
           this.ordersMap = new Map(
             result.map((order) => [(order.id === undefined) ? 0 : order.id, order]
           ));

@@ -34,7 +34,7 @@ export class AdminLoginComponent implements OnInit {
         this.loginDialogRef.close();
       },
       error: (error) => {
-        window.alert(error.error.error);
+        window.alert("Usuario o contraseña incorrectos.");
         console.error(error);
       }
     });

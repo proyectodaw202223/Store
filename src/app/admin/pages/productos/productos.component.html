@@ -13,7 +13,7 @@
       <div class="action-panel-filter-wrapper">
         <label class="action-panel-filter-label">Categoría</label>
         <select class="action-panel-filter" id="category-filter" (change)="onFilterChange($event)">
-          <option value=""></option>
+          <option value="">Todas</option>
           <option value="Bisutería">Bisutería</option>
           <option value="Lana">Lana</option>
           <option value="Hama Beads">Hama Beads</option>
@@ -23,7 +23,7 @@
       <div class="action-panel-filter-wrapper">
         <label class="action-panel-filter-label">Subcategoría</label>
         <select class="action-panel-filter" id="subcategory-filter" (change)="onFilterChange($event)">
-          <option value=""></option>
+          <option value="">Todas</option>
           <option value="Colgantes">Colgantes</option>
           <option value="Pendientes">Pendientes</option>
           <option value="Pulseras">Pulseras</option>
@@ -53,7 +53,7 @@
         <td><input type="checkbox" value="{{ product.value.id }}" class="select-product-checkbox"></td>
         <td><a [routerLink]="['/detproductos/' + product.value.id]">{{ ("000000" + product.value.id).slice(-6) }}</a></td>
         <td>{{ product.value.name }}</td>
-        <td>{{ product.value.price }} €</td>
+        <td>{{ product.value.price | currency : 'EUR' : '' }} €</td>
         <td>{{ product.value.category }}</td>
         <td>{{ product.value.subcategory }}</td>
         <td>{{ product.value.description }}</td>

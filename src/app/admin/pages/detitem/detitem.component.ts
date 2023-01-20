@@ -140,6 +140,16 @@ export class DetitemComponent implements OnInit {
       return false;
     }
 
+    if (this.item.stock < 0) {
+      window.alert("El stock no puede ser negativo.");
+      return false;
+    }
+
+    if (this.item.stock % 1 != 0) {
+      window.alert("El stock debe ser un número entero.");
+      return false;
+    }
+
     return true;
   }
 

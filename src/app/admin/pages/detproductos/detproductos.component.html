@@ -31,12 +31,11 @@
           </div>
           <div>
             <label class="form-label">Precio:</label>
-            <input type="number" name="price" [(ngModel)]="product.price">
+            <input type="number" name="price" min="0" [(ngModel)]="product.price">
           </div>
           <div>
             <label class="form-label">Categoría:</label>
             <select name="category" [(ngModel)]="product.category">
-              <option value=""></option>
               <option value="Bisutería">Bisutería</option>
               <option value="Lana">Lana</option>
               <option value="Hama Beads">Hama Beads</option>
@@ -46,7 +45,6 @@
           <div>
             <label class="form-label">Subcategoría:</label>
             <select name="subcategory" [(ngModel)]="product.subcategory">
-              <option value=""></option>
               <option value="Colgantes">Colgantes</option>
               <option value="Pendientes">Pendientes</option>
               <option value="Pulseras">Pulseras</option>

@@ -70,7 +70,7 @@
     <div class="action-panel-group-content">
       <div class="action-panel-filter-wrapper">
         <label class="action-panel-filter-label">Descuento por defecto:</label> 
-        <input type="number" class="action-panel-filter" [(ngModel)]="defaultDiscountPct" (focus)="onDefaultDiscountFocus($event)" (focusout)="onDefaultDiscountFocusout($event)"> 
+        <input type="number" class="action-panel-filter" min="1" max="100" [(ngModel)]="defaultDiscountPct" (focus)="onDefaultDiscountFocus($event)" (focusout)="onDefaultDiscountFocusout($event)"> 
       </div>
     </div>
     <span class="action-panel-group-label">Ajustes</span>
@@ -82,6 +82,7 @@
       <tr>
         <td><input type="checkbox" (change)="onSelectAllSaleLinesCheckboxChange($event)"></td>
         <th>Producto</th>
+        <th>Item</th>
         <th>Precio</th>
         <th>Color</th>
         <th>Talla</th>
@@ -93,11 +94,12 @@
       <tr *ngFor="let line of seasonalSale.lines">
         <td><input type="checkbox" value="{{ line.productItem?.id }}" class="select-sale-lines-checkbox"></td>
         <td><a [routerLink]="['/detproductos/' + line.productItem?.product?.id]">{{ line.productItem?.product?.name }}</a></td>
-        <td>{{ line.productItem?.product?.price }}</td>
+        <td><a [routerLink]="['/detitem/item/' + line.itemId]">{{ ('000000' + line.itemId).slice(-6) }}</a></td>
+        <td>{{ line.productItem?.product?.price | currency : 'EUR' : '' }} €</td>
         <td>{{ line.productItem?.color }}</td>
         <td>{{ line.productItem?.size }}</td>
         <td>{{ line.productItem?.stock }}</td>
-        <td><input type="number" name="discount" [(ngModel)]="line.discountPercentage" [disabled]="disableEdit"></td>
+        <td><input type="number" name="discount" min="1" max="100" [(ngModel)]="line.discountPercentage" [disabled]="disableEdit"></td>
       </tr>
     </tbody>
   </table>
@@ -119,6 +121,7 @@
       <tr>
         <td><input type="checkbox" (change)="onSelectAllItemsWithoutDiscountCheckboxChange($event)"></td>
         <th>Producto</th>
+        <th>Item</th>
         <th>Precio</th>
         <th>Color</th>
         <th>Talla</th>
@@ -129,7 +132,8 @@
       <tr *ngFor="let item of productItemsWithoutDiscountMap | keyvalue">
         <td><input type="checkbox" value="{{ item.value.id }}" class="select-item-without-discount-checkbox"></td>
         <td><a [routerLink]="['/detproductos/' + item.value.product?.id]">{{ item.value.product?.name }}</a></td>
-        <td>{{ item.value.product?.price }}</td>
+        <td><a [routerLink]="['/detitem/item/' + item.value.id]">{{ ('000000' + item.value.id).slice(-6) }}</a></td>
+        <td>{{ item.value.product?.price | currency : 'EUR' : '' }} €</td>
         <td>{{ item.value.color }}</td>
         <td>{{ item.value.size }}</td>
         <td>{{ item.value.stock }}</td>
