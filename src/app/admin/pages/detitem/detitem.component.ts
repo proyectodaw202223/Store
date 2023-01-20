@@ -100,7 +100,6 @@ export class DetitemComponent implements OnInit {
           this.router.navigate(['detitem/product/', this.item.productId]);
         else
           this.getNewItem();
-        console.log("Product item " + itemId + " successfully deleted.");
       },
       error: (error) => {
         window.alert(error.error.error);

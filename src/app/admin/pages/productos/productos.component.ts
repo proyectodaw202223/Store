@@ -98,7 +98,6 @@ export class ProductosComponent implements OnInit {
       next: (result) => {
         this.productsMap.delete(productId);
         this.filteredProductsMap.delete(productId);
-        console.log("Product " + productId + " successfully deleted.");
       },
       error: (error) => {
         window.alert(error.error.error);

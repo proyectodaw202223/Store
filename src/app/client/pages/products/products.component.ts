@@ -34,11 +34,10 @@ export class ProductsComponent implements OnInit {
       next: (result) => {
         this.allProducts = result;
         this.filteredProducts = this.allProducts;
-        console.log(this.allProducts);
         return result;
       },
       error: (error) => {
-        console.log(<any>error);
+        console.error(<any>error);
         return error;
       }
     })

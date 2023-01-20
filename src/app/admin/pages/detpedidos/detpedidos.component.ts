@@ -62,7 +62,6 @@ export class DetpedidosComponent implements OnInit {
     this.orderService.deleteOrder(orderId).subscribe({
       next: (result) => {
         this.router.navigate(['detpedidos']);
-        console.log("Order " + orderId + " successfully deleted.");
       },
       error: (error) => {
         window.alert(error.error.error);
@@ -113,7 +112,6 @@ export class DetpedidosComponent implements OnInit {
   }
 
   updateOrder(): void {
-    console.log(this.order);
     this.orderService.updateOrder(this.order).subscribe({
       next: (result) => {
         this.order = result as Order;

@@ -150,9 +150,7 @@ export class DetdescuentosComponent implements OnInit {
 
   deleteSale(saleId: number): void {
     this.seasonalSaleService.deleteSeasonalSale(saleId).subscribe({
-      next: (result) => {
-        console.log("Sale " + saleId + " successfully deleted.");
-      },
+      next: (result) => { },
       error: (error) => {
         window.alert(error.error.error);
         console.error(error);

@@ -78,7 +78,7 @@ export class ProductDetailsComponent implements OnInit {
         return result;
       },
       error: (error) => {
-        console.log(<any>error);
+        console.error(<any>error);
         return error;
       }
     })
@@ -89,7 +89,7 @@ export class ProductDetailsComponent implements OnInit {
         return result;
       },
       error: (error) => {
-        console.log(<any>error);
+        console.error(<any>error);
         return error;
       }
     })
@@ -137,7 +137,6 @@ export class ProductDetailsComponent implements OnInit {
       }
       return this.selectedItem;
     } else {
-      console.log(`No selected item. SelColor:${this.selectedColor} SelSize:${this.selectedSize}`);
       return null;
     }
   }
@@ -161,7 +160,6 @@ export class ProductDetailsComponent implements OnInit {
     let priceWithDiscount = this.getItemPriceWithDiscount(this.selectedItem);
     if (this.selectedItem.id !== undefined){
       newLine = new OrderLine(0,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
-      console.log(newLine)
     }
     let newOrder = new Order (Number(sessionStorage.getItem("customerId")), priceWithDiscount, '', 'Creado', '', [newLine])
     this._orderService.createOrder(newOrder).subscribe({
@@ -181,7 +179,6 @@ export class ProductDetailsComponent implements OnInit {
     if (this.selectedItem.id !== undefined){
       if (order.id == undefined) return
       newLine = new OrderLine(order.id,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
-      console.log(newLine)
       if (order.lines !== undefined){
         order.lines.push(newLine);
         order.amount = Number(order.amount) + priceWithDiscount;
@@ -218,14 +215,11 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   updateExistingOrder(order: Order){
-    console.log(order);
     if (this.selectedItem !== undefined){
       let orderHasItem = false;
       let itemInLine: OrderLine = <OrderLine>{};
       if (order.lines !== undefined){
         for (let line of order.lines){
-          console.log(this.selectedItem.id)
-          console.log(line.itemId)
           if(this.selectedItem.id === line.itemId){
             itemInLine = line;
             orderHasItem = true;
@@ -257,8 +251,6 @@ export class ProductDetailsComponent implements OnInit {
       } else {
         alert("Registrate para empezar a comprar.")
       }
-    } else {
-      console.log('no item selected')
     }
   }
 
