@@ -16,8 +16,8 @@ export class DetdescuentosComponent implements OnInit {
   public seasonalSale = new SeasonalSale('', '', '', '', false, '');
   public productItemsWithoutDiscountMap = new Map<number, ProductItem>();
   public defaultDiscountPct = 15;
-  public disableEdit = true;
-  public canBeCanceled = true;
+  public disableEdit = false;
+  public canBeCanceled = false;
 
   private isEditing = false;
   private lastValidFromDateTime = "";
@@ -133,6 +133,7 @@ export class DetdescuentosComponent implements OnInit {
 
   onNewSaleButtonClick(event: Event): void {
     this.router.navigate(['detdescuentos']);
+    window.location.reload();
   }
 
   onDeleteSaleButtonClick(event: Event): void {

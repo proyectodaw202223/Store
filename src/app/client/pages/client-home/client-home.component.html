@@ -3,7 +3,7 @@
     <div class="highlighted_products row flex overflow-hidden justify-content-center">
         <div class="highlighted_prod_preview" *ngFor="let product of newProducts">
             <a class="highlighted_prod_link" routerLink="products/product/{{product.id}}">
-                <img *ngIf="product.productItems !== undefined && product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
+                <img *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined && product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
                 <p class="highlighted_prod_name">{{product.name}}</p>
                 <p class="highlighted_prod_price">{{product.price}} €</p>
             </a>
@@ -20,7 +20,7 @@
     <div class="highlighted_products row flex overflow-hidden justify-content-center">
         <div class="highlighted_prod_preview" *ngFor="let product of productsForSale">
             <a class="highlighted_prod_link" routerLink="products/product/{{product.id}}">
-                <img *ngIf="product.productItems !== undefined && product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
+                <img *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined && product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
                 <p class="highlighted_prod_name">{{product.name}}</p>
                 <p class="highlighted_prod_price">{{product.price}} €</p>
             </a>

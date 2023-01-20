@@ -7,6 +7,8 @@
               <tr>
                 <th></th> <!-- Product image column -->
                 <th>Producto</th>
+                <th>Color</th>
+                <th>Talla</th>
                 <th>Cantidad</th>
                 <th>Importe</th>
               </tr>
@@ -17,6 +19,8 @@
                         <img class="order-table-image" src="{{ apiStorage }}{{ line.productItem.images[0].imagePath }}">
                       </td>
                     <td>{{ line.productItem?.product?.name }}</td>
+                    <td><div class ="color-selector-option" style.background-color = {{line.productItem?.color}}></div></td>
+                    <td>{{ line.productItem?.size }}</td>
                     <td>{{ line.quantity }}</td>
                     <td>{{ line.amount }}</td>
                   </tr>
@@ -38,8 +42,8 @@
         </div>
         <h2>ESTADO</h2>
         <div class="row">
-            <div class="col-6">
-                <span class="bold">{{order.status}}</span>
+            <div class="col order-status">
+                <span>{{order.status.toUpperCase()}}</span>
             </div>
         </div>
     </div>
