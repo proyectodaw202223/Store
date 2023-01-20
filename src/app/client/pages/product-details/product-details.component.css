@@ -17,10 +17,34 @@
     width: 100%;
 }
 
+.md-opacity{
+    opacity: .7;
+}
+
+.tachado{
+    position: relative;
+}
+
+.tachado::after{
+    content: '';
+    border-bottom: 3px solid #AD0824;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+}
+
 .prod-data-price{
     text-align: right;
     color: #AD0824;
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }
+
+.highlighted_prod_link {
+    cursor: pointer; 
+  }
 
 .prod-data-description{
     display: flex;

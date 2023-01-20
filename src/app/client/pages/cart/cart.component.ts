@@ -29,11 +29,12 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('customerId') == null)
-      this.router.navigate(['']);
-    
-    this.getCustomer(Number(sessionStorage.getItem('customerId')));
-    this.getNewProducts();
+    if (sessionStorage.getItem('customerId') == null){
+      this.router.navigate(['/']);
+    } else {
+      this.getCustomer(Number(sessionStorage.getItem('customerId')));
+      this.getNewProducts();
+    }
   }
 
   getCustomer(customerId: number): void {
@@ -146,6 +147,18 @@ export class CartComponent implements OnInit {
   onPayButtonClick(event: Event): void {
     if (this.customer.orders === undefined)
       return;
+    
+    if (
+      this.customer.lastName === null ||
+      this.customer.streetAddress === null ||
+      this.customer.zipCode === null ||
+      this.customer.province === null ||
+      this.customer.city === null ||
+      this.customer.country === null 
+      ){
+        window.alert("Hay datos de cliente necesarios a modificar.");
+        window.location.replace('/account');
+      }
 
     this.customer.orders[0].paymentDateTime = this.formatDate(new Date());
     this.customer.orders[0].status = OrderStatus.PAID;
@@ -153,6 +166,7 @@ export class CartComponent implements OnInit {
     this.orderService.updateOrder(this.customer.orders[0]).subscribe({
       next: (result) => {
         window.alert("Transacción completada exitosamente.");
+        window.location.replace('/orderdetails/' + this.customer.orders![0].id);
         this.customer.orders = [];
       },
       error: (error) => {

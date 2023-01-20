@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
 import { environment } from 'src/environments/environment';
+import { Order } from 'src/app/models/order.model';
 
 
 @Component({
@@ -49,6 +50,8 @@ export class MyAccountComponent implements OnInit {
     this.customerService.updateCustomer(this.customer).subscribe({
       next: (result) => {
         this.customer = result as Customer;
+        sessionStorage.setItem('customerName', result.firstName);
+        window.location.reload();
         alert("Cliente actualizado correctamente");
         this.ngOnInit();
       },
@@ -68,6 +71,12 @@ export class MyAccountComponent implements OnInit {
     document.getElementById("address-content")!.classList.add('disabled');
     this.onEdit = false;
     this.updateCustomer();
+  }
+
+  filterOutCreadoOrders():Order[] | undefined{
+    if(this.customer.orders === undefined) return
+
+    return this.customer.orders.filter(p => p.status !== 'Creado')
   }
   
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 import { ProductItemImage } from 'src/app/models/productItemImage.model';
 import { ProductService } from 'src/app/services/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ProductItem } from 'src/app/models/productItem.model';
 import { OrderService } from 'src/app/services/order.service';
@@ -38,7 +38,7 @@ export class ProductDetailsComponent implements OnInit {
     private _productService: ProductService,
     private _orderService: OrderService,
     private _customerService: CustomerService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -93,7 +93,6 @@ export class ProductDetailsComponent implements OnInit {
         return error;
       }
     })
-
   }
 
   //Slider functionality
@@ -147,8 +146,6 @@ export class ProductDetailsComponent implements OnInit {
     return (sessionStorage.getItem("customerName") !== null);
   }
 
-  // NUEVOS METODOS
-
   getItemPriceWithDiscount(productItem: ProductItem): number{
     if (this.selectedItem !== undefined){
       let discount = 0;
@@ -160,14 +157,6 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   createNewOrder(){
-    /* if (this.selectedItem !== undefined){
-      let discount = 0;
-      let newLine: OrderLine = <OrderLine>{};
-      if(this.selectedItem.sale !== undefined && this.selectedItem.sale !== null && this.selectedItem.sale.lines !== undefined){
-        discount = this.selectedItem.sale.lines[0].discountPercentage / 100;
-        console.log(`descuento es ${discount}`)
-      } 
-    let priceWithDiscount = this.product.price * (1 - discount); */
     let newLine: OrderLine = <OrderLine>{};
     let priceWithDiscount = this.getItemPriceWithDiscount(this.selectedItem);
     if (this.selectedItem.id !== undefined){
@@ -187,15 +176,6 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addOrderLine(order:Order){
-    /* if (this.selectedItem !== undefined){
-      let discount = 0;
-      let newLine: OrderLine;
-      if(this.selectedItem.sale !== undefined && this.selectedItem.sale !== null && this.selectedItem.sale.lines !== undefined){
-        discount = this.selectedItem.sale.lines[0].discountPercentage / 100;
-        console.log(`descuento es ${discount}`)
-      } else {
-        console.log("el descuento es cero")
-      } */
     let newLine: OrderLine = <OrderLine>{};
     let priceWithDiscount = this.getItemPriceWithDiscount(this.selectedItem);
     if (this.selectedItem.id !== undefined){
@@ -280,6 +260,13 @@ export class ProductDetailsComponent implements OnInit {
     } else {
       console.log('no item selected')
     }
+  }
+
+  redirectProduct(productId: number | undefined): void {
+    if (productId === undefined)
+      return;
+
+    window.location.replace('/products/product/' + productId);
   }
 
 }
