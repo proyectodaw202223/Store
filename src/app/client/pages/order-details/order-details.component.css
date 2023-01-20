@@ -27,6 +27,17 @@
   .order-table td, .order-table th { padding: 10px 0px; }
   
   .order-table td input { width: 100px; }
+
+  .color-selector-option{
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0 .5em;
+    border: 1.5px solid black;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   
   .subtotal-wrapper {
     display: flex;
@@ -84,5 +95,13 @@
   
   .highlighted_products_container {
     margin-top: 50px;
+  }
+
+  .order-status{
+    color: #F8C630;
+    font-size: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   

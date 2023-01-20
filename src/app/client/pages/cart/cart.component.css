@@ -28,6 +28,17 @@
 
 .order-table td input { width: 100px; }
 
+.color-selector-option{
+  width: 1.5em;
+  height: 1.5em;
+  margin: 0 .5em;
+  border: 1.5px solid black;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .subtotal-wrapper {
   display: flex;
   width: 100%;
@@ -47,6 +58,11 @@
 .bold { font-weight: bold; }
 
 .address-content span { margin: 2px 0px; }
+
+.needed-data{
+  color: #AD0824;
+  opacity: 0.5;
+}
 
 .delete-line-button {
   border-width: 0px;

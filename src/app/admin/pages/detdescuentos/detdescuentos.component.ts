@@ -136,6 +136,7 @@ export class DetdescuentosComponent implements OnInit {
 
   onNewSaleButtonClick(event: Event): void {
     this.router.navigate(['detdescuentos']);
+    window.location.reload();
   }
 
   onDeleteSaleButtonClick(event: Event): void {

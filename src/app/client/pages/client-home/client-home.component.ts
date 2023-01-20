@@ -37,6 +37,7 @@ export class ClientHomeComponent implements OnInit {
     this._productService.getProductsForSale(5).subscribe({
       next: (result) => {
         this.productsForSale = result;
+        console.log(result)
         return result;
       },
       error: (error) => {

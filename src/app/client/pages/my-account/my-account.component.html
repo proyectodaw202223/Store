@@ -37,7 +37,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let order of customer.orders">
+              <tr *ngFor="let order of filterOutCreadoOrders()">
                 <td>{{ order.created_at?.substr(0,10) }}</td>
                 <td>{{ order.id }}</td>
                 <td>{{ order.amount }}</td>
