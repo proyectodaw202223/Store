@@ -96,7 +96,7 @@
         <td><a [routerLink]="['/detproductos/' + line.productItem?.product?.id]">{{ line.productItem?.product?.name }}</a></td>
         <td><a [routerLink]="['/detitem/item/' + line.itemId]">{{ ('000000' + line.itemId).slice(-6) }}</a></td>
         <td>{{ line.productItem?.product?.price | currency : 'EUR' : '' }} €</td>
-        <td>{{ line.productItem?.color }}</td>
+        <td><input type="color" name="color" value="{{ line.productItem?.color }}" disabled></td>
         <td>{{ line.productItem?.size }}</td>
         <td>{{ line.productItem?.stock }}</td>
         <td><input type="number" name="discount" min="1" max="100" [(ngModel)]="line.discountPercentage" [disabled]="disableEdit"></td>
@@ -134,7 +134,7 @@
         <td><a [routerLink]="['/detproductos/' + item.value.product?.id]">{{ item.value.product?.name }}</a></td>
         <td><a [routerLink]="['/detitem/item/' + item.value.id]">{{ ('000000' + item.value.id).slice(-6) }}</a></td>
         <td>{{ item.value.product?.price | currency : 'EUR' : '' }} €</td>
-        <td>{{ item.value.color }}</td>
+        <td><input type="color" name="color" value="{{ item.value.color }}" disabled></td>
         <td>{{ item.value.size }}</td>
         <td>{{ item.value.stock }}</td>
       </tr>

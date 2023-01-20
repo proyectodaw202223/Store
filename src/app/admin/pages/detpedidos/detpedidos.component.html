@@ -95,7 +95,7 @@
         <td></td>
         <td><a [routerLink]="['/detproductos/' + line.productItem?.productId]">{{ line.productItem?.product?.name }}</a></td>
         <td><a [routerLink]="['/detitem/item/' + line.productItem?.id]">{{ ('000000' + line.productItem?.id).slice(-6) }}</a></td>
-        <td>{{ line.productItem?.color }}</td>
+        <td><input type="color" name="color" value="{{ line.productItem?.color }}" disabled></td>
         <td>{{ line.productItem?.size }}</td>
         <td>{{ line.quantity }}</td>
         <td>{{ line.productItem?.product?.price | currency : 'EUR' : '' }} €</td>

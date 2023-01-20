@@ -72,10 +72,6 @@ export class DetdescuentosComponent implements OnInit {
 
     this.disableEdit = (this.seasonalSale.isCanceled || isSaleStarted) ? true : false;
     this.canBeCanceled = !isSaleFinished && !this.seasonalSale.isCanceled;
-
-    console.log(isSaleFinished);
-    console.log(this.seasonalSale.isCanceled);
-    console.log(this.canBeCanceled);
   }
 
   getProductItems(): void {
@@ -154,9 +150,7 @@ export class DetdescuentosComponent implements OnInit {
 
   deleteSale(saleId: number): void {
     this.seasonalSaleService.deleteSeasonalSale(saleId).subscribe({
-      next: (result) => {
-        console.log("Sale " + saleId + " successfully deleted.");
-      },
+      next: (result) => { },
       error: (error) => {
         window.alert(error.error.error);
         console.error(error);

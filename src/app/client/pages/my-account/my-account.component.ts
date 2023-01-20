@@ -36,17 +36,15 @@ export class MyAccountComponent implements OnInit {
     this.customerService.getCustomerOrdersByCustomerId(id).subscribe({
         next: (result: Customer) => {
           this.customer = result as Customer;
-          console.log(this.customer);
         },
         error: (error) => {
           window.alert(error.error.error);
-          console.log(error);
+          console.error(error);
         }
     });
   }
 
   updateCustomer(): void {
-    console.log(this.customer);
     this.customerService.updateCustomer(this.customer).subscribe({
       next: (result) => {
         this.customer = result as Customer;
@@ -57,7 +55,7 @@ export class MyAccountComponent implements OnInit {
       },
       error: (error) => {
         window.alert(error.error.error);
-        console.log(error);
+        console.error(error);
       }
     });
   }

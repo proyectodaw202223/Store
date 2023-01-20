@@ -68,9 +68,7 @@ export class DetproductosComponent implements OnInit {
 
   deleteProduct(productId: number): void {
     this.productService.deleteProduct(productId).subscribe({
-      next: (result) => {
-        console.log("Product " + productId + " successfully deleted.");
-      },
+      next: (result) => { },
       error: (error) => {
         window.alert(error.error.error);
         console.error(error);

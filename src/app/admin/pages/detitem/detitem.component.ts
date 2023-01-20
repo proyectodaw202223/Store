@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DetitemComponent implements OnInit {
 
-  public item = new ProductItem(0, '', 0, '');
+  public item = new ProductItem(0, '#000', 0, '');
   public apiStorage: string = environment.apiStorage;
   private isEditing = false;
 
@@ -59,7 +59,7 @@ export class DetitemComponent implements OnInit {
         this.item.product = result as Product;
         this.item.productId = productId;
         this.item.id = undefined;
-        this.item.color = '';
+        this.item.color = '#000';
         this.item.size = '';
         this.item.stock = 0;
         this.item.images = [];
@@ -100,7 +100,6 @@ export class DetitemComponent implements OnInit {
           this.router.navigate(['detitem/product/', this.item.productId]);
         else
           this.getNewItem();
-        console.log("Product item " + itemId + " successfully deleted.");
       },
       error: (error) => {
         window.alert(error.error.error);

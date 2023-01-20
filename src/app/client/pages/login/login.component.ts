@@ -29,13 +29,12 @@ export class LoginComponent implements OnInit {
 
       this._customerService.createCustomer(customer).subscribe({
         next: (result) => {
-          console.log("sign in correcto");
           this.setSessionStorage(result);
           this.loginDialogRef.close(result);
           return result;
         },
         error: (error) => {
-          console.log(<any>error);
+          console.error(<any>error);
           return error;
         }
       })
@@ -43,12 +42,11 @@ export class LoginComponent implements OnInit {
       let customer = new Customer('', this.email, this.password, '', '', '', '', '', '', '');
       this._customerService.getCustomerByEmailAndPassword(customer).subscribe({
         next: (result) => {
-          console.log("login correcto");
           this.setSessionStorage(result);
           this.loginDialogRef.close(result); 
         },
         error: (error) => {
-          console.log(<any>error);
+          console.error(<any>error);
         }
       })
     }

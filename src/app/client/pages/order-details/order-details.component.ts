@@ -49,7 +49,7 @@ export class OrderDetailsComponent implements OnInit {
       },
       error: (error) => {
         window.alert(error.error.error);
-        console.log(error);
+        console.error(error);
       }
     });
   }
@@ -58,11 +58,10 @@ export class OrderDetailsComponent implements OnInit {
     this.customerService.getCustomerOrdersByCustomerId(id).subscribe({
         next: (result: Customer) => {
           this.customer = result as Customer;
-          console.log(this.customer);
         },
         error: (error) => {
           window.alert(error.error.error);
-          console.log(error);
+          console.error(error);
         }
     });
   }

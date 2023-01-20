@@ -99,7 +99,6 @@ export class PedidosComponent implements OnInit {
       next: (result) => {
         this.ordersMap.delete(orderId);
         this.filteredOrdersMap.delete(orderId);
-        console.log("Order " + orderId + " successfully deleted.");
       },
       error: (error) => {
         window.alert(error.error.error);
