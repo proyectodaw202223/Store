@@ -72,10 +72,6 @@ export class DetdescuentosComponent implements OnInit {
 
     this.disableEdit = (this.seasonalSale.isCanceled || isSaleStarted) ? true : false;
     this.canBeCanceled = !isSaleFinished && !this.seasonalSale.isCanceled;
-
-    console.log(isSaleFinished);
-    console.log(this.seasonalSale.isCanceled);
-    console.log(this.canBeCanceled);
   }
 
   getProductItems(): void {
