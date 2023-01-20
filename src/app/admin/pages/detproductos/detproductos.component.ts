@@ -47,7 +47,10 @@ export class DetproductosComponent implements OnInit {
   }
 
   onNewProductButtonClick(event: Event): void {
-    this.router.navigate(['detproductos']);
+    if (this.isEditing)
+      this.router.navigate(['detproductos']);
+    else
+      window.location.reload();
   }
 
   onDeleteProductButtonClick(event: Event): void {
@@ -57,7 +60,10 @@ export class DetproductosComponent implements OnInit {
     if (this.product.id !== undefined)
       this.deleteProduct(this.product.id);
     
-    this.router.navigate(['detproductos']);
+    if (this.isEditing)
+      this.router.navigate(['detproductos']);
+    else
+      window.location.reload();
   }
 
   deleteProduct(productId: number): void {
@@ -93,6 +99,11 @@ export class DetproductosComponent implements OnInit {
       return false;
     }
 
+    if (this.product.price < 0) {
+      window.alert("El precio del producto debe ser superior a 0.");
+      return false;
+    }
+
     if (!this.product.category) {
       window.alert("El campo categoría es obligatorio.");
       return false;
@@ -110,8 +121,8 @@ export class DetproductosComponent implements OnInit {
     this.productService.createProduct(this.product).subscribe({
       next: (result) => {
         this.product = result as Product;
-        this.isEditing = true;
         window.alert("Producto creado correctamente.");
+        this.router.navigate(['detproductos/' + this.product.id]);
       },
       error: (error) => {
         window.alert(error.error.error);

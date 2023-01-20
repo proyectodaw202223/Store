@@ -125,17 +125,4 @@ export class DetpedidosComponent implements OnInit {
       }
     });
   }
-
-  onSelectAllItemsCheckboxChange(event: Event): void {
-    var selectAllCheckbox = event.target as HTMLInputElement;
-    var checkboxCollection = document.getElementsByClassName('select-item-checkbox') as HTMLCollectionOf<HTMLInputElement>;
-    
-    for (let i = 0; i < checkboxCollection.length; i++) {
-      let checkbox = checkboxCollection.item(i);
-
-      if (checkbox != null) {
-        checkbox.checked = selectAllCheckbox.checked;
-      }
-    }
-  }
 }

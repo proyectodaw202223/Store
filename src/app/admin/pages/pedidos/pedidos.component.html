@@ -5,7 +5,7 @@
       <div class="action-panel-filter-wrapper">
         <label class="action-panel-filter-label">Estado</label>
         <select class="action-panel-filter" id="status-filter" (change)="onFilterChange($event)">
-            <option value=""></option>
+            <option value="">Todos</option>
             <option value="Pagado">Pagado</option>
             <option value="En Gestión">En Gestión</option>
             <option value="Enviado">Enviado</option>
@@ -35,7 +35,7 @@
         <td><input type="checkbox" value="{{ order.value.id }}" class="select-order-checkbox"></td>
         <td><a [routerLink]="['/detpedidos/' + order.value.id]">{{ ("000000" + order.value.id).slice(-6) }}</a></td>
         <td>{{ order.value.status }}</td>
-        <td>{{ order.value.amount }}</td>
+        <td>{{ order.value.amount | currency : 'EUR' : ''}} €</td>
         <td>{{ order.value.created_at?.substr(0,10) }}</td>
         <td>{{ order.value.customer?.lastName }}, {{ order.value.customer?.firstName }}</td>
         <td>{{ order.value.customer?.streetAddress }}</td>

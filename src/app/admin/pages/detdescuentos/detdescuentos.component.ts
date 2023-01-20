@@ -16,8 +16,8 @@ export class DetdescuentosComponent implements OnInit {
   public seasonalSale = new SeasonalSale('', '', '', '', false, '');
   public productItemsWithoutDiscountMap = new Map<number, ProductItem>();
   public defaultDiscountPct = 15;
-  public disableEdit = true;
-  public canBeCanceled = true;
+  public disableEdit = false;
+  public canBeCanceled = false;
 
   private isEditing = false;
   private lastValidFromDateTime = "";
@@ -37,6 +37,9 @@ export class DetdescuentosComponent implements OnInit {
       
     this.activatedRoute.params.subscribe((params) => {
       this.isEditing = (params['id']) ? true : false;
+
+      this.disableEdit = false;
+      this.canBeCanceled = false;
 
       if (this.isEditing) {
         this.getSeasonalSale(params['id']);
@@ -142,7 +145,10 @@ export class DetdescuentosComponent implements OnInit {
     if (this.seasonalSale.id !== undefined)
       this.deleteSale(this.seasonalSale.id);
 
-    this.router.navigate(['detdescuentos']);
+    if (this.isEditing)
+      this.router.navigate(['detdescuentos']);
+    else
+      window.location.reload();
   }
 
   deleteSale(saleId: number): void {
@@ -183,6 +189,15 @@ export class DetdescuentosComponent implements OnInit {
       return false;
     }
 
+    if (this.seasonalSale.lines !== undefined) {
+      for (let line of this.seasonalSale.lines) {
+        if (line.discountPercentage <= 0 || line.discountPercentage > 100) {
+          window.alert("El porcentaje de descuento debe ser mayor que 0 y menor que 100.");
+          return false;
+        }
+      }
+    }
+
     return true;
   }
 
@@ -190,8 +205,8 @@ export class DetdescuentosComponent implements OnInit {
     this.seasonalSaleService.createSeasonalSale(this.seasonalSale).subscribe({
       next: (result) => {
         this.seasonalSale = result as SeasonalSale;
-        this.getDisableEdit();
         window.alert("Rebaja creada correctamente.");
+        this.router.navigate(['detdescuentos/' + this.seasonalSale.id]);
       },
       error: (error) => {
         window.alert(error.error.error);
@@ -344,10 +359,16 @@ export class DetdescuentosComponent implements OnInit {
   onValidFromFocusout(event: Event): void {
     var validFromDateTime = new Date(this.seasonalSale.validFromDateTime);
     var validToDateTime = new Date(this.seasonalSale.validToDateTime);
+    var currentDateTime = new Date();
 
     if (validFromDateTime >= validToDateTime) {
       this.seasonalSale.validFromDateTime = this.lastValidFromDateTime;
       window.alert("La fecha 'Válido desde' no puede ser posterior a la fecha 'Válido hasta'.");
+    }
+
+    if (validFromDateTime <= currentDateTime) {
+      this.seasonalSale.validFromDateTime = this.lastValidFromDateTime;
+      window.alert("La fecha 'Válido desde' no puede ser anterior a la fecha actual.");
     }
   }
 
@@ -358,10 +379,11 @@ export class DetdescuentosComponent implements OnInit {
   onValidToFocusout(event: Event): void {
     var validFromDateTime = new Date(this.seasonalSale.validFromDateTime);
     var validToDateTime = new Date(this.seasonalSale.validToDateTime);
+    var currentDateTime = new Date();
 
-    if (validToDateTime <= validFromDateTime) {
+    if (validToDateTime <= validFromDateTime || validToDateTime <= currentDateTime) {
       this.seasonalSale.validToDateTime = this.lastValidToDateTime;
-      window.alert("La fecha 'Válido hasta' no puede ser anterior a la fecha 'Válido desde'.");
+      window.alert("La fecha 'Válido hasta' no puede ser anterior a la fecha 'Válido desde' o la fecha actual.");
     }
   }
 

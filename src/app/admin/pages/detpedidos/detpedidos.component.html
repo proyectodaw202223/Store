@@ -22,7 +22,6 @@
           <div>
             <label class="form-label">Estado:</label>
             <select name="status" [(ngModel)]="order.status">
-              <option value=""></option>
               <option value="Pagado">Pagado</option>
               <option value="En Gestión">En Gestión</option>
               <option value="Enviado">Enviado</option>
@@ -80,8 +79,11 @@
   <table>
     <thead>
       <tr>
-        <td><input type="checkbox" (change)="onSelectAllItemsCheckboxChange($event)"></td>
+        <th></th>
         <th>Producto</th>
+        <th>Item</th>
+        <th>Color</th>
+        <th>Talla</th>
         <th>Cantidad</th>
         <th>Precio</th>
         <th>Precio con Descuento</th>
@@ -90,12 +92,15 @@
     </thead>
     <tbody>
       <tr *ngFor="let line of order.lines">
-        <td><input type="checkbox" value="{{ line.id }}" class="select-item-checkbox"></td>
-        <td>{{ line.productItem?.product?.name }}</td>
+        <td></td>
+        <td><a [routerLink]="['/detproductos/' + line.productItem?.productId]">{{ line.productItem?.product?.name }}</a></td>
+        <td><a [routerLink]="['/detitem/item/' + line.productItem?.id]">{{ ('000000' + line.productItem?.id).slice(-6) }}</a></td>
+        <td>{{ line.productItem?.color }}</td>
+        <td>{{ line.productItem?.size }}</td>
         <td>{{ line.quantity }}</td>
-        <td>{{ line.productItem?.product?.price }}</td>
-        <td>{{ line.priceWithDiscount }}</td>
-        <td>{{ line.amount }}</td>
+        <td>{{ line.productItem?.product?.price | currency : 'EUR' : '' }} €</td>
+        <td>{{ line.priceWithDiscount | currency : 'EUR' : '' }} €</td>
+        <td>{{ line.amount | currency : 'EUR' : '' }} €</td>
       </tr>
     </tbody>
   </table>
