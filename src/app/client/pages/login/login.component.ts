@@ -24,14 +24,9 @@ export class LoginComponent implements OnInit {
   }
 
   login(email: string, password: string, name?: string){
-
     if (this.newUser){
       let customer = new Customer(this.name, this.email, this.password, '', '', '', '', '', '', '');
-      let confirmedPassword = <HTMLInputElement>document.getElementById("passwordConfirm");
-      if (this.password !== this.passwordConfirm){
-        confirmedPassword.setCustomValidity('parece que las contraseñas no coinciden');
-        return;
-      }
+
       this._customerService.createCustomer(customer).subscribe({
         next: (result) => {
           console.log("sign in correcto");
@@ -63,5 +58,14 @@ export class LoginComponent implements OnInit {
   setSessionStorage(loggedInCustomer: Customer){
     sessionStorage.setItem('customerName', loggedInCustomer.firstName);
     loggedInCustomer.id? sessionStorage.setItem('customerId', loggedInCustomer.id.toString()) : null;
+  }
+
+  validatePasswordConfirm() {
+    let confirmedPassword = <HTMLInputElement>document.getElementById("passwordConfirm");
+
+    if (this.password !== this.passwordConfirm)
+      confirmedPassword.setCustomValidity('parece que las contraseñas no coinciden');
+    else
+      confirmedPassword.setCustomValidity('');
   }
 }
