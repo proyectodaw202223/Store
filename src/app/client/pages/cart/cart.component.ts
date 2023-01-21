@@ -45,6 +45,12 @@ export class CartComponent implements OnInit {
     this.customerService.getCustomerAndCreatedOrderByCustomerId(customerId).subscribe({
       next: (result) => {
         this.customer = result as Customer;
+        this.customer!.orders![0]!.lines!.forEach(line => {
+          if (!this.checkStock(line)){
+            this.onStock = false;
+            return;
+          }   
+        })
       },
       error: (error) => {
         window.alert(error.error.error);
@@ -83,9 +89,8 @@ export class CartComponent implements OnInit {
     var orderLine = this.customer.orders[0].lines?.filter(
       (line) => line.id == parseInt(lineIdInput.value))[0] as OrderLine;
     
-    if (parseInt(lineQuantityInput.value) <= 0) {
+    if (parseInt(lineQuantityInput.value) <= 0 || lineQuantityInput.value === '') {
       orderLine.quantity = 1;
-      return;
     }
 
     if (!this.checkStock(line)){
@@ -198,7 +203,6 @@ export class CartComponent implements OnInit {
 
   updateStock(order:Order){
     for (let line of order.lines!){
-      console.log("bucle")
       let quantity = line.quantity;
       let item = line.productItem;
       item!.stock -= quantity;

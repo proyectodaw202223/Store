@@ -122,6 +122,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   colorSelected(selectedColor:string): void{
+    console.log(this.selectedItem)
     this.selectedColorSizes = this.productColorSize[selectedColor];
     this.selectedColor = selectedColor;
     this.selectedSize = this.selectedColorSizes[0];
@@ -129,6 +130,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   sizeSelected(selectedSize:string): void{
+    console.log(this.selectedItem)
     this.selectedSize = selectedSize;
     this.selectItem();
   }

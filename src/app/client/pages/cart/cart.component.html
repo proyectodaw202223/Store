@@ -27,7 +27,7 @@
             <td><div class ="color-selector-option" style.background-color = {{line.productItem?.color}}></div></td>
             <td>{{ line.productItem?.size }}</td>
             <td *ngIf="line.productItem !== undefined">
-              <input type="number" oninput="this.value=(parseInt(this.value))" min="1" [(ngModel)]="line.quantity" (change)="onLineQuantityChange($event,line)">
+              <input type="number" oninput="this.value=(parseInt(this.value))" min="1" default="1" [(ngModel)]="line.quantity" (change)="onLineQuantityChange($event,line)">
               <input type="hidden" value="{{ line.id }}">
             </td>
             <td *ngIf="line.productItem !== undefined && line.productItem.stock !== undefined && line.quantity > line.productItem.stock; else onStock" style="color:red" >
