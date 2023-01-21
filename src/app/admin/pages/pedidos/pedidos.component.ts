@@ -44,19 +44,6 @@ export class PedidosComponent implements OnInit {
     });
   }
 
-  onSelectAllOrdersCheckboxChange(event: Event) {
-    var selectAllCheckbox = event.target as HTMLInputElement;
-    var checkboxCollection = document.getElementsByClassName('select-order-checkbox') as HTMLCollectionOf<HTMLInputElement>;
-    
-    for (let i = 0; i < checkboxCollection.length; i++) {
-      let checkbox = checkboxCollection.item(i);
-
-      if (checkbox != null) {
-        checkbox.checked = selectAllCheckbox.checked;
-      }
-    }
-  }
-
   onFilterChange(event: Event): void {
     var statusFilter = document.querySelector("#status-filter") as HTMLSelectElement;
     var status = statusFilter.selectedOptions[0].value;
