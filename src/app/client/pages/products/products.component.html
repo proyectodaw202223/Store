@@ -15,8 +15,10 @@
     <section id="productos" class="col-8 col-md-10 d-flex flex-row flex-wrap">
         <div class="prod_preview" *ngFor="let product of filteredProducts">
             <a class="prod_link" routerLink="product/{{product.id}}">
-                <img *ngIf="product.productItems !== undefined && product.productItems[0].images !== undefined"
+                <img *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined && product.productItems[0].images !== undefined && product.productItems[0].images[0] !== undefined"
                      src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
+                <img *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined && product.productItems[0].images !== undefined && product.productItems[0].images[0] === undefined"
+                    src="../../../../assets/images/default-image.jpeg">
                 <p class="prod_name">{{product.name}}</p>
                 <p *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined" class="prod_price">{{getItemPriceWithDiscount(product.productItems[0], product).toFixed(2)}}€</p>
             </a>

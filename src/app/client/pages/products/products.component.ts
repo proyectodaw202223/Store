@@ -35,6 +35,7 @@ export class ProductsComponent implements OnInit {
       next: (result) => {
         this.allProducts = result;
         this.filteredProducts = this.allProducts;
+        this.filterProducts();
         return result;
       },
       error: (error) => {
@@ -98,6 +99,8 @@ export class ProductsComponent implements OnInit {
         this.filteredProducts = this.allProducts;
       }
     
+    this.filteredProducts = this.filteredProducts.filter((product) => product.productItems!.length > 0);
+
     return this.filteredProducts;
   }
 

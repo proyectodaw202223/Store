@@ -54,9 +54,11 @@ export class CartComponent implements OnInit {
   }
 
   getNewProducts(): void {
-    this.productService.getNewProducts(5).subscribe({
+    this.productService.getNewProducts(0).subscribe({
       next: (result) => {
         this.newProducts = result as Array<Product>;
+        this.newProducts = this.newProducts.filter((product) => product.productItems!.length > 0);
+        this.newProducts = this.newProducts.slice(0, 5);
       },
       error: (error) => {
         window.alert(error.error.error);

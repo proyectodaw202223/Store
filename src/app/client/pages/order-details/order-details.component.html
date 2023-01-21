@@ -15,9 +15,12 @@
             </thead>
             <tbody>
                 <tr *ngFor="let line of order.lines">
-                  <td *ngIf="line.productItem !== undefined && line.productItem.images !== undefined">
-                      <img class="order-table-image" src="{{ apiStorage }}{{ line.productItem.images[0].imagePath }}">
-                    </td>
+                  <td *ngIf="line.productItem !== undefined && line.productItem.images !== undefined && line.productItem.images[0] !== undefined">
+                    <img class="order-table-image" src="{{ apiStorage }}{{ line.productItem.images[0].imagePath }}">
+                  </td>
+                  <td *ngIf="line.productItem !== undefined && line.productItem.images !== undefined && line.productItem.images[0] === undefined">
+                    <img class="order-table-image" src="../../../../assets/images/default-image.jpeg">
+                  </td>
                   <td>{{ line.productItem?.product?.name }}</td>
                   <td><div class ="color-selector-option" style.background-color = {{line.productItem?.color}}></div></td>
                   <td>{{ line.productItem?.size }}</td>

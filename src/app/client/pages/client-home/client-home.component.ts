@@ -24,9 +24,11 @@ export class ClientHomeComponent implements OnInit {
 
   ngOnInit(): void { 
 
-    this._productService.getNewProducts(5).subscribe({
+    this._productService.getNewProducts(0).subscribe({
       next: (result) => {
         this.newProducts = result;
+        this.newProducts = this.newProducts.filter((product) => product.productItems!.length > 0);
+        this.newProducts = this.newProducts.slice(0, 5);
         return result;
       },
       error: (error) => {
