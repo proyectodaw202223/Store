@@ -77,6 +77,8 @@ export class DetdescuentosComponent implements OnInit {
   getProductItems(): void {
     this.productItemService.getAllItems().subscribe({
       next: (result: Array<ProductItem>) => {
+        result = result.filter((item) => item.sale === undefined || item.sale == null);
+
         this.productItemsWithoutDiscountMap = new Map(
           result.map((item) => [(item.id === undefined) ? 0 : item.id, item])
         );
@@ -131,8 +133,10 @@ export class DetdescuentosComponent implements OnInit {
   }
 
   onNewSaleButtonClick(event: Event): void {
-    this.router.navigate(['detdescuentos']);
-    window.location.reload();
+    if (this.isEditing)
+      this.router.navigate(['detdescuentos']);
+    else
+      window.location.reload();
   }
 
   onDeleteSaleButtonClick(event: Event): void {
