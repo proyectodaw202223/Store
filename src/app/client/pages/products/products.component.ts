@@ -104,14 +104,15 @@ export class ProductsComponent implements OnInit {
     return this.filteredProducts;
   }
 
-  getItemPriceWithDiscount(productItem: ProductItem, product: Product): number{
-    if (productItem !== undefined){
-      let discount = 0;
-      if(productItem.sale !== undefined && productItem.sale !== null && productItem.sale.lines !== undefined){
-        discount = productItem.sale.lines[0].discountPercentage / 100;
+  getItemPriceWithDiscount(product: Product): number{
+    let biggerDiscount = 0;
+    for (let item of product.productItems!){
+      if(item.sale !== undefined && item.sale !== null && item.sale.lines !== undefined){
+        let discount = item.sale.lines[0].discountPercentage / 100;
+        if (discount > biggerDiscount) biggerDiscount = discount
       }
-      return product.price * (1 - discount);
-    } else return product.price;
+    }
+    return product.price * (1 - biggerDiscount);
   }
 
 }

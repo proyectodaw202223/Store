@@ -90,7 +90,7 @@
               <img *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined && product.productItems[0].images !== undefined && product.productItems[0].images[0] !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
               <img *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined && product.productItems[0].images !== undefined && product.productItems[0].images[0] === undefined" src="../../../../assets/images/default-image.jpeg">
               <p class="highlighted_prod_name">{{product.name}}</p>
-              <p *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined" class="highlighted_prod_price">{{getItemPriceWithDiscount(product.productItems[0], product).toFixed(2)}}€</p>
+              <p *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined" class="highlighted_prod_price">{{getItemPriceWithDiscount(product).toFixed(2)}}€</p>
           </a>
       </div>
   </div>
