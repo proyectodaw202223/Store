@@ -15,17 +15,23 @@
             </thead>
             <tbody>
                 <tr *ngFor="let line of order.lines">
-                    <td *ngIf="line.productItem !== undefined && line.productItem.images !== undefined">
-                        <img class="order-table-image" src="{{ apiStorage }}{{ line.productItem.images[0].imagePath }}">
-                      </td>
-                    <td>{{ line.productItem?.product?.name }}</td>
-                    <td><div class ="color-selector-option" style.background-color = {{line.productItem?.color}}></div></td>
-                    <td>{{ line.productItem?.size }}</td>
-                    <td>{{ line.quantity }}</td>
-                    <td>{{ line.amount }}</td>
-                  </tr>
+                  <td *ngIf="line.productItem !== undefined && line.productItem.images !== undefined">
+                      <img class="order-table-image" src="{{ apiStorage }}{{ line.productItem.images[0].imagePath }}">
+                    </td>
+                  <td>{{ line.productItem?.product?.name }}</td>
+                  <td><div class ="color-selector-option" style.background-color = {{line.productItem?.color}}></div></td>
+                  <td>{{ line.productItem?.size }}</td>
+                  <td>{{ line.quantity }}</td>
+                  <td>{{ line.amount }} €</td>
+                </tr>
             </tbody>
           </table>
+          <div class="subtotal-wrapper larger-font" *ngIf="customer.orders !== undefined && customer.orders[0] !== undefined">
+            <div class="bold">
+              <span>TOTAL A PAGAR:</span>
+              <span>{{ order.amount | currency : 'EUR' : '' }} €</span>
+            </div>
+          </div>
     </div>
    <button class="btn button bold large-font" id="edit-customer-data-button" (click)="onBackButton($event)">MI CUENTA</button>
 </div>

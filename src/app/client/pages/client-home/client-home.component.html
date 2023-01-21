@@ -5,7 +5,7 @@
             <a class="highlighted_prod_link" routerLink="products/product/{{product.id}}">
                 <img *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined && product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
                 <p class="highlighted_prod_name">{{product.name}}</p>
-                <p class="highlighted_prod_price">{{product.price}} €</p>
+                <p *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined" class="highlighted_prod_price">{{getItemPriceWithDiscount(product.productItems[0], product).toFixed(2)}}€</p>
             </a>
         </div>
     </div>
@@ -22,7 +22,7 @@
             <a class="highlighted_prod_link" routerLink="products/product/{{product.id}}">
                 <img *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined && product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
                 <p class="highlighted_prod_name">{{product.name}}</p>
-                <p class="highlighted_prod_price">{{product.price}} €</p>
+                <p *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined" class="highlighted_prod_price">{{getItemPriceWithDiscount(product.productItems[0], product).toFixed(2)}}€</p>
             </a>
         </div>
     </div>

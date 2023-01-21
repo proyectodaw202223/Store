@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
 import { environment } from 'src/environments/environment';
+import { ProductItem } from 'src/app/models/productItem.model';
 
 @Component({
   selector: 'app-client-home',
@@ -44,5 +45,15 @@ export class ClientHomeComponent implements OnInit {
         return error;
       }
     })
+  }
+
+  getItemPriceWithDiscount(productItem: ProductItem, product: Product): number{
+    if (productItem !== undefined){
+      let discount = 0;
+      if(productItem.sale !== undefined && productItem.sale !== null && productItem.sale.lines !== undefined){
+        discount = productItem.sale.lines[0].discountPercentage / 100;
+      }
+      return product.price * (1 - discount);
+    } else return product.price;
   }
 }

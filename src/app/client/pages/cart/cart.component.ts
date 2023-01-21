@@ -5,9 +5,11 @@ import { Order } from 'src/app/models/order.model';
 import { OrderLine } from 'src/app/models/orderLine.model';
 import { OrderStatus } from 'src/app/models/orderStatus.model';
 import { Product } from 'src/app/models/product.model';
+import { ProductItem } from 'src/app/models/productItem.model';
 import { CustomerService } from 'src/app/services/customer.service';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
+import { ProductItemService } from 'src/app/services/productItem.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -20,11 +22,13 @@ export class CartComponent implements OnInit {
   public customer = <Customer>{};
   public newProducts: Array<Product> = [];
   public apiStorage: string = environment.apiStorage;
+  public onStock:boolean = true;
 
   constructor(
     private customerService: CustomerService,
     private orderService: OrderService,
     private productService: ProductService,
+    private productItemService: ProductItemService,
     private router: Router
   ) { }
 
@@ -61,7 +65,13 @@ export class CartComponent implements OnInit {
     });
   }
 
-  onLineQuantityChange(event: Event): void {
+  checkStock(line: OrderLine): boolean{
+    if (line.quantity > line.productItem!.stock) return false;
+    return true
+  }
+
+  onLineQuantityChange(event: Event, line: OrderLine): void {
+
     var lineQuantityInput = event.target as HTMLInputElement;
     var lineIdInput = lineQuantityInput.parentElement?.parentElement?.lastChild as HTMLInputElement;
 
@@ -74,6 +84,12 @@ export class CartComponent implements OnInit {
     if (parseInt(lineQuantityInput.value) <= 0) {
       orderLine.quantity = 1;
       return;
+    }
+
+    if (!this.checkStock(line)){
+      this.onStock = false;
+    } else {
+      this.onStock = true;
     }
 
     this.customer.orders[0].amount -= orderLine.amount;
@@ -163,6 +179,8 @@ export class CartComponent implements OnInit {
     this.customer.orders[0].paymentDateTime = this.formatDate(new Date());
     this.customer.orders[0].status = OrderStatus.PAID;
 
+    this.updateStock(this.customer.orders[0])
+
     this.orderService.updateOrder(this.customer.orders[0]).subscribe({
       next: (result) => {
         window.alert("Transacción completada exitosamente.");
@@ -174,6 +192,22 @@ export class CartComponent implements OnInit {
         console.error(error);
       }
     });
+  }
+
+  updateStock(order:Order){
+    for (let line of order.lines!){
+      console.log("bucle")
+      let quantity = line.quantity;
+      let item = line.productItem;
+      item!.stock -= quantity;
+      this.productItemService.updateItem(item!).subscribe({
+        next: (result) => {
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+    }
   }
 
   formatDate(date: Date): string {
@@ -194,5 +228,15 @@ export class CartComponent implements OnInit {
 
   padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
+  }
+
+  getItemPriceWithDiscount(productItem: ProductItem, product: Product): number{
+    if (productItem !== undefined){
+      let discount = 0;
+      if(productItem.sale !== undefined && productItem.sale !== null && productItem.sale.lines !== undefined){
+        discount = productItem.sale.lines[0].discountPercentage / 100;
+      }
+      return product.price * (1 - discount);
+    } else return product.price;
   }
 }
