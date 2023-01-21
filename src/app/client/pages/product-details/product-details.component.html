@@ -37,7 +37,7 @@
               </div>
               <div class="col-8 size-selector-combo">
                 <span *ngIf="selectedColorSizes.length == 0"> Selecciona primero un color.</span>
-                <select name="size" id="size_selector" *ngIf="selectedColorSizes.length !== 0">
+                <select name="size" id="size_selector" value={{selectedItem.size}} *ngIf="selectedColorSizes.length !== 0">
                   <option *ngFor="let size of selectedColorSizes" value={{size}} (click)="sizeSelected(size)">{{size}}</option>
                 </select>
               </div> 
