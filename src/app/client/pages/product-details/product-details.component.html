@@ -20,9 +20,9 @@
         <div class="row">
           <h2 class="col-7 prod-data-name">{{product.name}}</h2>
           <div class="col-5 prod-data-price">
-            <h3 *ngIf="product.price != getItemPriceWithDiscount(selectedItem, product)" class="tachado md-opacity">&nbsp;{{product.price}}</h3>
-            <h3 *ngIf="product.price != getItemPriceWithDiscount(selectedItem, product)" class="md-opacity">&nbsp;€&nbsp;&nbsp;</h3>
-            <h2>{{getItemPriceWithDiscount(selectedItem, product).toFixed(2)}}€</h2>
+            <h3 *ngIf="product.price != getSelectedItemPriceWithDiscount(selectedItem, product)" class="tachado md-opacity">&nbsp;{{product.price}}</h3>
+            <h3 *ngIf="product.price != getSelectedItemPriceWithDiscount(selectedItem, product)" class="md-opacity">&nbsp;€&nbsp;&nbsp;</h3>
+            <h2>{{selectedItemPrice.toFixed(2)}}€</h2>
           </div>
         </div>
         <div class="row prod-data-description">
@@ -99,7 +99,7 @@
               <img *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined && product.productItems[0].images !== undefined && product.productItems[0].images[0] !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
               <img *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined && product.productItems[0].images !== undefined && product.productItems[0].images[0] === undefined" src="../../../../assets/images/default-image.jpeg">
               <p class="highlighted_prod_name">{{product.name}}</p>
-              <p *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined" class="highlighted_prod_price">{{getItemPriceWithDiscount(product.productItems[0], product).toFixed(2)}}€</p>
+              <p *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined" class="highlighted_prod_price">{{getItemPriceWithDiscount(product).toFixed(2)}}€</p>
           </a>
       </div>
   </div>

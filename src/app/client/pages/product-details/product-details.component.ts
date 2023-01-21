@@ -31,6 +31,7 @@ export class ProductDetailsComponent implements OnInit {
   public selectedColorSizes: string[] = [];
   public selectedColor: string = '';
   public selectedSize: string = '';
+  public selectedItemPrice: number = 0;
 
   public selectedItem: ProductItem = <ProductItem>{};
 
@@ -50,6 +51,7 @@ export class ProductDetailsComponent implements OnInit {
         this.product = result;
         if (this.product.productItems !== undefined){
           this.selectedItem = this.product.productItems[0];
+          this.selectedItemPrice = this.getSelectedItemPriceWithDiscount(this.selectedItem, this.product);
           this.selectedColor = this.selectedItem.color;
           this.selectedSize = this.selectedItem.size;
           for (let item of this.product.productItems){
@@ -123,10 +125,12 @@ export class ProductDetailsComponent implements OnInit {
     this.selectedColorSizes = this.productColorSize[selectedColor];
     this.selectedColor = selectedColor;
     this.selectedSize = this.selectedColorSizes[0];
+    this.selectItem();
   }
 
   sizeSelected(selectedSize:string): void{
     this.selectedSize = selectedSize;
+    this.selectItem();
   }
 
   selectItem():ProductItem | null{
@@ -136,6 +140,7 @@ export class ProductDetailsComponent implements OnInit {
       )
       if (selectedItemArray !== undefined){
         this.selectedItem = selectedItemArray[0];
+        this.selectedItemPrice = this.getSelectedItemPriceWithDiscount(this.selectedItem, this.product);
       }
       return this.selectedItem;
     } else {
@@ -147,7 +152,7 @@ export class ProductDetailsComponent implements OnInit {
     return (sessionStorage.getItem("customerName") !== null);
   }
 
-  getItemPriceWithDiscount(productItem: ProductItem, product: Product): number{
+  getSelectedItemPriceWithDiscount(productItem: ProductItem, product: Product): number{
     if (productItem !== undefined){
       let discount = 0;
       if(productItem.sale !== undefined && productItem.sale !== null && productItem.sale.lines !== undefined){
@@ -157,9 +162,20 @@ export class ProductDetailsComponent implements OnInit {
     } else return product.price;
   }
 
+  getItemPriceWithDiscount(product: Product): number{
+    let biggerDiscount = 0;
+    for (let item of product.productItems!){
+      if(item.sale !== undefined && item.sale !== null && item.sale.lines !== undefined){
+        let discount = item.sale.lines[0].discountPercentage / 100;
+        if (discount > biggerDiscount) biggerDiscount = discount
+      }
+    }
+    return product.price * (1 - biggerDiscount);
+  }
+
   createNewOrder(){
     let newLine: OrderLine = <OrderLine>{};
-    let priceWithDiscount = this.getItemPriceWithDiscount(this.selectedItem, this.product);
+    let priceWithDiscount = this.getSelectedItemPriceWithDiscount(this.selectedItem, this.product);
     if (this.selectedItem.id !== undefined){
       newLine = new OrderLine(0,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
     }
@@ -177,7 +193,7 @@ export class ProductDetailsComponent implements OnInit {
 
   addOrderLine(order:Order){
     let newLine: OrderLine = <OrderLine>{};
-    let priceWithDiscount = this.getItemPriceWithDiscount(this.selectedItem, this.product);
+    let priceWithDiscount = this.getSelectedItemPriceWithDiscount(this.selectedItem, this.product);
     if (this.selectedItem.id !== undefined){
       if (order.id == undefined) return
       newLine = new OrderLine(order.id,this.selectedItem.id, 1, priceWithDiscount, priceWithDiscount)
