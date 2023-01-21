@@ -20,7 +20,7 @@
   <table>
     <thead>
       <tr>
-        <td><input type="checkbox" (change)="onSelectAllOrdersCheckboxChange($event)"></td>
+        <th></th>
         <th>ID</th>
         <th>Estado</th>
         <th>Importe</th>
@@ -32,7 +32,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let order of filteredOrdersMap | keyvalue">
-        <td><input type="checkbox" value="{{ order.value.id }}" class="select-order-checkbox"></td>
+        <td></td>
         <td><a [routerLink]="['/detpedidos/' + order.value.id]">{{ ("000000" + order.value.id).slice(-6) }}</a></td>
         <td>{{ order.value.status }}</td>
         <td>{{ order.value.amount | currency : 'EUR' : ''}} €</td>
