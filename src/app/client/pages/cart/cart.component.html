@@ -10,6 +10,7 @@
             <th>COLOR</th>
             <th>TALLA</th>
             <th>CANTIDAD</th>
+            <th></th>
             <th>IMPORTE</th>
             <th></th> <!-- Delete icon column -->
           </tr>
@@ -22,10 +23,16 @@
             <td>{{ line.productItem?.product?.name }}</td>
             <td><div class ="color-selector-option" style.background-color = {{line.productItem?.color}}></div></td>
             <td>{{ line.productItem?.size }}</td>
-            <td>
-              <input type="number" oninput="this.value=(parseInt(this.value)||0)" min="1" [(ngModel)]="line.quantity" (change)="onLineQuantityChange($event)">
+            <td *ngIf="line.productItem !== undefined">
+              <input type="number" oninput="this.value=(parseInt(this.value))" min="1" [(ngModel)]="line.quantity" (change)="onLineQuantityChange($event,line)">
               <input type="hidden" value="{{ line.id }}">
             </td>
+            <td *ngIf="line.productItem !== undefined && line.productItem.stock !== undefined && line.quantity > line.productItem.stock; else onStock" style="color:red" >
+              &nbsp;¡stock!&nbsp;
+            </td>
+            <ng-template #onStock>
+              <td></td>
+            </ng-template>
             <td>{{ line.amount | currency : 'EUR' : '' }} €</td>
             <td>
               <button class="delete-line-button" value="{{ line.id }}" (click)="onDeleteLineButtonClick($event)">
@@ -68,7 +75,7 @@
       <button class="btn button bold large-font" id="edit-customer-data-button" (click)="onModifyCustomerDataButtonClick($event)">MODIFICAR DATOS</button>
     </div>
     <div class="column" *ngIf="customer.orders !== undefined && customer.orders[0] !== undefined">
-      <button *ngIf="customer.orders[0].lines !== undefined" class="btn button bold large-font" id="pay-button" (click)="onPayButtonClick($event)">PAGAR</button>
+      <button *ngIf="customer.orders[0].lines !== undefined" class="btn button bold large-font" id="pay-button" (click)="onPayButtonClick($event)" [disabled]="!onStock">PAGAR</button>
     </div>
   </div>
 </div>
@@ -79,8 +86,8 @@
         <a class="highlighted_prod_link" routerLink="../products/product//{{product.id}}">
             <img *ngIf="product.productItems !== undefined && product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
             <p class="highlighted_prod_name">{{product.name}}</p>
-            <p class="highlighted_prod_price">{{product.price}} €</p>
-        </a>
+            <p *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined" class="highlighted_prod_price">{{getItemPriceWithDiscount(product.productItems[0], product).toFixed(2)}}€</p>
+          </a>
     </div>
 </div>
 </section>

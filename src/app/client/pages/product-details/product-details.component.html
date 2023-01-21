@@ -15,9 +15,9 @@
         <div class="row">
           <h2 class="col-7 prod-data-name">{{product.name}}</h2>
           <div class="col-5 prod-data-price">
-            <h3 *ngIf="product.price != getItemPriceWithDiscount(selectedItem)" class="tachado md-opacity">&nbsp;{{product.price}}</h3>
-            <h3 *ngIf="product.price != getItemPriceWithDiscount(selectedItem)" class="md-opacity">&nbsp;€&nbsp;&nbsp;</h3>
-            <h2>{{getItemPriceWithDiscount(selectedItem).toFixed(2)}}€</h2>
+            <h3 *ngIf="product.price != getItemPriceWithDiscount(selectedItem, product)" class="tachado md-opacity">&nbsp;{{product.price}}</h3>
+            <h3 *ngIf="product.price != getItemPriceWithDiscount(selectedItem, product)" class="md-opacity">&nbsp;€&nbsp;&nbsp;</h3>
+            <h2>{{getItemPriceWithDiscount(selectedItem, product).toFixed(2)}}€</h2>
           </div>
         </div>
         <div class="row prod-data-description">
@@ -93,7 +93,8 @@
           <a class="highlighted_prod_link" (click)="redirectProduct(product.id)">
               <img *ngIf="product.productItems !== undefined && product.productItems[0].images !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
               <p class="highlighted_prod_name">{{product.name}}</p>
-              <p class="highlighted_prod_price">{{product.price}} €</p>
+              <!-- <p class="highlighted_prod_price">{{product.price}} €</p> -->
+              <p *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined" class="highlighted_prod_price">{{getItemPriceWithDiscount(product.productItems[0], product).toFixed(2)}}€</p>
           </a>
       </div>
   </div>
