@@ -95,7 +95,7 @@
   <h3>NOVEDADES</h3>
   <div class="highlighted_products row flex overflow-hidden justify-content-center">
       <div class="highlighted_prod_preview" *ngFor="let product of newProducts">
-          <a class="highlighted_prod_link" routerLink="products/product/{{product.id}}">
+          <a class="highlighted_prod_link" (click)="redirectProduct(product.id)">
               <img *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined && product.productItems[0].images !== undefined && product.productItems[0].images[0] !== undefined" src={{apiStorage}}{{product.productItems[0].images[0].imagePath}}>
               <img *ngIf="product.productItems !== undefined && product.productItems[0] !== undefined && product.productItems[0].images !== undefined && product.productItems[0].images[0] === undefined" src="../../../../assets/images/default-image.jpeg">
               <p class="highlighted_prod_name">{{product.name}}</p>

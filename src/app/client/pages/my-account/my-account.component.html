@@ -38,9 +38,9 @@
             </thead>
             <tbody>
               <tr *ngFor="let order of filterOutCreadoOrders()">
-                <td>{{ order.created_at?.substr(0,10) }}</td>
-                <td>{{ order.id }}</td>
-                <td>{{ order.amount }}</td>
+                <td>{{ order.paymentDateTime.substr(0,10) }}</td>
+                <td>{{ ('000000' + order.id).slice(-6) }}</td>
+                <td>{{ order.amount | currency : 'EUR' : '' }} €</td>
                 <td>{{ order.status }}</td>
                 <td><a [routerLink]="['/orderdetails/' + order.id]"><img src="../../../../assets/iconos/lupa.svg"></a></td>
               </tr>
